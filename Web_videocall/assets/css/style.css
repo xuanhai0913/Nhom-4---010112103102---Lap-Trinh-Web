@@ -1,0 +1,25 @@
+[v-cloak] { display: none; }
+
+.header-highlight {
+  color: #ff4954;
+}
+
+.info {
+  padding: 1.5rem;
+}
+
+.container {
+  padding-top: 1rem;
+}
+
+#videos {
+  display: flex;
+  flex-wrap: wrap;
+  margin-top: 20px;
+}
+
+#videos video {
+  flex: 1 1 50%;
+  padding: 0;
+  min-width: 0;
+}
