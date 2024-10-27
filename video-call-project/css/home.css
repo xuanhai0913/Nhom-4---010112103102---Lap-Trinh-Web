@@ -1,0 +1,116 @@
+.sidebar {
+    width: 200px;
+    padding: 20px;
+    border-right: 1px solid #dadce0;
+}
+
+.sidebar .menu-item {
+    display: flex;
+    align-items: center;
+    padding: 10px 0;
+    color: #5f6368;
+    cursor: pointer;
+}
+
+.sidebar .menu-item i {
+    margin-right: 10px;
+}
+
+.sidebar .menu-item.active {
+    background-color: #e8f0fe;
+    color: #1a73e8;
+    border-radius: 4px;
+}
+
+.main {
+    padding: 20px;
+    flex-grow: 1;
+}
+
+.main h1 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 20px 0;
+}
+
+.main p {
+    font-size: 16px;
+    color: #5f6368;
+}
+
+.main .buttons {
+    display: flex;
+    margin: 20px 0;
+}
+
+.main .buttons button {
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.main .buttons .primary {
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+}
+
+.carousel {
+    text-align: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.carousel img {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+
+.carousel p {
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+.carousel .dots {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+.carousel .dots span {
+    width: 10px;
+    height: 10px;
+    background-color: #dadce0;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+}
+.carousel .dots .active {
+    background-color: #1a73e8;
+}
+.carousel .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 24px;
+    color: #5f6368;
+    cursor: pointer;
+}
+.carousel .nav.left {
+    left: -30px;
+}
+.carousel .nav.right {
+    right: -30px;
+}
+.footer {
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid #dadce0;
+}
+.footer a {
+    color: #1a73e8;
+    text-decoration: none;
+}

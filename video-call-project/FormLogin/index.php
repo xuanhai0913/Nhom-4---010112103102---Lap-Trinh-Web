@@ -52,14 +52,14 @@
 					</form>
 					<?php require 'login.php'; ?>
 
-					<form class="forgot">
+					<form action="send_verification_code.php" method="post" id="forgot">
 						<div onclick="moveDefault();" class="backToSignIn">
 							<i class="fa-solid fa-chevron-up"></i>
 						</div>
 						<h1>Forgot Password</h1>
 						<span>Sử email mà bạn đã đăng ký để nhận mã.</span>
-						<input type="email" placeholder="Email" />
-						<button class="btn-send" type="button" ">Gửi mã</button>
+						<input type="email" name="email" required placeholder="Email" />
+						<button class="btn-send" type="submit" ">Gửi mã</button>
 						<?php include "forgot.php"; ?>
 						<input id="captcha" type="text" placeholder="Mã xác nhận" />
 						<button id="btn-captcha" type="button" onclick="moveResetPassword();">Xác nhận</button>
