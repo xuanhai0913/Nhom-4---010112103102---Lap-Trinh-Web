@@ -1,59 +1,71 @@
 <?php
-require_once('connection.php');
 
+require_once('connection.php');
 $conn = open_dataBase();
 
-$stmt = null;
+// Sử dụng PHPMailer
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
-// Kiểm tra email đã có trong DB chưa.
+require '../../vendor/autoload.php'; // Đường dẫn đến autoload.php của Composer
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];
 
-    if (is_email_exists($email)) {
-        $token = rand(100000,999999);
-        $expiryTime = date('Y-m-d H:i:s', time() + 60);
-        $stmt = $conn->prepare("UPDATE users SET token = ?, expired = ? WHERE email = ?");
-        $stmt->bind_param("sss", $token, $expiryTime, $email);
-
-        if ($stmt->execute()) {
-            echo "Gửi mã thành công!";
-        } else {
-            echo "Error: " . $stmt->error;
-        }
-
-        $stmt->close();
-    } else {
-        echo "Email không tồn tại!";
+    // Kiểm tra xem email có hợp lệ không
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+        echo 'Địa chỉ email không hợp lệ.';
+        exit();
     }
-    $title = "Update password";
-    $content = '';
-}
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
-    $user_token = $_POST['token'];
-
-    // Lấy token và thời gian hết hạn từ cơ sở dữ liệu
-    $stmt = $conn->prepare("SELECT token, expired FROM users WHERE email = ?");
+    $sql = "SELECT user_id FROM users WHERE email = ?";
+    $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $email);
     $stmt->execute();
-    $stmt->bind_result($db_token, $db_expired);
-    $stmt->fetch();
+    $result = $stmt->get_result();
 
-    $current_time = date('Y-m-d H:i:s');
+    if ($result->num_rows > 0) {
+        // Tạo mã xác thực ngẫu nhiên
+        $verification_code = rand(100000, 999999);
 
-    // Kiểm tra tính hợp lệ của token và thời gian hết hạn
-    if ($user_token == $db_token && $current_time <= $db_expired) {
-        echo "Mã xác thực hợp lệ. Bạn có thể đặt lại mật khẩu!";
-        // Thực hiện bước tiếp theo để đặt lại mật khẩu
+        // Lưu mã vào phiên (session) để so sánh sau này
+        session_start();
+        $_SESSION['verification_code'] = $verification_code;
+
+        // Gửi email
+        $mail = new PHPMailer(true);
+        try {
+            // Cấu hình máy chủ SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Máy chủ SMTP của Gmail
+            $mail->SMTPAuth = true;
+            $mail->Username = 'manhkinddiol@gmail.com'; // Địa chỉ email của bạn
+            $mail->Password = 'kiuq ukui bsqi yqtd'; // Mật khẩu email hoặc mật khẩu ứng dụng
+            $mail->Port = 465; // Sử dụng cổng 465 cho SMTPS
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Bảo mật SMTPS
+
+            $mail->CharSet = "UTF-8";            
+            
+            // Người gửi và người nhận
+            $mail->setFrom('manhkinddiol@gmail.com', 'V2meet - nơi ngọc trung tỏa sáng');
+            $mail->addAddress($email);
+            
+            // Nội dung email
+            $mail->isHTML(true);
+            $mail->Subject = 'Mã xác thực của bạn';
+            $mail->Body = "Mã xác thực của bạn là: <b>$verification_code</b>";
+            
+            $mail->send();
+            echo "Mã xác đã được gửi đi. Vui lòng kiểm tra email.";
+            
+        } catch (Exception $e) {
+            echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
+        }
     } else {
-        echo "Mã xác thực không hợp lệ hoặc đã hết hạn.";
+        echo 'Email chưa có tài khoản, vui lòng tạo tài khoản.';
     }
 
     $stmt->close();
 }
 
-
 $conn->close();
-?>

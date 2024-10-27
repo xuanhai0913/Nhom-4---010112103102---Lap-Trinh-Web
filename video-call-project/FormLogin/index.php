@@ -29,9 +29,9 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your email for registration</span>
-						<input type="text" placeholder="Name" name="username" required />
-						<input type="email" placeholder="Email" name="email" required />
-						<input type="password" placeholder="Password" name="password" required />
+						<input type="text" placeholder="Name" name="username" required class="input--<?= $errorClass ?>"/>
+						<input type="email" placeholder="Email" name="email" required class="input--<?= $errorClass ?>"/>
+						<input type="password" placeholder="Password" name="password" required/>
 						<button>Sign Up</button>
 					</form>
 				</div>
@@ -52,7 +52,7 @@
 					</form>
 					<?php require 'login.php'; ?>
 
-					<form action="send_verification_code.php" method="post" id="forgot">
+					<form action="forgot.php" method="post" id="forgot">
 						<div onclick="moveDefault();" class="backToSignIn">
 							<i class="fa-solid fa-chevron-up"></i>
 						</div>
