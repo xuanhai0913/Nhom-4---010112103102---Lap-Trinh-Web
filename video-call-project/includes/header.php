@@ -1,32 +1,36 @@
 <?php
 require_once('../FormLogin/connection.php');
 
-function getUserAvatar($username) {
-    $conn = open_dataBase();
-    $sql = "SELECT avatar FROM users WHERE username = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $username);
+$conn = open_dataBase();
+
+session_start();
+
+// Kiểm tra xem người dùng đã đăng nhập chưa
+if (isset($_SESSION['username'])) {
+    $username = $_SESSION['username'];
+
+    // Sử dụng truy vấn chuẩn bị để bảo vệ chống lại SQL Injection
+    $stmt = $conn->prepare("SELECT avatar FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $avatar = "";
     if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        $avatar = $row['avatar'];
+        $user = $result->fetch_assoc();
+        $avatar = $user['avatar'] ?: 'default-avatar.png'; // Gán giá trị mặc định nếu không có avatar
     } else {
-        $avatar = "https://example.com/default-avatar.jpg";
+        $avatar = 'default-avatar.png'; // Gán giá trị mặc định nếu không tìm thấy người dùng
     }
 
     $stmt->close();
-    $conn->close();
-
-    return $avatar;
+} else {
+    header("Location: ../FormLogin/login.php");
+    exit();
 }
 
-// Lấy avatar cho người dùng (thay đổi 1 bằng id người dùng thực tế)
-$user_id = 1;
-$avatar = getUserAvatar($user_id);
+$conn->close();
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +39,8 @@ $avatar = getUserAvatar($user_id);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-DyZ88mC6Up2uqSIL6qz6aSB1n0bR1o5B1Y5X44BZ9N8bL5lH5yT/M6lb1mjL8MQH" crossorigin="anonymous">
+    <title>Header</title>
 </head>
 
 <body>
@@ -48,10 +54,11 @@ $avatar = getUserAvatar($user_id);
                 <i class="fas fa-question-circle"></i>
                 <i class="fas fa-cog"></i>
                 <i class="fas fa-th"></i>
-                <img alt="User Avatar" height="40" src="<?php echo htmlspecialchars($avatar); ?>" />
+                <a href="profile.php"> <!-- Thêm thẻ <a> để liên kết tới profile.php -->
+                    <img alt="User Avatar" height="40" src="../assets/upload/avatar/<?php echo htmlspecialchars($avatar); ?>" />
+                </a>
             </div>
         </div>
     </div>
 </body>
-
 </html>

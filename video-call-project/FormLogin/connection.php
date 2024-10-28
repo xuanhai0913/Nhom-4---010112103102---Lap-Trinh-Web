@@ -2,7 +2,7 @@
     define('severname', 'localhost');
     define('username', 'root');
     define('password', '');
-    define('dbname', 'test');
+    define('dbname', 'user_registration');
 
     // Ham ket noi voi dataBase
     function open_dataBase (){

@@ -26,9 +26,11 @@
         color: #5f6368;
     }
 
-    .header__right img {
+    img {
+        cursor: pointer;
         height: 40px;
-        aspect-ratio: 1 / 1;
+        width: 40px;
         border-radius: 50%;
+        object-fit: cover;
     }
 }

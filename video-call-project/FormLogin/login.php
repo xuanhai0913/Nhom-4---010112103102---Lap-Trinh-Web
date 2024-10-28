@@ -1,5 +1,7 @@
-<?php 
+<?php
 require_once('connection.php');
+
+session_start();
 
 $className = '';
 $conn = open_dataBase();
@@ -20,22 +22,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (!$stmt) {
             die("Không thể chuẩn bị câu lệnh: " . $conn->error);
         }
-    
+
         $stmt->bind_param("s", $username);
         $stmt->execute();
         $stmt->bind_result($hashed_password);
-        
+
         if ($stmt->fetch() && password_verify($password, $hashed_password)) {
-            header("Location: ../pages/home.php");
+            $_SESSION['username'] = $username; // Lưu thông tin người dùng vào phiên
+            header('Location: ../pages/home.php');
             exit();
         } else {
             echo 'Sai tên người dùng hoặc mật khẩu!';
         }
-    
+
         $stmt->close(); // Đóng câu lệnh
     } else {
         echo 'Sai tên người dùng hoặc mật khẩu!';
     }
 }
-
-?>

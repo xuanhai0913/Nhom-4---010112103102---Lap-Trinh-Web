@@ -29,7 +29,7 @@
 						<span>or use your email for registration</span>
 						<input type="text" placeholder="Name" name="username" required />
 						<input type="email" placeholder="Email" name="email" required />
-						<input type="password" placeholder="Password" name="password" required/>
+						<input type="password" placeholder="Password" name="password" required />
 						<button>Sign Up</button>
 					</form>
 				</div>
@@ -43,11 +43,11 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your account</span>
-						<input type="text" placeholder="User name" name="username" required class="<?php echo $className; ?>"/>
-						<input type="password" placeholder="Password" name="password" required class="<?php echo $className; ?>"/>
+						<input type="text" placeholder="User name" name="username" required class="<?php echo $className; ?>" />
+						<input type="password" placeholder="Password" name="password" required class="<?php echo $className; ?>" />
 						<a id="forgot" onclick="moveForgot();">Forgot your password?</a>
 						<button>Sign In</button>
-					
+
 					</form>
 
 					<form action="forgot.php" method="post" id="forgot">
@@ -59,7 +59,7 @@
 						<input type="email" name="email" required placeholder="Email" />
 						<button class="btn-send" type="submit" ">Gửi mã</button>
 						<?php include "forgot.php"; ?>
-						<input id="captcha" type="text" placeholder="Mã xác nhận" />
+						<input id=" captcha" type="text" placeholder="Mã xác nhận" />
 						<button id="btn-captcha" type="button" onclick="moveResetPassword();">Xác nhận</button>
 					</form>
 
