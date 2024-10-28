@@ -1,6 +1,7 @@
 <?php 
 require_once('connection.php');
 
+$className = '';
 $conn = open_dataBase();
 
 // Khởi tạo biến $stmt
@@ -25,14 +26,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $stmt->bind_result($hashed_password);
         
         if ($stmt->fetch() && password_verify($password, $hashed_password)) {
-            echo "Đăng nhập thành công!";
+            header("Location: ../pages/home.php");
+            exit();
         } else {
-            echo "Mật khẩu không đúng.";
+            echo 'Sai tên người dùng hoặc mật khẩu!';
         }
     
         $stmt->close(); // Đóng câu lệnh
     } else {
-        echo "Tên đăng nhập không tồn tại!";
+        echo 'Sai tên người dùng hoặc mật khẩu!';
     }
 }
 

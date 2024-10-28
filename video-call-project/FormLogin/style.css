@@ -93,6 +93,9 @@
       margin: 8px 0;
       width: 100%;
     }
+    .input--error {
+      border: 2px solid red;
+    }
   }
 
   .section__form {

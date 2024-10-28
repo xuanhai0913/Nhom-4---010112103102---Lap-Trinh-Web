@@ -1,32 +1,31 @@
 <?php
-require_once('connection.php');
+require_once('../FormLogin/connection.php');
 
-$conn = open_dataBase();
-function getUserAvatar($user_id) {
-
-    $sql = "SELECT avatar_url FROM users WHERE user_id = ?";
+function getUserAvatar($username) {
+    $conn = open_dataBase();
+    $sql = "SELECT avatar FROM users WHERE username = ?";
     $stmt = $conn->prepare($sql);
-    $stmt->bind_param("i", $user_id);
+    $stmt->bind_param("i", $username);
     $stmt->execute();
     $result = $stmt->get_result();
 
-    $avatar_url = "";
+    $avatar = "";
     if ($result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $avatar_url = $row['avatar_url'];
+        $avatar = $row['avatar'];
     } else {
-        $avatar_url = "https://example.com/default-avatar.jpg";
+        $avatar = "https://example.com/default-avatar.jpg";
     }
 
     $stmt->close();
     $conn->close();
 
-    return $avatar_url;
+    return $avatar;
 }
 
 // Lấy avatar cho người dùng (thay đổi 1 bằng id người dùng thực tế)
 $user_id = 1;
-$avatar_url = getUserAvatar($user_id);
+$avatar = getUserAvatar($user_id);
 ?>
 
 <!DOCTYPE html>
@@ -49,7 +48,7 @@ $avatar_url = getUserAvatar($user_id);
                 <i class="fas fa-question-circle"></i>
                 <i class="fas fa-cog"></i>
                 <i class="fas fa-th"></i>
-                <img alt="User Avatar" height="40" src="<?php echo htmlspecialchars($avatar_url); ?>" />
+                <img alt="User Avatar" height="40" src="<?php echo htmlspecialchars($avatar); ?>" />
             </div>
         </div>
     </div>

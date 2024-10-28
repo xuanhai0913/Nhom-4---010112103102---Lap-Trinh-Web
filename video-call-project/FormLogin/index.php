@@ -11,8 +11,6 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
 		crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-
 </head>
 
 <body>
@@ -29,8 +27,8 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your email for registration</span>
-						<input type="text" placeholder="Name" name="username" required class="input--<?= $errorClass ?>"/>
-						<input type="email" placeholder="Email" name="email" required class="input--<?= $errorClass ?>"/>
+						<input type="text" placeholder="Name" name="username" required />
+						<input type="email" placeholder="Email" name="email" required />
 						<input type="password" placeholder="Password" name="password" required/>
 						<button>Sign Up</button>
 					</form>
@@ -45,12 +43,12 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your account</span>
-						<input type="text" placeholder="User name" name="username" required />
-						<input type="password" placeholder="Password" name="password" required />
+						<input type="text" placeholder="User name" name="username" required class="<?php echo $className; ?>"/>
+						<input type="password" placeholder="Password" name="password" required class="<?php echo $className; ?>"/>
 						<a id="forgot" onclick="moveForgot();">Forgot your password?</a>
 						<button>Sign In</button>
+					
 					</form>
-					<?php require 'login.php'; ?>
 
 					<form action="forgot.php" method="post" id="forgot">
 						<div onclick="moveDefault();" class="backToSignIn">
