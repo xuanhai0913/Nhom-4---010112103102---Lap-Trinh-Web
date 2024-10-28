@@ -27,9 +27,9 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your email for registration</span>
-						<input type="text" placeholder="Name" name="username" required />
+						<input type="text" placeholder="Name" name="username" class='input__username' pattern="[a-zA-Z0-9._]{5,}" required />
 						<input type="email" placeholder="Email" name="email" required />
-						<input type="password" placeholder="Password" name="password" required />
+						<input type="password" placeholder="Password" name="password" pattern="[a-z0-9]{5,}" required />
 						<button>Sign Up</button>
 					</form>
 				</div>
@@ -60,7 +60,7 @@
 						<button class="btn-send" type="submit" ">Gửi mã</button>
 						<?php include "forgot.php"; ?>
 						<input id=" captcha" type="text" placeholder="Mã xác nhận" />
-						<button id="btn-captcha" type="button" onclick="moveResetPassword();">Xác nhận</button>
+						<button id="btn-captcha" type="button">Xác nhận</button>
 					</form>
 
 					<form>

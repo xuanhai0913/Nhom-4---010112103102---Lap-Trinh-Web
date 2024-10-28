@@ -1,13 +1,10 @@
 <?php
-require_once('connection.php');
+require_once('../includes/db.php');
 
 session_start();
 
 $className = '';
 $conn = open_dataBase();
-
-// Khởi tạo biến $stmt
-$stmt = null;
 
 // Kiểm tra xem form đã được gửi chưa
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -16,27 +13,29 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     empty_content_login($username, $password);
 
-    // Sử dụng prepared statement để bảo mật
-    if (is_username_exists($username)) {
-        $stmt = $conn->prepare("SELECT password FROM users WHERE username = ?");
-        if (!$stmt) {
-            die("Không thể chuẩn bị câu lệnh: " . $conn->error);
-        }
+    // Kiểm tra xem tên người dùng có tồn tại không
+    if (isExists('username',$username)) {
+        // Lấy mật khẩu đã mã hóa từ cơ sở dữ liệu dựa trên tên người dùng
+        $result = getDataByKey('username', $username, 'password');
+        
+        // Kiểm tra nếu kết quả trả về có hàng dữ liệu
+        if ($result && $result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            $hashed_password = $row['password']; // Lấy mật khẩu đã mã hóa từ kết quả
 
-        $stmt->bind_param("s", $username);
-        $stmt->execute();
-        $stmt->bind_result($hashed_password);
-
-        if ($stmt->fetch() && password_verify($password, $hashed_password)) {
-            $_SESSION['username'] = $username; // Lưu thông tin người dùng vào phiên
-            header('Location: ../pages/home.php');
-            exit();
+            // Kiểm tra mật khẩu
+            if (password_verify($password, $hashed_password)) {
+                $_SESSION['username'] = $username; // Lưu thông tin người dùng vào phiên
+                header('Location: ../pages/home.php');
+                exit();
+            } else {
+                echo 'Sai tên người dùng hoặc mật khẩu!';
+            }
         } else {
             echo 'Sai tên người dùng hoặc mật khẩu!';
         }
-
-        $stmt->close(); // Đóng câu lệnh
     } else {
         echo 'Sai tên người dùng hoặc mật khẩu!';
     }
 }
+?>

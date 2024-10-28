@@ -1,5 +1,5 @@
 <?php
-require_once('connection.php');
+require_once('../includes/db.php');
 
 $conn = open_dataBase();
 
@@ -12,18 +12,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Kiểm tra nếu thông tin không trống
     empty_content_register($username, $email, $password);
     // Kiểm tra xem tên người dùng đã tồn tại
-    if (is_username_exists($username)) {
+    if (isExists('username',$username)) {
         echo 'Tên người dùng đã tồn tại!';
-    } else if (is_email_exists($email)) {
+    } else if (isExists('email',$email)) {
         echo 'Email đã được sử dụng. Vui lòng nhập Email khác!';
     } else {
 
         // Chèn thông tin vào bảng
-        $sql = "INSERT INTO users (username, password, email) VALUES (?, ?, ?)";
+        $sql = "INSERT INTO users (username,fullname, password, email) VALUES (?, ?, ?,?)";
         $stmt = $conn->prepare($sql);
 
         if ($stmt) {
-            $stmt->bind_param("sss", $username, $password, $email);
+            $stmt->bind_param("ssss", $username, $username, $password, $email);
 
             if ($stmt->execute()) {
                 echo "Đăng ký thành công!";

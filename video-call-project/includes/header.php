@@ -1,5 +1,5 @@
 <?php
-require_once('../FormLogin/connection.php');
+require_once('db.php');
 
 $conn = open_dataBase();
 
@@ -10,10 +10,11 @@ if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 
     // Sử dụng truy vấn chuẩn bị để bảo vệ chống lại SQL Injection
-    $stmt = $conn->prepare("SELECT avatar FROM users WHERE username = ?");
-    $stmt->bind_param("s", $username);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    // $stmt = $conn->prepare("SELECT avatar FROM users WHERE username = ?");
+    // $stmt->bind_param("s", $username);
+    // $stmt->execute();
+    // $result = $stmt->get_result();
+    $result = getDataByKey('username',$username,'avatar');
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
@@ -21,8 +22,6 @@ if (isset($_SESSION['username'])) {
     } else {
         $avatar = 'default-avatar.png'; // Gán giá trị mặc định nếu không tìm thấy người dùng
     }
-
-    $stmt->close();
 } else {
     header("Location: ../FormLogin/login.php");
     exit();

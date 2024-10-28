@@ -1,6 +1,6 @@
 <?php
 
-require_once('connection.php');
+require_once('../includes/db.php');
 $conn = open_dataBase();
 
 // Sử dụng PHPMailer
@@ -18,11 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         exit();
     }
 
-    $sql = "SELECT username FROM users WHERE email = ?";
-    $stmt = $conn->prepare($sql);
-    $stmt->bind_param("s", $email);
-    $stmt->execute();
-    $result = $stmt->get_result();
+    $result = getDataByKey('email',$email,'username');
 
     if ($result->num_rows > 0) {
         // Tạo mã xác thực ngẫu nhiên
@@ -65,7 +61,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo 'Email chưa có tài khoản, vui lòng tạo tài khoản.';
     }
 
-    $stmt->close();
 }
 
 $conn->close();
