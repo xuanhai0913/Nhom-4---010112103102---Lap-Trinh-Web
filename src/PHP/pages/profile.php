@@ -31,9 +31,9 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/profile.css">
+    <link rel="stylesheet" href="../../assets/css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-DyZ88mC6Up2uqSIL6qz6aSB1n0bR1o5B1Y5X44BZ9N8bL5lH5yT/M6lb1mjL8MQH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../assets/css/profile.css">
+    <link rel="stylesheet" href="../../assets/css/base.css">
     <title>Profile</title>
 </head>
 
@@ -44,7 +44,7 @@ $conn->close();
                 Trang cá nhân
             </div>
             <div class="profile__info">
-                <img src="../assets/upload/avatar/<?php echo htmlspecialchars($avatar); ?>" alt="User Avatar" class="profile__avatar" >
+                <img src="../../assets/upload/avatar/<?php echo htmlspecialchars($avatar); ?>" alt="User Avatar" class="profile__avatar" >
                 <div>
                     <div class="username">
                         <?php echo htmlspecialchars($user['username']); ?>

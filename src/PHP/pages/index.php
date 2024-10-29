@@ -5,12 +5,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="../assets/css/base.css">
-	<link rel="stylesheet" href="../assets/css/log.css">
+	<link rel="stylesheet" href="../../assets/css/base.css">
+	<link rel="stylesheet" href="../../assets/css/log.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 	integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="../assets/js/jquery-3.7.1.min.js"></script>
+	<script src="../../assets/js/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -61,6 +61,7 @@
 						<?php include "../auth/forgot.php"; ?>
 						<input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code' required />
 						<button id="btn-captcha" type="button">Xác nhận</button>
+						<?php include "../auth/verify_code.php"; ?>
 					</form>
 
 					<form>
@@ -94,6 +95,6 @@
 		<article class="container">
 </body>
 
-<script src="../assets/js/script.js"></script>
+<script src="../../assets/js/script.js"></script>
 
 </html>

@@ -31,7 +31,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../assets/css/header.css">
+    <link rel="stylesheet" href="../../assets/css/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-DyZ88mC6Up2uqSIL6qz6aSB1n0bR1o5B1Y5X44BZ9N8bL5lH5yT/M6lb1mjL8MQH" crossorigin="anonymous">
     <title>Header</title>
 </head>
@@ -48,7 +48,7 @@ $conn->close();
                 <i class="fas fa-cog"></i>
                 <i class="fas fa-th"></i>
                 <a href="profile.php"> <!-- Thêm thẻ <a> để liên kết tới profile.php -->
-                    <img alt="User Avatar" height="40" src="../assets/upload/avatar/<?php echo htmlspecialchars($avatar); ?>" />
+                    <img alt="User Avatar" height="40" src="../../assets/upload/avatar/<?php echo htmlspecialchars($avatar); ?>" />
                 </a>
             </div>
         </div>
