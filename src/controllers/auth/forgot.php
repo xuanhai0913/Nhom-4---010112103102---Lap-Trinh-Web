@@ -1,13 +1,13 @@
 <?php
 
-require_once('../../config/db.php');
+require_once(__DIR__ . '/../../config/db.php');
 $conn = open_dataBase();
 
 // Sử dụng PHPMailer
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require '../../../vendor/autoload.php'; // Đường dẫn đến autoload.php của Composer
+require_once (__DIR__ . '/../../../vendor/autoload.php'); // Đường dẫn đến autoload.php của Composer
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $email = $_POST['email'];

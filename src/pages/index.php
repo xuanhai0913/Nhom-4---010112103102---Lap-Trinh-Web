@@ -19,7 +19,7 @@
 			<div class="form-container" id="form">
 				<div class="section__form section__form--signUp">
 					<?php include "../controllers/auth/register.php"; ?>
-					<form action="register.php" method="post">
+					<form action="../controllers/auth/register.php" method="post">
 						<h1>Create Account</h1>
 						<div class="social">
 							<a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
@@ -35,7 +35,7 @@
 				</div>
 				<div class="section__form section__form--signIn" id="form-sign-in">
 					<?php include "../controllers/auth/login.php"; ?>
-					<form action="login.php" method="post">
+					<form action="../controllers/auth/login.php" method="post">
 						<h1>Sign in</h1>
 						<div class="social">
 							<a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
@@ -50,7 +50,7 @@
 
 					</form>
 
-					<form action="forgot.php" method="post" id="forgot">
+					<form action="../controllers/auth/forgot.php" method="post" id="forgot">
 						<div onclick="moveDefault();" class="backToSignIn">
 							<i class="fa-solid fa-chevron-up"></i>
 						</div>
