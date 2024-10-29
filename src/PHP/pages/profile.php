@@ -1,5 +1,5 @@
 <?php
-require_once('../includes/db.php');
+require_once('../config/db.php');
 
 $conn = open_dataBase();
 
@@ -9,13 +9,7 @@ session_start();
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 
-    // Sử dụng truy vấn chuẩn bị để bảo vệ chống lại SQL Injection
-    // $stmt = $conn->prepare("SELECT avatar FROM users WHERE username = ?");
-    // $stmt->bind_param("s", $username);
-    // $stmt->execute();
-    // $result = $stmt->get_result();
     $result = getDataByKey('username', $username, '*');
-
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
         $avatar = $user['avatar'] ?: 'default-avatar.png'; // Gán giá trị mặc định nếu không có avatar
@@ -23,7 +17,7 @@ if (isset($_SESSION['username'])) {
         $avatar = 'default-avatar.png'; // Gán giá trị mặc định nếu không tìm thấy người dùng
     }
 } else {
-    header("Location: ../FormLogin/login.php");
+    header("Location: ../pages/index.php");
     exit();
 }
 
@@ -37,9 +31,9 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-DyZ88mC6Up2uqSIL6qz6aSB1n0bR1o5B1Y5X44BZ9N8bL5lH5yT/M6lb1mjL8MQH" crossorigin="anonymous">
-    <link rel="stylesheet" href="../css/profile.css">
+    <link rel="stylesheet" href="../assets/css/profile.css">
     <title>Profile</title>
 </head>
 
@@ -50,7 +44,7 @@ $conn->close();
                 Trang cá nhân
             </div>
             <div class="profile__info">
-                <img src="../assets/upload/avatar/<?php echo htmlspecialchars($avatar); ?>" alt="User Avatar" class="profile__avatar">
+                <img src="../assets/upload/avatar/<?php echo htmlspecialchars($avatar); ?>" alt="User Avatar" class="profile__avatar" >
                 <div>
                     <div class="username">
                         <?php echo htmlspecialchars($user['username']); ?>

@@ -8,12 +8,6 @@ session_start();
 // Kiểm tra xem người dùng đã đăng nhập chưa
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
-
-    // Sử dụng truy vấn chuẩn bị để bảo vệ chống lại SQL Injection
-    // $stmt = $conn->prepare("SELECT avatar FROM users WHERE username = ?");
-    // $stmt->bind_param("s", $username);
-    // $stmt->execute();
-    // $result = $stmt->get_result();
     $result = getDataByKey('username',$username,'avatar');
 
     if ($result->num_rows > 0) {
@@ -23,7 +17,7 @@ if (isset($_SESSION['username'])) {
         $avatar = 'default-avatar.png'; // Gán giá trị mặc định nếu không tìm thấy người dùng
     }
 } else {
-    header("Location: ../../../pages/index.php");
+    header("Location: ../pages/index.php");
     exit();
 }
 

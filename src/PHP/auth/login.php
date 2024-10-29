@@ -1,5 +1,5 @@
 <?php
-require_once(__DIR__ . '/../../config/db.php');
+require_once('../config/db.php');
 
 session_start();
 
@@ -10,6 +10,9 @@ $conn = open_dataBase();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $username = $_POST['username'];
     $password = $_POST['password'];
+    
+    session_start();
+    $_SESSION['username'] = $username;
 
     empty_content_login($username, $password);
 

@@ -18,8 +18,8 @@
 		<div class="wrapper">
 			<div class="form-container" id="form">
 				<div class="section__form section__form--signUp">
-					<?php include "../controllers/auth/register.php"; ?>
-					<form action="../controllers/auth/register.php" method="post">
+					<?php include "../auth/register.php"; ?>
+					<form action="../auth/register.php" method="post">
 						<h1>Create Account</h1>
 						<div class="social">
 							<a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
@@ -34,8 +34,8 @@
 					</form>
 				</div>
 				<div class="section__form section__form--signIn" id="form-sign-in">
-					<?php include "../controllers/auth/login.php"; ?>
-					<form action="../controllers/auth/login.php" method="post">
+					<?php include "../auth/login.php"; ?>
+					<form action="../pages/home.php" method="post">
 						<h1>Sign in</h1>
 						<div class="social">
 							<a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
@@ -50,7 +50,7 @@
 
 					</form>
 
-					<form action="../controllers/auth/forgot.php" method="post" id="forgot">
+					<form action="../auth/forgot.php" method="post" id="forgot">
 						<div onclick="moveDefault();" class="backToSignIn">
 							<i class="fa-solid fa-chevron-up"></i>
 						</div>
@@ -58,8 +58,8 @@
 						<span>Sử email mà bạn đã đăng ký để nhận mã.</span>
 						<input type="email" name="email" required placeholder="Email" />
 						<button class="btn-send" type="submit" ">Gửi mã</button>
-						<?php include "../controllers/auth/forgot.php"; ?>
-						<input id=" captcha" type="text" placeholder="Mã xác nhận" />
+						<?php include "../auth/forgot.php"; ?>
+						<input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code' required />
 						<button id="btn-captcha" type="button">Xác nhận</button>
 					</form>
 
@@ -94,6 +94,6 @@
 		<article class="container">
 </body>
 
-<script src="../js/script.js"></script>
+<script src="../assets/js/script.js"></script>
 
 </html>

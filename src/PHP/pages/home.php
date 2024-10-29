@@ -6,8 +6,8 @@
     </title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
-    <link href="../css/base.css" rel="stylesheet" />
-    <link href="../css/home.css" rel="stylesheet" />
+    <link href="../assets/css/base.css" rel="stylesheet" />
+    <link href="../assets/css/home.css" rel="stylesheet" />
 </head>
 
 <body>
