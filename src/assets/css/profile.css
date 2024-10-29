@@ -1,0 +1,134 @@
+.profile__title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.profile__info {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f0f2f5;
+    border-radius: 10px;
+}
+
+.profile__info img {
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-right: 20px;
+    object-fit: cover;
+}
+
+.profile-info div {
+    flex-grow: 1;
+}
+
+.username {
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.name {
+    color: #666;
+}
+
+.profile__info button {
+    background-color: #0095f6;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.section {
+    margin-bottom: 20px;
+}
+
+.section label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.section input[type="text"],
+.section textarea {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f0f2f5;
+}
+
+.section textarea {
+    height: 60px;
+}
+
+.section .note {
+    color: #666;
+    font-size: 12px;
+    margin-top: 5px;
+}
+
+.section .char-count {
+    text-align: right;
+    font-size: 12px;
+    color: #666;
+}
+
+.toggle-section {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.toggle-section label {
+    font-weight: bold;
+}
+
+.toggle-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+}
+
+.toggle-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    border-radius: 25px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 19px;
+    width: 19px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: .4s;
+    border-radius: 50%;
+}
+
+input:checked+.slider {
+    background-color: #0095f6;
+}
+
+input:checked+.slider:before {
+    transform: translateX(25px);
+}

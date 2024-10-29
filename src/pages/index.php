@@ -5,12 +5,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="base.css">
-	<link rel="stylesheet" href="style.css">
-	<script src="jquery-3.7.1.min.js"></script>
+	<link rel="stylesheet" href="../css/base.css">
+	<link rel="stylesheet" href="../css/log.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
+	integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+	<script src="../js/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 		<div class="wrapper">
 			<div class="form-container" id="form">
 				<div class="section__form section__form--signUp">
-					<?php include "register.php"; ?>
+					<?php include "src/assets/php/components/register.php"; ?>
 					<form action="register.php" method="post">
 						<h1>Create Account</h1>
 						<div class="social">
@@ -94,6 +94,6 @@
 		<article class="container">
 </body>
 
-<script src="script.js"></script>
+<script src="../js/script.js"></script>
 
 </html>
