@@ -1,0 +1,83 @@
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f1f1f1;
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #333;
+        }
+
+        .input-group {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+        }
+
+        .input-group input,
+        .input-group select,
+        .input-group button {
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .input-group button {
+            background-color: #4285f4;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .input-group button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .video-controls {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .video-controls button {
+            flex: 1 1 45%;
+            margin: 5px;
+        }
+
+        #videos {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .video {
+            width: 300px;
+            height: 200px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin: 5px;
+            background-color: #eaeaea;
+        }
+
+        .status {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .status span {
+            font-weight: bold;
+        }
