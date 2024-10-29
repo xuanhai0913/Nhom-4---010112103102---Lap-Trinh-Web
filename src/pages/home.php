@@ -11,7 +11,7 @@
 </head>
 
 <body>
-    <?php include '../includes/header.php'; ?>
+    <?php include '../templates/header.php'; ?>
     <div style="display: flex;">
         <div class="sidebar">
             <div class="menu-item active">

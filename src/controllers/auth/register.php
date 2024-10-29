@@ -1,5 +1,5 @@
 <?php
-require_once('../includes/db.php');
+require_once('../../config/db.php');
 
 $conn = open_dataBase();
 
@@ -27,6 +27,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->execute()) {
                 echo "Đăng ký thành công!";
+                header('Location: ../../../../pages/index.php');
+                exit();
             } else {
                 echo "Đăng ký thất bại: " . $stmt->error;
             }

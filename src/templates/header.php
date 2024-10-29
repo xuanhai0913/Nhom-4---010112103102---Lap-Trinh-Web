@@ -1,5 +1,5 @@
 <?php
-require_once('db.php');
+require_once('../config/db.php');
 
 $conn = open_dataBase();
 
@@ -23,7 +23,7 @@ if (isset($_SESSION['username'])) {
         $avatar = 'default-avatar.png'; // Gán giá trị mặc định nếu không tìm thấy người dùng
     }
 } else {
-    header("Location: ../FormLogin/login.php");
+    header("Location: ../../../pages/index.php");
     exit();
 }
 
@@ -37,7 +37,7 @@ $conn->close();
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/header.css">
+    <link rel="stylesheet" href="../assets/css/header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha384-DyZ88mC6Up2uqSIL6qz6aSB1n0bR1o5B1Y5X44BZ9N8bL5lH5yT/M6lb1mjL8MQH" crossorigin="anonymous">
     <title>Header</title>
 </head>

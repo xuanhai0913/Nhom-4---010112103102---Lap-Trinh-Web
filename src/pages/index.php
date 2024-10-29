@@ -5,12 +5,12 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Document</title>
-	<link rel="stylesheet" href="../css/base.css">
-	<link rel="stylesheet" href="../css/log.css">
+	<link rel="stylesheet" href="../assets/css/base.css">
+	<link rel="stylesheet" href="../assets/css/log.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
 	integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
 	crossorigin="anonymous" referrerpolicy="no-referrer" />
-	<script src="../js/jquery-3.7.1.min.js"></script>
+	<script src="../assets/js/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -18,7 +18,7 @@
 		<div class="wrapper">
 			<div class="form-container" id="form">
 				<div class="section__form section__form--signUp">
-					<?php include "src/assets/php/components/register.php"; ?>
+					<?php include "../controllers/auth/register.php"; ?>
 					<form action="register.php" method="post">
 						<h1>Create Account</h1>
 						<div class="social">
@@ -34,7 +34,7 @@
 					</form>
 				</div>
 				<div class="section__form section__form--signIn" id="form-sign-in">
-					<?php include "login.php"; ?>
+					<?php include "../controllers/auth/login.php"; ?>
 					<form action="login.php" method="post">
 						<h1>Sign in</h1>
 						<div class="social">
@@ -58,7 +58,7 @@
 						<span>Sử email mà bạn đã đăng ký để nhận mã.</span>
 						<input type="email" name="email" required placeholder="Email" />
 						<button class="btn-send" type="submit" ">Gửi mã</button>
-						<?php include "forgot.php"; ?>
+						<?php include "../controllers/auth/forgot.php"; ?>
 						<input id=" captcha" type="text" placeholder="Mã xác nhận" />
 						<button id="btn-captcha" type="button">Xác nhận</button>
 					</form>

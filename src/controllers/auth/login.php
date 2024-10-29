@@ -1,5 +1,5 @@
 <?php
-require_once('../includes/db.php');
+require_once('../../config/db.php');
 
 session_start();
 
@@ -26,7 +26,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Kiểm tra mật khẩu
             if (password_verify($password, $hashed_password)) {
                 $_SESSION['username'] = $username; // Lưu thông tin người dùng vào phiên
-                header('Location: ../pages/home.php');
+                header('Location: ../../../../pages/home.php');
                 exit();
             } else {
                 echo 'Sai tên người dùng hoặc mật khẩu!';
