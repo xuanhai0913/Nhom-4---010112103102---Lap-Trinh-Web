@@ -6,44 +6,29 @@
     </title>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
-    <link href="../assets/css/base.css" rel="stylesheet" />
-    <link href="../assets/css/home.css" rel="stylesheet" />
+    <link href="../../assets/css/base.css" rel="stylesheet" />
+    <link href="../../assets/css/home.css" rel="stylesheet" />
 </head>
 
 <body>
     <?php include '../templates/header.php'; ?>
-    <div style="display: flex;">
-        <div class="sidebar">
-            <div class="menu-item active">
-                <i class="fas fa-video">
-                </i>
-                <span>
-                    Cuộc họp
-                </span>
-            </div>
-            <div class="menu-item">
-                <i class="fas fa-phone">
-                </i>
-                <span>
-                    Cuộc gọi
-                </span>
-            </div>
-        </div>
-        <div class="main">
+    <div class="container">
+        <div class="home-container">
             <h1>
-                Hội nghị truyền hình an toàn cho mọi người
+                V2meet – Kết nối trái tim, xóa tan khoảng cách
             </h1>
             <p>
-                Kết nối, cộng tác và ăn mừng ở mọi nơi với Google Meet
+                "Kết nối, cộng tác và ăn mừng mọi khoảnh khắc – chỉ với một cú chạm, khoảng cách sẽ không còn là rào cản!"
             </p>
             <div class="buttons">
                 <button class="primary">
                     Cuộc họp mới
                 </button>
+                <div class="join__input">
+                    <input class="join__input-text" type="text" id="roomCode" placeholder="Nhập mã phòng đã có">
+                    <button class="join__input-paste" onclick="pasteText()">Dán</button>
+                </div>
                 <button>
-                    Nhập mã hoặc biệt hiệu
-                </button>
-                <button disabled="">
                     Tham gia
                 </button>
             </div>
@@ -72,11 +57,9 @@
                     </span>
                 </div>
             </div>
-            <div class="footer">
-                <a href="#">
-                    Tìm hiểu thêm về Google Meet
-                </a>
-            </div>
+            <a class="link" href="#">
+                Tìm hiểu thêm về V2meet
+            </a>
         </div>
     </div>
     <script>
@@ -130,6 +113,14 @@
         }
 
         showSlide(slideIndex);
+
+        function pasteText() {
+            navigator.clipboard.readText().then(text => {
+                document.getElementById('roomCode').value = text;
+            }).catch(err => {
+                console.error('Không thể dán nội dung: ', err);
+            });
+        }
     </script>
 </body>
 
