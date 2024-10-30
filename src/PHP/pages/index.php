@@ -59,7 +59,7 @@
 						<input type="email" name="email" required placeholder="Email" />
 						<button class="btn-send" type="submit" ">Gửi mã</button>
 						<?php include "../auth/forgot.php"; ?>
-						<input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code' required />
+						<input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code'/>
 						<button id="btn-captcha" type="button">Xác nhận</button>
 						<?php include "../auth/verify_code.php"; ?>
 					</form>

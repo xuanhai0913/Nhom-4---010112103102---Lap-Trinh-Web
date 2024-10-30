@@ -1,12 +1,12 @@
 <?php
 // verify_code.php
 require_once('../config/db.php');
-
+$conn = open_dataBase();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Lấy mã xác thực từ người dùng
     $codeByUser = $_POST['verify_code'] ?? '';
-    $email = $_SESSION['email'] ?? '';
+    $email = $_POST['email'] ?? '';
 
     // Kiểm tra xem email có tồn tại trong phiên hay không
     if (!empty($email)) {
@@ -31,4 +31,5 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo 'Email không tồn tại trong phiên.';
     }
 }
+$conn->close();
 ?>
