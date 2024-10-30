@@ -8,14 +8,17 @@
 	<link rel="stylesheet" href="../../assets/css/base.css">
 	<link rel="stylesheet" href="../../assets/css/log.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-	integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-	crossorigin="anonymous" referrerpolicy="no-referrer" />
+		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="../../assets/js/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
 	<article class="container">
 		<div class="wrapper">
+			<div id="notification" class="notification" style="display: none;">
+				<span id="notificationMessage"><?php echo isset($message) ? $message : ''; ?></span>
+			</div>
 			<div class="form-container" id="form">
 				<div class="section__form section__form--signUp">
 					<?php include "../auth/register.php"; ?>
@@ -27,7 +30,7 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your email for registration</span>
-						<input type="text" placeholder="Name" name="username" class='input__username' pattern="[a-zA-Z0-9._]{5,}" required />
+						<input type="text" placeholder="Name" name="username" class='input__username' pattern="[a-zA-Z0-9._]{5,}" required class="<?php echo $className; ?>"/>
 						<input type="email" placeholder="Email" name="email" required />
 						<input type="password" placeholder="Password" name="password" pattern="[a-z0-9]{5,}" required />
 						<button>Sign Up</button>
@@ -35,7 +38,7 @@
 				</div>
 				<div class="section__form section__form--signIn" id="form-sign-in">
 					<?php include "../auth/login.php"; ?>
-					<form action="../pages/home.php" method="post">
+					<form action="../auth/login.php" method="post">
 						<h1>Sign in</h1>
 						<div class="social">
 							<a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
@@ -43,8 +46,8 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your account</span>
-						<input type="text" placeholder="User name" name="username" required class="<?php echo $className; ?>" />
-						<input type="password" placeholder="Password" name="password" required class="<?php echo $className; ?>" />
+						<input type="text" placeholder="User name" name="username" required />
+						<input type="password" placeholder="Password" name="password" required />
 						<a id="forgot" onclick="moveForgot();">Forgot your password?</a>
 						<button>Sign In</button>
 
@@ -59,7 +62,7 @@
 						<input type="email" name="email" required placeholder="Email" />
 						<button class="btn-send" type="submit" ">Gửi mã</button>
 						<?php include "../auth/forgot.php"; ?>
-						<input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code'/>
+						<input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code' />
 						<button id="btn-captcha" type="button">Xác nhận</button>
 						<?php include "../auth/verify_code.php"; ?>
 					</form>

@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($stmt->execute()) {
                 echo "Đăng ký thành công!";
-                header('Location: ../../../../pages/index.php');
+                header('Location: ../pages/index.php');
                 exit();
             } else {
                 echo "Đăng ký thất bại: " . $stmt->error;
