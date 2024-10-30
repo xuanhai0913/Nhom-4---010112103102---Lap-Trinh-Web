@@ -1,49 +1,28 @@
-.sidebar {
-    width: 200px;
-    padding: 20px;
-    border-right: 1px solid #dadce0;
-}
-
-.sidebar .menu-item {
+.home-container {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    padding: 10px 0;
-    color: #5f6368;
-    cursor: pointer;
-}
-
-.sidebar .menu-item i {
-    margin-right: 10px;
-}
-
-.sidebar .menu-item.active {
-    background-color: #e8f0fe;
-    color: #1a73e8;
-    border-radius: 4px;
-}
-
-.main {
     padding: 20px;
     flex-grow: 1;
 }
 
-.main h1 {
+.home-container h1 {
     font-size: 24px;
     font-weight: 500;
     margin: 20px 0;
 }
 
-.main p {
+.home-container p {
     font-size: 16px;
     color: #5f6368;
 }
 
-.main .buttons {
+.home-container .buttons {
     display: flex;
     margin: 20px 0;
 }
 
-.main .buttons button {
+.home-container .buttons button {
     padding: 10px 20px;
     margin-right: 10px;
     border: 1px solid #dadce0;
@@ -52,7 +31,7 @@
     font-size: 14px;
 }
 
-.main .buttons .primary {
+.home-container .buttons .primary {
     background-color: #1a73e8;
     color: #fff;
     border: none;
@@ -105,12 +84,42 @@
 .carousel .nav.right {
     right: -30px;
 }
-.footer {
-    text-align: center;
-    padding: 20px;
-    border-top: 1px solid #dadce0;
-}
-.footer a {
+.link {
     color: #1a73e8;
     text-decoration: none;
 }
+
+.join__input {
+    display: flex;
+    align-items: center;
+    position: relative;
+    max-width: 100%;
+}
+
+.join__input-text {
+    font-size: 18px;
+    padding: 5px 10px;
+    width: 100%;
+    padding-left: 35px;
+    outline: none;
+    background: #ffffff;
+    color: #000000;
+    border: 1px solid #c4d1eb;
+    border-radius: 5px;
+    box-shadow: 3px 3px 2px 0px #e2e2e2;
+    transition: 0.3s ease;
+  }
+
+  .join__input-text:focus {
+    background: #f2f2f2;
+    border: 1px solid #5a7ec7;
+    border-radius: 10px;
+  }
+
+  .join__input-paste {
+    position: absolute;
+    left: 10px;
+    fill: #4660dc;
+    width: 18px;
+    height: 18px;
+  }  
