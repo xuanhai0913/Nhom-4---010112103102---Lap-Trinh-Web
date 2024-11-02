@@ -16,9 +16,6 @@
 <body>
 	<article class="container">
 		<div class="wrapper">
-			<div id="notification" class="notification" style="display: none;">
-				<span id="notificationMessage"><?php echo isset($message) ? $message : ''; ?></span>
-			</div>
 			<div class="form-container" id="form">
 				<div class="section__form section__form--signUp">
 					<?php include "../auth/register.php"; ?>

@@ -1,8 +1,6 @@
 <?php
 require_once('../config/db.php');
 
-session_start();
-
 $className = '';
 $conn = open_dataBase();
 

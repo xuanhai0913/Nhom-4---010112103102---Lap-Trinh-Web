@@ -1,7 +1,7 @@
 <?php
 require_once('../config/db.php');
 
-
+$className = '';
 $conn = open_dataBase();
 
 // Xử lý thông tin đăng ký khi form được gửi
@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     empty_content_register($username, $email, $password);
     // Kiểm tra xem tên người dùng đã tồn tại
     if (isExists('username',$username)) {
-        echo 'Tên người dùng đã tồn tại!';
+        $className = 'input--error';
     } else if (isExists('email',$email)) {
         echo 'Email đã được sử dụng. Vui lòng nhập Email khác!';
     } else {
