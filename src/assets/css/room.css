@@ -1,83 +1,162 @@
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f1f1f1;
-            margin: 0;
-            padding: 20px;
-        }
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f1f1f1;
+    margin: 0;
+    padding: 20px;
+}
 
-        .container {
-            max-width: 800px;
-            margin: auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-        }
+.container {
+    max-width: 800px;
+    margin: auto;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
 
-        h2 {
-            text-align: center;
-            color: #333;
-        }
+h2 {
+    text-align: center;
+    color: #333;
+}
 
-        .input-group {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 15px;
-        }
+.input-group {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
 
-        .input-group input,
-        .input-group select,
-        .input-group button {
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-        }
+/* Input, Select and Button Styles */
+.input-group input,
+.input-group select,
+.input-group button {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
 
-        .input-group button {
-            background-color: #4285f4;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
+.input-group button {
+    background-color: #4285f4;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
 
-        .input-group button:disabled {
-            background-color: #ccc;
-            cursor: not-allowed;
-        }
+.input-group button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}
 
-        .video-controls {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: space-between;
-            margin-top: 20px;
-        }
+.video-controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-top: 20px;
+}
 
-        .video-controls button {
-            flex: 1 1 45%;
-            margin: 5px;
-        }
+/* Video Control Button Styles */
+.video-controls button {
+    flex: 1 1 45%;
+    margin: 5px;
+}
 
-        #videos {
-            margin-top: 20px;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-        }
+#videos {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
-        .video {
-            width: 300px;
-            height: 200px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            margin: 5px;
-            background-color: #eaeaea;
-        }
+.video {
+    width: 300px;
+    height: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin: 5px;
+    background-color: #eaeaea;
+}
 
-        .status {
-            margin-top: 20px;
-            text-align: center;
-        }
+.status {
+    margin-top: 20px;
+    text-align: center;
+}
 
-        .status span {
-            font-weight: bold;
-        }
+.status span {
+    font-weight: bold;
+}
+
+.room-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px; 
+}
+
+.room-container h3 {
+    font-size: 24px;
+    font-weight: 500;
+    margin: 20px 0;
+    color: #333;
+}
+
+.room-container input {
+    font-size: 16px;
+    padding: 10px;
+    width: 300px; 
+    margin: 10px 0;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    transition: border 0.3s ease;
+}
+
+.room-container input:focus {
+    border: 1px solid #1a73e8;
+    outline: none;
+}
+
+.room-container .buttons {
+    display: flex;
+    gap: 10px; 
+    margin: 20px 0;
+}
+
+.room-container .buttons button {
+    padding: 10px 20px;
+    border: 1px solid #dadce0;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    background-color: #ffffff;
+    color: #1a73e8;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.room-container .buttons button:hover {
+    background-color: rgba(88, 101, 242, 0.1);
+    box-shadow: 0 0 10px rgba(88, 101, 242, 0.2);
+}
+
+.room-container .buttons .primary {
+    background-color: #1a73e8;
+    color: #fff;
+    border: none;
+}
+
+.room-container .status {
+    font-size: 16px;
+    color: #5f6368;
+    margin: 20px 0;
+}
+
+.room-container #roomIdDisplay {
+    color: green;
+    margin-top: 10px;
+}
+
+.video-controls button i,
+.room-container .buttons button i {
+    margin-right: 5px; 
+}
