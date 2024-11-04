@@ -59,6 +59,7 @@
     justify-content: center;
     margin: 10px 0;
 }
+
 .carousel .dots span {
     width: 10px;
     height: 10px;
@@ -67,9 +68,11 @@
     margin: 0 5px;
     cursor: pointer;
 }
+
 .carousel .dots .active {
     background-color: #1a73e8;
 }
+
 .carousel .nav {
     position: absolute;
     top: 50%;
@@ -78,27 +81,60 @@
     color: #5f6368;
     cursor: pointer;
 }
+
 .carousel .nav.left {
     left: -30px;
 }
+
 .carousel .nav.right {
     right: -30px;
 }
+
 .link {
     color: #1a73e8;
     text-decoration: none;
 }
 
-.join__input {
+.fuctional {
+    display: flex;
+    gap: 2rem;
+    height: 35px;
+}
+
+.fuctional__create-room {
+    background: rgba(88, 101, 242, 1);
+    color: white;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 500;
+    justify-content: space-around;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    width: 125px;
+    height: 100%;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.fuctional__create-room:hover {
+    background: rgba(88, 101, 242, 0.8);
+    box-shadow: 0 0 10px rgba(88, 101, 242, 0.8);
+}
+
+.fuctional__join-room {
     display: flex;
     align-items: center;
     position: relative;
     max-width: 100%;
+    gap: 10px;
 }
 
-.join__input-text {
+.join-room__input {
     font-size: 18px;
-    padding: 5px 10px;
+    padding: 5px 0px 5px 100px;
     width: 100%;
     padding-left: 35px;
     outline: none;
@@ -108,18 +144,64 @@
     border-radius: 5px;
     box-shadow: 3px 3px 2px 0px #e2e2e2;
     transition: 0.3s ease;
-  }
+}
 
-  .join__input-text:focus {
+.join-room__input:focus {
     background: #f2f2f2;
     border: 1px solid #5a7ec7;
     border-radius: 10px;
-  }
+}
 
-  .join__input-paste {
+.join-room__paste {
     position: absolute;
     left: 10px;
-    fill: #4660dc;
-    width: 18px;
-    height: 18px;
-  }  
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #5a7ec7;
+}
+
+.join-room__button {
+    background: rgba(88, 101, 242, 1);
+    color: white;
+    font-family: inherit;
+    font-size: 17px;
+    font-weight: 500;
+    text-align: left;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    position: relative;
+    width: 150px;
+    height: 100%;
+    padding-right: 25px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.join-room__button:hover {
+    background: rgba(88, 101, 242, 0.8);
+    box-shadow: 0 0 10px rgba(88, 101, 242, 0.8);
+}
+
+.join-room__button-icon {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 25px;
+    width: 25px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 20px 10px #7a8cf3;
+    right: 5px;
+    transition: all 0.3s;
+}
+
+.join-room__button:hover .join-room__button-icon{
+    box-shadow: 0 0 10px rgba(87, 91, 143, 0.8);
+}

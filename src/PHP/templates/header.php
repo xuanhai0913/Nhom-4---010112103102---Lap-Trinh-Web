@@ -40,14 +40,13 @@ $conn->close();
     <div class="container">
         <div class="header">
             <div class="header__left">
-                <img alt="Logo" height="40" src="https://storage.googleapis.com/a1aa/image/OuLMTCiw5vahCxbcAG1ZnlDFs54irzaCvxHmpBL6r5ec2W1JA.jpg" width="40" />
-                <span>V2Meet</span>
+                <img alt="Logo" height="50" src="../../assets/images/logo.png"/>
             </div>
             <div class="header__right">
                 <i class="fas fa-question-circle"></i>
                 <i class="fas fa-cog"></i>
                 <i class="fas fa-th"></i>
-                <a href="profile.php"> <!-- Thêm thẻ <a> để liên kết tới profile.php -->
+                <a href="profile.php">
                     <img alt="User Avatar" height="40" src="../../assets/upload/avatar/<?php echo htmlspecialchars($avatar); ?>" />
                 </a>
             </div>

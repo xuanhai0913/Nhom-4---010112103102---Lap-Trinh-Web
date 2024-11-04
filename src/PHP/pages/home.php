@@ -4,8 +4,9 @@
     <title>
         Video Conference
     </title>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&amp;display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="../../assets/css/base.css" rel="stylesheet" />
     <link href="../../assets/css/home.css" rel="stylesheet" />
 </head>
@@ -20,19 +21,23 @@
             <p>
                 "Kết nối, cộng tác và ăn mừng mọi khoảnh khắc – chỉ với một cú chạm, khoảng cách sẽ không còn là rào cản!"
             </p>
-            <div class="buttons">
-                <button class="primary">
-                    Cuộc họp mới
+
+            <div class="fuctional">
+                <button class="fuctional__create-room">
+                    <i class="fa-solid fa-plus"></i>
+                    Tạo phòng
                 </button>
-                <div class="join__input">
-                    <input class="join__input-text" type="text" id="roomCode" placeholder="Nhập mã phòng đã có">
-                    <button class="join__input-paste" onclick="pasteText()">Dán</button>
+                <div class="fuctional__join-room">
+                    <input class="join-room__input" type="text" id="roomCode" placeholder="Nhập mã phòng đã có">
+                    <i class="fa-regular fa-paste join-room__paste" onclick="pasteRoomCode()"></i>
+                    <button class="join-room__button"> Tham gia
+                        <div class="join-room__button-icon">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </button>
                 </div>
-                <button>
-                    Tham gia
-                </button>
             </div>
-            <div class="carousel">
+            <div class="introduce">
                 <i class="fas fa-chevron-left nav left" onclick="prevSlide()">
                 </i>
                 <img alt="Illustration of two people having a video conference" height="200" id="carousel-image" src="https://storage.googleapis.com/a1aa/image/tqmb77zF9J42Hl5eJQ3qEfZF6r3N5ZLxOKzmekVjE7k0ZbVnA.jpg" width="200" />
@@ -114,7 +119,7 @@
 
         showSlide(slideIndex);
 
-        function pasteText() {
+        function pasteRoomCode() {
             navigator.clipboard.readText().then(text => {
                 document.getElementById('roomCode').value = text;
             }).catch(err => {
