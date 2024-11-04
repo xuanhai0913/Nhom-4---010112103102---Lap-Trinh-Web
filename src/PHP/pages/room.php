@@ -67,9 +67,9 @@
                     <i class="fas fa-sync-alt"></i> Switch Camera
                 </button>
                 <button class="pushable">
-  <span class="shadow"></span>
-  <span class="edge"></span>
-  <span class="front">                    <i class="fas fa-sign-out-alt"></i> Leave room</span>
+                    <span class="shadow"></span>
+                    <span class="edge"></span>
+                    <span class="front"> <i class="fas fa-sign-out-alt"></i> Leave room</span>
                 </button>
         </div>
 
@@ -79,6 +79,15 @@
 
         <div id="videos"></div>
     </div>
+
+    <script src="../room/config.js"></script>
+    <script src="../room/deviceSettings.js"></script>
+    <script src="../room/Mute.js"></script>
+    <script src="../room/roomManagement.js"></script>
+    <script src="../room/share.js"></script>
+    <script src="../room/utils.js"></script>
+    <script src="../room/Video.js"></script>
+    <script src="../room/videoDimensions.js"></script>
 
 </body>
 
