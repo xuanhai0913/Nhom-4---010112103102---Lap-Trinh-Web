@@ -1,27 +1,35 @@
 <?php
 require_once('../config/db.php');
 
-$className = '';
+// Open database connection
 $conn = open_dataBase();
 
-// Xử lý thông tin đăng ký khi form được gửi
+// Initialize variables
+$className = '';
+
+// Handle registration form submission
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $username = trim($_POST['username']);
-    $email = trim($_POST['email']);
-    $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT); // Mã hóa mật khẩu
+    // Trim and sanitize inputs
+    $username = trim($conn->real_escape_string($_POST['username']));
+    $email = trim($conn->real_escape_string($_POST['email']));
+    $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT); // Hash the password
 
-    // Kiểm tra nếu thông tin không trống
-    empty_content_register($username, $email, $password);
-    // Kiểm tra xem tên người dùng đã tồn tại
-    if (isExists('username',$username)) {
-        $className = 'input--error';
-    } else if (isExists('email',$email)) {
-        echo 'Email đã được sử dụng. Vui lòng nhập Email khác!';
+    // Check if any field is empty
+    if (empty($username) || empty($email) || empty($password)) {
+        echo "Vui lòng điền đầy đủ thông tin!";
     } else {
-
-        // Chèn thông tin vào bảng
-        $sql = "INSERT INTO users (username,fullname, password, email) VALUES (?, ?, ?,?)";
-        $stmt = $conn->prepare($sql);
+        // Check if the username already exists
+        if (isExists('username', $username)) {
+            $className = 'input--error';
+            echo "Tên đăng nhập đã tồn tại!";
+        } 
+        // Check if the email already exists
+        else if (isExists('email', $email)) {
+            echo "Email đã được sử dụng. Vui lòng nhập Email khác!";
+        } else {
+            // Prepare and bind the insert statement
+            $sql = "INSERT INTO users (username,fullname, password, email) VALUES (?, ?, ?,?)";
+            $stmt = $conn->prepare($sql);
 
         if ($stmt) {
             $stmt->bind_param("ssss", $username, $username, $password, $email);
@@ -38,8 +46,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             echo "Lỗi chuẩn bị câu lệnh: " . $conn->error;
         }
+        $stmt->close();
+        }
     }
 }
-
-// Đóng kết nối
+// Close the database connection
 $conn->close();
+?>
