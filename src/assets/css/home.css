@@ -1,107 +1,39 @@
 .home-container {
     display: flex;
-    flex-direction: column;
+    width: 100%;
+    flex-direction: row;
     align-items: center;
+    gap: 50px;
+    min-height: calc(100vh - 70px - 50px);
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
     padding: 20px;
-    flex-grow: 1;
+    gap: 20px;
+    max-width: 50%;
 }
 
-.home-container h1 {
-    font-size: 24px;
+.content h1 {
+    font-size: 40px;
     font-weight: 500;
-    margin: 20px 0;
+    margin: 20px 0 0 0;
 }
 
-.home-container p {
-    font-size: 16px;
+.content p {
+    font-size: 18px;
     color: #5f6368;
 }
 
-.home-container .buttons {
+.function {
     display: flex;
-    margin: 20px 0;
-}
-
-.home-container .buttons button {
-    padding: 10px 20px;
-    margin-right: 10px;
-    border: 1px solid #dadce0;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-}
-
-.home-container .buttons .primary {
-    background-color: #1a73e8;
-    color: #fff;
-    border: none;
-}
-
-.carousel {
-    text-align: center;
-    margin: 20px 0;
-    position: relative;
-}
-
-.carousel img {
-    width: 200px;
-    height: 200px;
-    border-radius: 50%;
-}
-
-.carousel p {
-    font-size: 16px;
-    margin: 10px 0;
-}
-
-.carousel .dots {
-    display: flex;
-    justify-content: center;
-    margin: 10px 0;
-}
-
-.carousel .dots span {
-    width: 10px;
-    height: 10px;
-    background-color: #dadce0;
-    border-radius: 50%;
-    margin: 0 5px;
-    cursor: pointer;
-}
-
-.carousel .dots .active {
-    background-color: #1a73e8;
-}
-
-.carousel .nav {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 24px;
-    color: #5f6368;
-    cursor: pointer;
-}
-
-.carousel .nav.left {
-    left: -30px;
-}
-
-.carousel .nav.right {
-    right: -30px;
-}
-
-.link {
-    color: #1a73e8;
-    text-decoration: none;
-}
-
-.fuctional {
-    display: flex;
-    gap: 2rem;
+    gap: 2.5%;
     height: 35px;
 }
 
-.fuctional__create-room {
+.function__create-room {
     background: rgba(88, 101, 242, 1);
     color: white;
     font-family: inherit;
@@ -110,21 +42,22 @@
     justify-content: space-around;
     display: flex;
     align-items: center;
+    gap: 5px;
     overflow: hidden;
     position: relative;
-    width: 125px;
+    min-width: fit-content;
     height: 100%;
     cursor: pointer;
     border: none;
     border-radius: 5px;
 }
 
-.fuctional__create-room:hover {
+.function__create-room:hover {
     background: rgba(88, 101, 242, 0.8);
     box-shadow: 0 0 10px rgba(88, 101, 242, 0.8);
 }
 
-.fuctional__join-room {
+.function__join-room {
     display: flex;
     align-items: center;
     position: relative;
@@ -176,7 +109,7 @@
     align-items: center;
     overflow: hidden;
     position: relative;
-    width: 150px;
+    min-width: 115px;
     height: 100%;
     padding-right: 25px;
     cursor: pointer;
@@ -202,6 +135,104 @@
     transition: all 0.3s;
 }
 
-.join-room__button:hover .join-room__button-icon{
+.join-room__button:hover .join-room__button-icon {
     box-shadow: 0 0 10px rgba(87, 91, 143, 0.8);
+}
+
+.carousel {
+    text-align: center;
+    min-width: 450px;
+    width: 450px;
+    padding: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.carousel__text {
+    font-size: 18px;
+    margin: 10px 0;
+    transition: all 1s ease-in-out;
+    opacity: 0;
+}
+
+.carousel__text--active {
+    opacity: 1;
+}
+
+.carousel__dots {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0;
+}
+
+.carousel__dot {
+    width: 10px;
+    height: 10px;
+    background-color: #a7a9ad;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: background-color 1s ease;
+}
+
+.carousel__dot--active {
+    background-color: #7bbae0;
+}
+
+.carousel__thumbnails {
+    display: flex;
+    justify-content: space-around;
+    position: relative;
+    width: 100%;
+
+    i {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 24px;
+        color: #5f6368;
+        cursor: pointer;
+        transition: font-size 0.3s ease;
+    }
+
+    .thumbnail__prev {
+        left: 75px;
+    }
+
+    .thumbnail__next {
+        right: 75px;
+    }
+
+    i:hover {
+        font-size: 30px;
+    }
+
+    .thumbnail__image {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        object-fit: cover;
+        transition: all  1s ease-in-out;
+        opacity: 0;
+    }
+
+    .thumbnail__image--active {
+        opacity: 1;
+    }
+
+}
+.carousel__description {
+    font-size: 20px;
+    color: #000000;
+}
+
+
+.link {
+    color: #1a73e8;
+    text-decoration: none;
 }

@@ -1,36 +1,72 @@
+@import url('../../assets/css/profile.css');
+
 .header {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 20px 5px 20px;
+    padding: 5px 20px;
     border-bottom: 1px solid #dadce0;
+    width: 100%;
+    box-sizing: border-box;
+    height: 70px;
 }
 
 .header__left {
-    display: flex;
-    align-items: center;
-    gap: 20px;
+    a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            cursor: pointer;
+            height: 50px;
+            object-fit: cover;
+        }
+    }
 }
 
-.header__left img {
-    height: 60px;
-}
 
 .header__right {
     display: flex;
     align-items: center;
     gap: 20px;
 
+    #datetime {
+        font-size: 20px;
+        color: #5f6368;
+    }
+
     i {
         font-size: 20px;
         color: #5f6368;
     }
 
-    img {
-        cursor: pointer;
-        height: 50px;
-        width: 50px;
+    .btn-avatar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
         border-radius: 50%;
-        object-fit: cover;
+        box-shadow: 0;
+        transition: all 0.1s ease;
+
+        img {
+            cursor: pointer;
+            border-radius: 50%;
+            object-fit: cover;
+            width: 50px;
+            height: 50px;
+        }
+    }
+
+    .btn-avatar:hover {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 
+                0 0 10px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(0, 0, 0, 0.2);
+    }
+
+    .btn-avatar.active {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.4), 
+                0 0 10px rgba(0, 0, 0, 0.3),
+                0 0 15px rgba(0, 0, 0, 0.2);
     }
 }

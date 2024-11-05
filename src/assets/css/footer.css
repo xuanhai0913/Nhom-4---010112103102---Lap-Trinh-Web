@@ -1,0 +1,118 @@
+.footer {
+    height: 50px;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: rgba(88, 101, 242, 1);
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+.footer-navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.footer-navbar__social-list {
+    display: inline-flex;
+    align-items: center;
+    height: 100%;
+    font-family: "Poppins", sans-serif;
+}
+.footer-navbar__social-list .icon-facebook:after {
+    background-color: #1569d6;
+}
+.footer-navbar__social-list .icon-facebook:hover span,
+.footer-navbar__social-list .icon-facebook:hover span::before {
+    background: #1569d6;
+    color: #fff;
+}
+.footer-navbar__social-list .icon-twitter:after {
+    background-color: #000000;
+}
+.footer-navbar__social-list .icon-twitter:hover span,
+.footer-navbar__social-list .icon-twitter:hover span::before {
+    background: #000000;
+    color: #fff;
+}
+.footer-navbar__social-list .icon-instagram:after {
+    background-color: #e4405f;
+}
+.footer-navbar__social-list .icon-instagram:hover span,
+.footer-navbar__social-list .icon-instagram:hover span::before {
+    background: #e4405f;
+    color: #fff;
+}
+.footer-navbar__social-list .link-icon {
+    color: #fff;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.footer-navbar__social-item {
+    position: relative;
+    z-index: 0;
+    border-radius: 50%;
+    margin-right: 2vw;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    overflow: hidden;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+.footer-navbar__social-item:after {
+    content: "";
+    position: absolute;
+    display: inline-block;
+    height: 100%;
+    width: 100%;
+    background-color: transparent;
+    z-index: -1;
+    border-radius: 50%;
+    top: 100%;
+}
+.footer-navbar__social-item:hover {
+    color: #fff;
+    overflow: unset;
+    transition: color 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    animation: overflow-toggle 0.7s;
+}
+.footer-navbar__social-item:hover span {
+    top: -40px;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    text-shadow: 0px -1px 0px rgba(0, 0, 0, 0.1);
+}
+.footer-navbar__social-item:hover:after {
+    animation: bg-pos 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1 both;
+    animation-timing-function: ease-in-out;
+}
+
+@keyframes bg-pos {
+    0% {
+        top: 100%;
+    }
+    100% {
+        top: 0;
+    }
+}
+
+@keyframes overflow-toggle {
+    0% {
+        overflow: hidden;
+    }
+    100% {
+        overflow: visible;
+    }
+}
