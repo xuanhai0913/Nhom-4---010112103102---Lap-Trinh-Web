@@ -33,28 +33,91 @@ $(document).ready(function () {
     });
 });
 
-function submitForm(formId, actionUrl) {
-    const form = document.getElementById(formId);
-    form.addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        const formData = new FormData(form);
-
-        fetch(actionUrl, {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.text())
-            .then(data => {
-                const notification = document.getElementById('notification');
-                notification.textContent = data;
-                notification.style.display = 'block';
-            })
-            .catch(error => console.error('Error:', error));
+$('#form-register').submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '../../PHP/auth/register.php',
+        data: $(this).serialize(),
+        success: function (response) {
+            response = JSON.parse(response);
+            console.log(response);
+            if (response.status === 'error') {
+                alert(response.message);
+            } else {
+                alert(response.message);
+                sessionStorage.setItem('focusLoginInput', 'true'); // Lưu cờ trạng thái
+                location.reload();
+            }
+        }
     });
-}
+});
 
-submitForm('form-register', '../auth/register.php');
-submitForm('form-login', '../auth/login.php');
-submitForm('form-forgot-password', '../auth/forgot.php');
-submitForm('form-verify-code', '../auth/verify_code.php');
+$(document).ready(function () {
+    if (sessionStorage.getItem('focusLoginInput') === 'true') {
+        $('#form-login input:first').focus(); // Trỏ vào input đầu tiên của form login
+        sessionStorage.removeItem('focusLoginInput'); // Xóa cờ trạng thái sau khi sử dụng
+    }
+});
+
+
+
+$('#form-login').submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '../../PHP/auth/login.php',
+        data: $(this).serialize(),
+        success: function (response) {
+            response = JSON.parse(response);
+            console.log(response);
+            if (response.status === 'error') {
+                alert(response.message);
+            } else {
+                window.location.href = '../../PHP/pages/home.php';
+            }
+        }
+    });
+});
+
+$('#form-forgot').submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '../../PHP/auth/forgot.php',
+        data: $(this).serialize(),
+        success: function (response) {
+            response = JSON.parse(response);
+            console.log(response);
+            if (response.status === 'error') {
+                alert(response.message);
+            } else {
+                alert(response.message);
+            }
+        }
+    });
+});
+
+$('#form-verify-code').submit(function (e) {
+    e.preventDefault();
+    $.ajax({
+        type: 'POST',
+        url: '../../PHP/auth/verify_code.php',
+        data: $(this).serialize(),
+        success: function (response) {
+            try {
+                response = JSON.parse(response);
+                alert(response.message);
+            } catch (error) {
+                console.error("Error parsing JSON:", error, response);
+                alert("Có lỗi xảy ra khi xử lý phản hồi.");
+            }
+        },
+        error: function (xhr, status, error) {
+            console.error("AJAX Error:", error);
+            alert("Có lỗi xảy ra khi gửi yêu cầu.");
+        }
+    });
+});
+
+

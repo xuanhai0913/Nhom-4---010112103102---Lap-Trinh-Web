@@ -27,9 +27,9 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your email for registration</span>
-						<input type="text" placeholder="Name" name="username" class='input__username' pattern="[a-zA-Z0-9._]{5,}" required/>
-						<input type="email" placeholder="Email" name="email" required />
-						<input type="password" placeholder="Password" name="password" pattern="[a-z0-9]{5,}" required />
+						<input type="text" placeholder="Name" name="username" class='input__username' pattern="[a-zA-Z0-9._]{5,}" />
+						<input type="email" placeholder="Email" name="email"  />
+						<input type="password" placeholder="Password" name="password" pattern="[a-z0-9]{5,}"  />
 						<button>Sign Up</button>
 					</form>
 				</div>
@@ -43,8 +43,8 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your account</span>
-						<input type="text" placeholder="User name" name="username" required />
-						<input type="password" placeholder="Password" name="password" required />
+						<input type="text" placeholder="User name" name="username" />
+						<input type="password" placeholder="Password" name="password" />
 						<a id="forgot" onclick="moveForgot();">Forgot your password?</a>
 						<button>Sign In</button>
 
@@ -56,8 +56,8 @@
 						</div>
 						<h1>Forgot Password</h1>
 						<span>Sử email mà bạn đã đăng ký để nhận mã.</span>
-						<input type="email" name="email" required placeholder="Email" />
-						<button class="btn-send" type="submit" ">Gửi mã</button>
+						<input type="email" name="email" placeholder="Email" />
+						<button class="btn-send">Gửi mã</button>
 						<form id="form-verify-code">
 							<input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code' />
 							<button id="btn-captcha" type="button">Xác nhận</button>

@@ -1,34 +1,34 @@
 <?php
-// verify_code.php
 require_once('../config/db.php');
 $conn = open_dataBase();
+session_start();
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Lấy mã xác thực từ người dùng
-    $codeByUser = $_POST['verify_code'] ?? '';
-    $email = $_POST['email'] ?? '';
+    $codeByUser = $_POST['verify-code'] ?? '';
+    $email = $_SESSION['email'] ?? '';
 
-    // Kiểm tra xem email có tồn tại trong phiên hay không
     if (!empty($email)) {
-        // Lấy token trong database dựa trên email
-        $result = getDataByKey('token', 'email', $email);
-        
-        if ($result->num_rows > 0) {
+        // Kiem tra xem email da ton tai trong database chua
+        $sql = "SELECT token FROM users WHERE email = ?";
+        $stmt = $conn->prepare($sql);
+        $stmt->bind_param("s", $email);
+        $stmt->execute();
+        $result = $stmt->get_result();
+
+        if ($result && $result->num_rows > 0) {
             $dbtoken = $result->fetch_assoc()['token'];
-            
-            // So sánh mã xác thực từ người dùng với mã trong cơ sở dữ liệu
+
             if ($dbtoken === $codeByUser) {
-                echo "Mã xác nhận đã đúng";
-                // Có thể thực hiện thêm các hành động ở đây như chuyển hướng người dùng hoặc xóa mã xác thực
-                unset($_SESSION['verification_code']); // Xóa mã trong session nếu không cần nữa
+                unset($_SESSION['verification_code']);
+                echo json_encode(array('status' => 'success', 'message' => 'Mã xác nhận đã đúng'));
             } else {
-                echo "Mã xác nhận sai. Vui lòng nhập lại!";
+                echo json_encode(array('status' => 'error', 'message' => 'Sai mã xác thực'));
             }
         } else {
-            echo 'Không lấy được dữ liệu trong database';
+            echo json_encode(array('status' => 'error', 'message' => 'Sai email'));
         }
     } else {
-        echo 'Email không tồn tại trong phiên.';
+        echo json_encode(array('status' => 'warning', 'message' => 'Sai email'));
     }
 }
 $conn->close();

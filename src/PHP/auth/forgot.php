@@ -1,5 +1,4 @@
 <?php
-
 require_once('../config/db.php');
 
 $conn = open_dataBase();
@@ -14,66 +13,68 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Kiểm tra xem email có hợp lệ không
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo 'Địa chỉ email không hợp lệ.';
+        echo json_encode(array('status' => 'error', 'message' => 'Email không hợp lệ'));
         exit();
     }
 
+    // Kiểm tra xem email có tồn tại trong cơ sở dữ liệu không
     $result = getDataByKey('email', $email, 'username');
-
-    if ($result->num_rows > 0) {
-        // Tạo mã xác thực ngẫu nhiên
-        $verification_code = rand(100000, 999999);
-
-        // Cập nhật mã token vào database.
-        $sql = 'UPDATE users SET token = ? WHERE email = ?';
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("ss", $verification_code, $email);
-
-        // Lưu mã vào phiên (session) để so sánh sau này
-        session_start();
-        $_SESSION['verification_code'] = $verification_code;
-        $_SESSION['email'] = $email;
-
-        
-
-        if ($stmt->execute()) {
-            // Gửi email
-            $mail = new PHPMailer(true);
-            try {
-                // Cấu hình máy chủ SMTP
-                $mail->isSMTP();
-                $mail->Host = 'smtp.gmail.com'; // Máy chủ SMTP của Gmail
-                $mail->SMTPAuth = true;
-                $mail->Username = 'manhkinddiol@gmail.com'; // Địa chỉ email của bạn
-                $mail->Password = 'kiuq ukui bsqi yqtd'; // Mật khẩu email hoặc mật khẩu ứng dụng
-                $mail->Port = 465; // Sử dụng cổng 465 cho SMTPS
-                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Bảo mật SMTPS
-
-                $mail->CharSet = "UTF-8";            
-                
-                // Người gửi và người nhận
-                $mail->setFrom('manhkinddiol@gmail.com', 'V2meet - nơi ngọc trung tỏa sáng');
-                $mail->addAddress($email);
-                
-                // Nội dung email
-                $mail->isHTML(true);
-                $mail->Subject = 'Mã xác thực của bạn';
-                $mail->Body = "Mã xác thực của bạn là: <b>$verification_code</b>";
-                
-                $mail->send();
-                echo "Mã xác thực đã được gửi đi. Vui lòng kiểm tra email.";
-                
-            } catch (Exception $e) {
-                echo "Không thể gửi email. Lỗi: {$mail->ErrorInfo}";
-            }
-        } else {
-            echo "Không ghi được mã xác thực vào cơ sở dữ liệu: " . $stmt->error;
-        }
-
-        $stmt->close();
-    } else {
-        echo 'Email chưa có tài khoản, vui lòng tạo tài khoản.';
+    
+    // Nếu không tìm thấy email trong cơ sở dữ liệu, trả về thông báo lỗi
+    if ($result->num_rows <= 0) {
+        echo json_encode(array('status' => 'error', 'message' => 'Email chưa có tài khoản, vui lòng tạo tài khoản!'));
+        exit();
     }
+
+    // Tạo mã xác thực ngẫu nhiên
+    $verification_code = rand(100000, 999999);
+
+    // Cập nhật mã token vào database.
+    $sql = 'UPDATE users SET token = ? WHERE email = ?';
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("ss", $verification_code, $email);
+    session_start();
+    $_SESSION['verification_code'] = $verification_code;
+    $_SESSION['email'] = $email;
+
+    if ($stmt->execute()) {
+        // Gửi email
+        $mail = new PHPMailer(true);
+        try {
+            // Cấu hình máy chủ SMTP
+            $mail->isSMTP();
+            $mail->Host = 'smtp.gmail.com'; // Máy chủ SMTP của Gmail
+            $mail->SMTPAuth = true;
+            $mail->Username = 'trungbed1ve@gmail.com'; // Địa chỉ email của bạn
+            $mail->Password = 'uaiq ygpc ypfy cfod'; // Mật khẩu email hoặc mật khẩu ứng dụng
+            $mail->Port = 465; // Sử dụng cổng 465 cho SMTPS
+            $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS; // Bảo mật SMTPS
+
+            $mail->CharSet = "UTF-8";            
+                
+            // Người gửi và người nhận
+            $mail->setFrom('manhkinddiol@gmail.com', 'V2meet - nơi ngọc trung tỏa sáng');
+            $mail->addAddress($email);
+                
+            // Nội dung email
+            $mail->isHTML(true);
+            $mail->Subject = 'Mã xác thực của bạn';
+            $mail->Body = "Mã xác thực của bạn là: <b>$verification_code</b>";
+                
+            $mail->send();
+            echo json_encode(array('status' => 'success', 'message' => 'Mã xác thực đã được gửi đi!'));
+            exit();
+        } catch (Exception $e) {
+            echo json_encode(array('status' => 'error', 'message' => "Không thể gửi email. Lỗi: {$mail->ErrorInfo}"));
+            exit();
+        }
+    } else {
+        echo json_encode(array('status' => 'error', 'message' => "Không thể gửi email. Lỗi: " . $stmt->error));
+        exit();
+    }
+
+    $stmt->close();
 }
 
 $conn->close();
+?>
