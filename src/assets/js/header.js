@@ -23,7 +23,7 @@ $(document).ready(function () {
     $(".profilePopup").hide();
     $(".btn-avatar").click(function () {
         $(this).toggleClass("active");
-        $(".profilePopup").toggle();
+        $(".profilePopup").toggle().css("opacity", "1");
     });
     $(".profilePopup__closeIcon").click(function () {
         $(".profilePopup").hide();

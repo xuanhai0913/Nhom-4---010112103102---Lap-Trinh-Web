@@ -1,7 +1,7 @@
 $(document).ready(function() {
     $(".container-avatar-edit").hide();
     $(".avatar-edit").click(function() {
-        $(".container-avatar-edit").toggle();
+        $(".container-avatar-edit").toggle().css("opacity", "1");
     });
     $(".close-avatar-edit").click(function() {
         $(".container-avatar-edit").hide();

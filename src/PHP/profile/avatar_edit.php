@@ -91,6 +91,18 @@ if (isset($_POST['submit'])) {
         <div class="choose__avatar-default" id="default-avatar">
             <div class="section-title">Avatar mặc định</div>
             <div class="section-images">
+                <?php
+                $directory = '../../assets/images/avatar/default'; // Thư mục chứa ảnh
+                $images = scandir($directory); // Lấy danh sách các tệp trong thư mục
+
+                // Duyệt qua các tệp trong thư mục
+                foreach ($images as $image) {
+                    // Kiểm tra xem tệp có phải là ảnh hay không (dựa trên phần mở rộng)
+                    if (in_array(pathinfo($image, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif'])) {
+                        echo "<img src='$directory/$image' alt='$image' class='image-item'>";
+                    }
+                }
+                ?>
             </div>
         </div>
         <div class="choose__avatar-upload" id="upload-avatar" style="display: none;">
@@ -117,7 +129,7 @@ if (isset($_POST['submit'])) {
         <div class="preview__header">
             <h1>Ảnh hồ sơ mới của bạn</h1>
         </div>
-        <form action="" method="POST" enctype="multipart/form-data">
+        <form id="uploadForm" action="" method="POST" enctype="multipart/form-data">
             <input type="file" id="fileInput" name="file" accept="image/*" onchange="loadFile(event)" style="display: none;">
             <div class="preview__content">
                 <img class="preview__content-image" id="previewImage" alt="Preview image" src="../../assets/images/avatar/default/default-avatar.png" />

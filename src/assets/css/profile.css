@@ -15,6 +15,7 @@
     top: 65px;
     right: 20px;
     z-index: 1000;
+    opacity: 0;
   }
   .profilePopup__email {
     text-align: center;
