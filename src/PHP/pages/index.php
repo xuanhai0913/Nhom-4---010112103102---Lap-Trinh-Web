@@ -7,9 +7,6 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="../../assets/css/base.css">
 	<link rel="stylesheet" href="../../assets/css/log.css">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-		integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
-		crossorigin="anonymous" referrerpolicy="no-referrer" />
 	<script src="../../assets/js/jquery-3.7.1.min.js"></script>
 </head>
 
@@ -19,7 +16,7 @@
 			<div class="form-container" id="form">
 				<div class="section__form section__form--signUp">
 					<div id="notification"></div>
-					<form method="post" id="form-register">
+					<form method="post" id="form-register" class="form-log">
 						<h1>Create Account</h1>
 						<div class="social">
 							<a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
@@ -27,15 +24,24 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your email for registration</span>
-						<input type="text" placeholder="Name" name="username" class='input__username' pattern="[a-zA-Z0-9._]{5,}" />
-						<input type="email" placeholder="Email" name="email"  />
-						<input type="password" placeholder="Password" name="password" pattern="[a-z0-9]{5,}"  />
+						<div class="input-form">
+							<input type="text" placeholder="Name" name="username" class='input__username' pattern="[a-zA-Z0-9._]{5,}" />
+							
+						</div>
+						<div class="input-form">
+							<input type="email" placeholder="Email" name="email" />
+							
+						</div>
+						<div class="input-form">
+							<input type="password" placeholder="Password" name="password" pattern="[a-z0-9]{5,}" />
+							
+						</div>
 						<button>Sign Up</button>
 					</form>
 				</div>
 				<div class="section__form section__form--signIn" id="form-sign-in">
-					
-					<form id="form-login" method="post">
+
+					<form id="form-login" method="post" class="form-log">
 						<h1>Sign in</h1>
 						<div class="social">
 							<a href="#" class="social__link"><i class="fab fa-facebook-f"></i></a>
@@ -43,38 +49,40 @@
 							<a href="#" class="social__link"><i class="fab fa-linkedin-in"></i></a>
 						</div>
 						<span>or use your account</span>
-						<input type="text" placeholder="User name" name="username" />
-						<input type="password" placeholder="Password" name="password" />
+						<div class="input-form">
+							<input type="text" placeholder="User name" name="username" class="input" id="input__username"/>
+							<span id="message__username" class="message"></span>
+						</div>
+						<div class="input-form">
+							<input type="password" placeholder="Password" name="password" id="input__password" class="input"/>
+							<span id="message__password" class="message"></span>
+						</div>
 						<a id="forgot" onclick="moveForgot();">Forgot your password?</a>
 						<button>Sign In</button>
 
 					</form>
-
-					<form id="form-forgot" method="post" id="forgot">
+					<div class="form-log">
 						<div onclick="moveDefault();" class="backToSignIn">
 							<i class="fa-solid fa-chevron-up"></i>
 						</div>
-						<h1>Forgot Password</h1>
-						<span>Sử email mà bạn đã đăng ký để nhận mã.</span>
-						<input type="email" name="email" placeholder="Email" />
-						<button class="btn-send">Gửi mã</button>
+						<form id="form-forgot" method="post">
+							<h1>Forgot Password</h1>
+							<span>Sử email mà bạn đã đăng ký để nhận mã.</span>
+							<div class="input-form">
+								<input type="email" name="email" placeholder="Email" class="input" id="input__email" />
+								<span id="message__email" class="message"></span>
+							</div>
+							<button class="btn-send">Gửi mã</button>
+						</form>
 						<form id="form-verify-code">
-							<input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code' />
+							<div class="input-form">
+								<input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code' />
+								
+							</div>
 							<button id="btn-captcha" type="button">Xác nhận</button>
 						</form>
-					</form>
+					</div>
 
-
-					<form id="form-reset">
-						<div onclick="moveDefault();" class="backToSignIn">
-							<i class="fa-solid fa-chevron-up"></i>
-						</div>
-						<h1>Reset Password</h1>
-						<span>Đặt lại mật khẩu của bạn.</span>
-						<input class="forgot__input" type='' placeholder="Mật khẩu mới">
-						<input class="forgot__input" type='' placeholder="Xác nhận mật khẩu">
-						<button>Xác nhận</button>
-					</form>
 				</div>
 
 				<div class="section__overlay">
