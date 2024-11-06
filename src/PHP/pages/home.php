@@ -37,7 +37,7 @@
             <div class="carousel">
                 <div class="carousel__thumbnails">
                     <i class="fas fa-chevron-left thumbnail__prev" onclick="prevSlide()"></i>
-                    <img alt="info" id="thumbnail__image" class="thumbnail__image" src="../../assets/images/info1.png" />
+                    <img alt="info" id="thumbnail__image" class="thumbnail__image" src="../../assets/images/static/home/info1.png" />
                     <i class="fas fa-chevron-right thumbnail__next" onclick="nextSlide()"></i>
                 </div>
                 <p id="carousel__text" class="carousel__text">

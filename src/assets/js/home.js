@@ -1,16 +1,16 @@
 var slideIndex = 0;
 var slides = [{
-    image: "../../assets/images/info1.png",
-    text: "Nhận đường liên kết bạn có thể chia sẻ"
-},
-{
-    image: "../../assets/images/info2.png",
-    text: "Tham gia cuộc họp với một cú nhấp chuột"
-},
-{
-    image: "../../assets/images/info3.png",
-    text: "Bảo mật và an toàn cho mọi cuộc họp"
-}
+        image: "../../assets/images/static/home/info1.png",
+        text: "Nhận đường liên kết bạn có thể chia sẻ"
+    },
+    {
+        image: "../../assets/images/static/home/info2.png",
+        text: "Tham gia cuộc họp với một cú nhấp chuột"
+    },
+    {
+        image: "../../assets/images/static/home/info3.png",
+        text: "Bảo mật và an toàn cho mọi cuộc họp"
+    }
 ];
 
 function showSlide(index) {
@@ -31,7 +31,7 @@ function showSlide(index) {
     carouselImage.classList.remove("thumbnail__image--active");
     carouselText.classList.remove("carousel__text--active");
 
-    setTimeout(function () {
+    setTimeout(function() {
         carouselImage.src = slides[slideIndex].image;
         carouselText.innerText = slides[slideIndex].text;
 

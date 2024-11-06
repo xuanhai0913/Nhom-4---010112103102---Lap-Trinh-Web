@@ -1,7 +1,11 @@
 <?php
 // footer.php
 ?>
-
+<head>
+    <link rel="stylesheet" href="../../assets/css/base.css">
+    <link rel="stylesheet" href="../../assets/css/footer.css">
+    <script src="../../assets/js/footer.js"></script>
+</head>
 <footer class="footer">
     <nav class="footer-navbar">
         <a href="/" class="footer-navbar__biolink">Video Conference</a>
