@@ -45,29 +45,40 @@
     width: 125px;
     aspect-ratio: 1 / 1;
     position: relative;
-  }
-  .avatar__image {
     border-radius: 50%;
-    object-fit: cover;
-    width: 100%;
-    height: 100%;
+  
+    img {
+      border-radius: 50%;
+      object-fit: cover;
+      width: 100%;
+      height: 100%;
+    }
+  
+    span {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background-color: white;
+      border-radius: 50%;
+      padding: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      width: 20px;
+      aspect-ratio: 1 / 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .avatar-edit {
+      cursor: pointer;
+    }
+
+  }
+  .profilePopup__avatar:hover span {
+      color: #2e43fa;
+      background-color: #e2e2fc;
   }
   
-  .avatar__edit {
-    position: absolute;
-    bottom: 0px;
-    right: 0px;
-    background-color: white;
-    border-radius: 50%;
-    padding: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
-    width: 20px;
-    aspect-ratio: 1 / 1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
   .profilePopup__fullname {
     text-align: center;
     font-size: 1.1em;
@@ -92,9 +103,8 @@
     padding: 10px;
     cursor: pointer;
     flex: 1;
-    justify-content: center;
     border: #1a73e8 solid 1px;
-    width: 200px;
+    width: 150px;
     height: 50px;
     font-size: 1em;
   }
