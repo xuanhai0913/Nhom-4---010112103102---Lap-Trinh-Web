@@ -9,8 +9,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password']);
     
     // Kiểm tra nếu các trường không bị bỏ trống
-    if (empty($username) || empty($password)) {
-        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng điền đầy đủ tên người dùng và mật khẩu.'));
+    if(empty($username)) {
+        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập tên người dùng!', 'obj' => 'username'));
+        exit();
+    }
+    
+    if(empty($password)) {
+        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập mật khẩu!', 'obj' => 'password!'));
         exit();
     }
 
@@ -32,12 +37,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo json_encode(array('status' => 'success', 'message' => 'Đăng nhập thành công!'));
                 exit();
             } else {
-                echo json_encode(array('status' => 'error', 'message' => 'Sai mật khẩu!'));
+                echo json_encode(array('status' => 'error', 'message' => 'Sai mật khẩu!', 'obj' => 'password'));
                 exit();
             }
         }   
     } else {
-        echo json_encode(array('status' => 'error', 'message' => 'Sai tên người!'));
+        echo json_encode(array('status' => 'error', 'message' => 'Sai tên người!', 'obj' => 'username'));
         exit();
     }
 }

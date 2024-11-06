@@ -72,7 +72,8 @@ $('#form-login').submit(function (e) {
             response = JSON.parse(response);
             console.log(response);
             if (response.status === 'error') {
-                alert(response.message);
+                showError(response.obj,response.message);
+                showError(response.obj, response.message);
             } else {
                 window.location.href = '../../PHP/pages/home.php';
             }
@@ -90,7 +91,7 @@ $('#form-forgot').submit(function (e) {
             response = JSON.parse(response);
             console.log(response);
             if (response.status === 'error') {
-                alert(response.message);
+                showError('email',response.message);             
             } else {
                 alert(response.message);
             }
@@ -121,3 +122,11 @@ $('#form-verify-code').submit(function (e) {
 });
 
 
+
+
+function showError(obj, message) {
+
+    document.querySelector(`#input__${obj}`).classList.add('input--error');
+    document.querySelector(`#message__${obj}`).innerHTML = "<i class='fas fa-exclamation-circle'></i> " + message;
+    document.querySelector(`#message__${obj}`).style.display = 'block';
+}
