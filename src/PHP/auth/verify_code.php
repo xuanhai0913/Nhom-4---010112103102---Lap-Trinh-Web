@@ -6,7 +6,6 @@ session_start();
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $codeByUser = $_POST['verify-code'] ?? '';
     $email = $_SESSION['email'] ?? '';
-
     if (!empty($email)) {
         // Kiem tra xem email da ton tai trong database chua
         $sql = "SELECT token FROM users WHERE email = ?";
@@ -20,15 +19,15 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             if ($dbtoken === $codeByUser) {
                 unset($_SESSION['verification_code']);
-                echo json_encode(array('status' => 'success', 'message' => 'Mã xác nhận đã đúng'));
+                echo json_encode(array('status' => 'success', 'message' => 'Mã xác nhận đã đúng', 'object' => 'captcha'));
             } else {
-                echo json_encode(array('status' => 'error', 'message' => 'Sai mã xác thực'));
+                echo json_encode(array('status' => 'error', 'message' => 'Sai mã xác thực', 'object' => 'captcha'));
             }
         } else {
-            echo json_encode(array('status' => 'error', 'message' => 'Sai email'));
+            echo json_encode(array('status' => 'error', 'message' => 'Sai email', 'object' => 'email'));
         }
     } else {
-        echo json_encode(array('status' => 'warning', 'message' => 'Sai email'));
+        echo json_encode(array('status' => 'warning', 'message' => 'Sai email', 'object' => 'email'));
     }
 }
 $conn->close();

@@ -35,6 +35,7 @@ $(document).ready(function () {
 
 $('#form-register').submit(function (e) {
     e.preventDefault();
+    clearErrors(); // Xóa lớp 'input--error' và tất cả thông báo lỗi
     $.ajax({
         type: 'POST',
         url: '../../PHP/auth/register.php',
@@ -43,7 +44,15 @@ $('#form-register').submit(function (e) {
             response = JSON.parse(response);
             console.log(response);
             if (response.status === 'error') {
-                alert(response.message);
+                if(response.object === 'username') {
+                    showError('username',response.message);
+                }
+                if (response.object === 'email') {
+                    showError('email',response.message);
+                }
+                if (response.object === 'password') {
+                    showError('password',response.message);
+                }
             } else {
                 alert(response.message);
                 sessionStorage.setItem('focusLoginInput', 'true'); // Lưu cờ trạng thái
@@ -77,6 +86,7 @@ $('#form-login').submit(function (e) {
                     showError('password',response.message);
                 }
                 if (response.object === 'username') {
+                    console.log(response.message);
                     showError('username',response.message);
                 } 
 
@@ -112,17 +122,13 @@ $('#form-verify-code').submit(function (e) {
         url: '../../PHP/auth/verify_code.php',
         data: $(this).serialize(),
         success: function (response) {
-            try {
-                response = JSON.parse(response);
+            response = JSON.parse(response);
+            console.log(response);
+            if (response.status === 'error') {
+                showError(response.object,response.message);             
+            } else {
                 alert(response.message);
-            } catch (error) {
-                console.error("Error parsing JSON:", error, response);
-                alert("Có lỗi xảy ra khi xử lý phản hồi.");
             }
-        },
-        error: function (xhr, status, error) {
-            console.error("AJAX Error:", error);
-            alert("Có lỗi xảy ra khi gửi yêu cầu.");
         }
     });
 });
