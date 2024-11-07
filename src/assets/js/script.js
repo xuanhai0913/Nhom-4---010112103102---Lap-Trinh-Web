@@ -64,6 +64,7 @@ $(document).ready(function () {
 
 $('#form-login').submit(function (e) {
     e.preventDefault();
+    clearErrors(); // Xóa lớp 'input--error' và tất cả thông báo lỗi
     $.ajax({
         type: 'POST',
         url: '../../PHP/auth/login.php',
@@ -133,4 +134,15 @@ function showError(object, message) {
     document.querySelector(`#input__${object}`).classList.add('input--error');
     document.querySelector(`#message__${object}`).innerHTML = "<i class='fas fa-exclamation-circle'></i> " + message;
     document.querySelector(`#message__${object}`).style.display = 'block';
+}
+
+function clearErrors() {
+    // Xóa lớp 'input--error' và ẩn tất cả thông báo lỗi
+    document.querySelectorAll('.input--error').forEach(element => {
+        element.classList.remove('input--error');
+    });
+    document.querySelectorAll('.message').forEach(element => {
+        element.style.display = 'none';
+        element.innerHTML = '';
+    });
 }
