@@ -72,8 +72,13 @@ $('#form-login').submit(function (e) {
             response = JSON.parse(response);
             console.log(response);
             if (response.status === 'error') {
-                showError(response.obj,response.message);
-                showError(response.obj, response.message);
+                if (response.object === 'password') {
+                    showError('password',response.message);
+                }
+                if (response.object === 'username') {
+                    showError('username',response.message);
+                } 
+
             } else {
                 window.location.href = '../../PHP/pages/home.php';
             }
@@ -124,9 +129,8 @@ $('#form-verify-code').submit(function (e) {
 
 
 
-function showError(obj, message) {
-
-    document.querySelector(`#input__${obj}`).classList.add('input--error');
-    document.querySelector(`#message__${obj}`).innerHTML = "<i class='fas fa-exclamation-circle'></i> " + message;
-    document.querySelector(`#message__${obj}`).style.display = 'block';
+function showError(object, message) {
+    document.querySelector(`#input__${object}`).classList.add('input--error');
+    document.querySelector(`#message__${object}`).innerHTML = "<i class='fas fa-exclamation-circle'></i> " + message;
+    document.querySelector(`#message__${object}`).style.display = 'block';
 }

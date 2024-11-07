@@ -10,12 +10,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Kiểm tra nếu các trường không bị bỏ trống
     if(empty($username)) {
-        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập tên người dùng!', 'obj' => 'username'));
+        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập tên người dùng!', 'object' => 'username'));
         exit();
     }
-    
     if(empty($password)) {
-        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập mật khẩu!', 'obj' => 'password!'));
+        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập mật khẩu!', 'object' => 'password'));
         exit();
     }
 
@@ -37,12 +36,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 echo json_encode(array('status' => 'success', 'message' => 'Đăng nhập thành công!'));
                 exit();
             } else {
-                echo json_encode(array('status' => 'error', 'message' => 'Sai mật khẩu!', 'obj' => 'password'));
+                echo json_encode(array('status' => 'error', 'message' => 'Sai mật khẩu!', 'object' => 'password'));
                 exit();
             }
         }   
     } else {
-        echo json_encode(array('status' => 'error', 'message' => 'Sai tên người!', 'obj' => 'username'));
+        echo json_encode(array('status' => 'error', 'message' => 'Sai tên người!', 'object' => 'username'));
         exit();
     }
 }
