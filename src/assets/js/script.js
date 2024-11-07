@@ -45,13 +45,13 @@ $('#form-register').submit(function (e) {
             console.log(response);
             if (response.status === 'error') {
                 if(response.object === 'username') {
-                    showError('username',response.message);
+                    showError('username',response.message,response.form);
                 }
                 if (response.object === 'email') {
-                    showError('email',response.message);
+                    showError('email',response.message,response.form);
                 }
                 if (response.object === 'password') {
-                    showError('password',response.message);
+                    showError('password',response.message,response.form);
                 }
             } else {
                 alert(response.message);
@@ -83,11 +83,11 @@ $('#form-login').submit(function (e) {
             console.log(response);
             if (response.status === 'error') {
                 if (response.object === 'password') {
-                    showError('password',response.message);
+                    showError(response.object,response.message,response.form);
                 }
                 if (response.object === 'username') {
                     console.log(response.message);
-                    showError('username',response.message);
+                    showError(response.object,response.message,response.form);
                 } 
 
             } else {
@@ -99,6 +99,7 @@ $('#form-login').submit(function (e) {
 
 $('#form-forgot').submit(function (e) {
     e.preventDefault();
+    clearErrors();
     $.ajax({
         type: 'POST',
         url: '../../PHP/auth/forgot.php',
@@ -107,7 +108,7 @@ $('#form-forgot').submit(function (e) {
             response = JSON.parse(response);
             console.log(response);
             if (response.status === 'error') {
-                showError('email',response.message);             
+                showError(response.object,response.message,response.form);             
             } else {
                 alert(response.message);
             }
@@ -117,6 +118,7 @@ $('#form-forgot').submit(function (e) {
 
 $('#form-verify-code').submit(function (e) {
     e.preventDefault();
+    clearErrors();
     $.ajax({
         type: 'POST',
         url: '../../PHP/auth/verify_code.php',
@@ -125,7 +127,7 @@ $('#form-verify-code').submit(function (e) {
             response = JSON.parse(response);
             console.log(response);
             if (response.status === 'error') {
-                showError(response.object,response.message);             
+                showError(response.object,response.message,response.form);             
             } else {
                 alert(response.message);
             }
@@ -134,12 +136,29 @@ $('#form-verify-code').submit(function (e) {
 });
 
 
+$('#form-reset').submit(function (e) {
+    e.preventDefault();
+    clearErrors();
+    $.ajax({
+        type: 'POST',
+        url: '../../PHP/auth/resetPassword.php',
+        data: $(this).serialize(),
+        success: function (response) {
+            response = JSON.parse(response);
+            console.log(response);
+            if (response.status === 'error') {
+                showError(response.object,response.message,response.form);             
+            } else {
+                alert(response.message);
+            }
+        }
+    });
+});
 
-
-function showError(object, message) {
+function showError(object, message, form) {
     document.querySelector(`#input__${object}`).classList.add('input--error');
-    document.querySelector(`#message__${object}`).innerHTML = "<i class='fas fa-exclamation-circle'></i> " + message;
-    document.querySelector(`#message__${object}`).style.display = 'block';
+    document.querySelector(`#message__${object}-${form}`).innerHTML = "<i class='fas fa-exclamation-circle'></i> " + message;
+    document.querySelector(`#message__${object}-${form}`).style.display = 'block';
 }
 
 function clearErrors() {

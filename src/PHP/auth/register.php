@@ -10,23 +10,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = password_hash(trim($_POST['password']), PASSWORD_DEFAULT);
 
     if (empty($username)) {
-        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng điền đầy đủ thông tin!', 'object' => 'username'));
+        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập đầy đủ thông tin!', 'object' => 'username', 'form' => 'register'));
         exit();
     }
     if (isExists('username', $username)) {
-        echo json_encode(array('status' => 'error', 'message' => 'Tên đăng nhập này đã tồn tại.', 'object' => 'username'));
+        echo json_encode(array('status' => 'error', 'message' => 'Tên đăng nhập này đã tồn tại.', 'object' => 'username', 'form' => 'register'));
         exit();
     }
     if (empty($email)) {
-        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng điền thông tin email!', 'object' => 'email'));
+        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập thông tin email!', 'object' => 'email', 'form' => 'register'));
         exit();
     }
     if (isExists('email', $email)) {
-        echo json_encode(array('status' => 'error', 'message' => 'Email đã được sử dụng.', 'object' => 'email'));
+        echo json_encode(array('status' => 'error', 'message' => 'Email đã được sử dụng.', 'object' => 'email', 'form' => 'register'));
         exit();
     }
     if (!isset($_POST['password']) || strlen(trim($_POST['password'])) === 0) {
-        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng điền mật khẩu!', 'object' => 'password'));
+        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập mật khẩu!', 'object' => 'password', 'form' => 'register'));
         exit();
     }
     $sql = "INSERT INTO users (username, fullname, password, email) VALUES (?, ?, ?, ?)";
@@ -36,7 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if ($stmt->execute()) {
             echo json_encode(array('status' => 'success', 'message' => 'Đăng ký thành công!'));
         } else {
-            echo json_encode(array('status' => 'error', 'message' => "Đăng ký thất bại: " . $stmt->error, 'object' => 'register'));
+            echo json_encode(array('status' => 'error', 'message' => "Đăng ký thất bại: " . $stmt->error, 'object' => 'register', 'form' => 'register'));
         }
         $stmt->close();
     } else {

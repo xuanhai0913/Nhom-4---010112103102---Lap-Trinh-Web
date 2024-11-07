@@ -21,13 +21,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 unset($_SESSION['verification_code']);
                 echo json_encode(array('status' => 'success', 'message' => 'Mã xác nhận đã đúng', 'object' => 'captcha'));
             } else {
-                echo json_encode(array('status' => 'error', 'message' => 'Sai mã xác thực', 'object' => 'captcha'));
+                echo json_encode(array('status' => 'error', 'message' => 'Sai mã xác thực', 'object' => 'captcha', 'form' => 'verify'));
             }
         } else {
-            echo json_encode(array('status' => 'error', 'message' => 'Sai email', 'object' => 'email'));
+            echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập email', 'object' => 'captcha', 'form' => 'verify'));
         }
     } else {
-        echo json_encode(array('status' => 'warning', 'message' => 'Sai email', 'object' => 'email'));
+        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập email', 'object' => 'captcha', 'form' => 'verify'));
     }
 }
 $conn->close();

@@ -22,12 +22,13 @@
                         <h1>Reset Password</h1>
                         <span>Đặt lại mật khẩu của bạn.</span>
                         <div class="input-form">
-                            <input id="input__reset" class="input" type='text' placeholder="Xác nhận mật khẩu">
+                            <input id="input__reset" class="input" type='text' placeholder="Xác nhận mật khẩu" name="password-first">
+                            <span id="message__password-first" class="message"></span>
                         </div>
                         <div class="input-form">
-                            <input id="input__reset" class="input" type='text' placeholder="Xác nhận mật khẩu">
+                            <input id="input__reset" class="input" type='text' placeholder="Xác nhận mật khẩu" name="password-second">
+                            <span id="message__password-second" class="message"></span>
                         </div>
-                        
                         <button type="submit">Xác nhận</button>
                     </form>
                 </div>
