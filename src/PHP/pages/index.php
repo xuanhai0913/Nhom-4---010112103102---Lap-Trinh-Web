@@ -24,15 +24,15 @@
 						</div>
 						<span>or use your email for registration</span>
 						<div class="input-form">
-							<input type="text" placeholder="Name" name="username" class='input__username' pattern="[a-zA-Z0-9._]{5,}" />
+							<input type="text" placeholder="Name" name="username" id='input__username' class="input" pattern="[a-zA-Z0-9._]{5,}" />
 							<span id="message__username-register" class="message"></span>
 						</div>
 						<div class="input-form">
-							<input type="email" placeholder="Email" name="email" />
+							<input type="email" placeholder="Email" name="email" id="input__email" class="input"/>
 							<span id="message__email-register" class="message"></span>
 						</div>
 						<div class="input-form">
-							<input type="password" placeholder="Password" name="password" pattern="[a-z0-9]{5,}" />
+							<input type="password" placeholder="Password" name="password" pattern="[a-z0-9]{5,}" id="input__password" class="input" />
 							<span id="message__password-register" class="message"></span>
 						</div>
 						<button>Sign Up</button>

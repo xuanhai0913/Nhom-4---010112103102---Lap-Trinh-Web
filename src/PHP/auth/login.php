@@ -9,14 +9,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password']);
 
     // Kiểm tra nếu các trường không bị bỏ trống
-<<<<<<< HEAD
-    
-    if(empty($username)) {
-        echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập tên người dùng!', 'object' => 'username'));
-=======
     if (empty($username)) {
         echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập tên người dùng!', 'object' => 'username', 'form' => 'login'));
->>>>>>> 4b4fc90d6cb63e114ad6dd2c7fbb4a019b58137b
         exit();
     }
     // Nếu tên người dùng không tồn tại thì sẽ xuất thông báo lỗi và dừng lại.
@@ -52,3 +46,4 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 }
 
 $conn->close();
+?>
