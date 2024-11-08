@@ -129,31 +129,13 @@ $('#form-verify-code').submit(function (e) {
             if (response.status === 'error') {
                 showError(response.object,response.message,response.form);             
             } else {
-                alert(response.message);
+                location = '../../PHP/pages/reset.php';
             }
         }
     });
 });
 
 
-$('#form-reset').submit(function (e) {
-    e.preventDefault();
-    clearErrors();
-    $.ajax({
-        type: 'POST',
-        url: '../../PHP/auth/resetPassword.php',
-        data: $(this).serialize(),
-        success: function (response) {
-            response = JSON.parse(response);
-            console.log(response);
-            if (response.status === 'error') {
-                showError(response.object,response.message,response.form);             
-            } else {
-                alert(response.message);
-            }
-        }
-    });
-});
 
 function showError(object, message, form) {
     document.querySelector(`#input__${object}-${form}`).classList.add('input--error');
