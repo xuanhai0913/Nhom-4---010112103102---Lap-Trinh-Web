@@ -36,3 +36,4 @@
     </div>
 </section>
 <?php include 'avatar_edit.php'; ?>
+<?php include 'profile_edit.php'; ?>

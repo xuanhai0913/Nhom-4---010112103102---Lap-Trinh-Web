@@ -83,3 +83,21 @@ function openCameraModal() {
         })
         .catch(error => console.error('Lỗi khi truy cập camera: ', error));
 }
+
+// Hàm xử lý nhấn đúp vào ảnh để cập nhật vào input
+function changeAvatarDefault(event) {
+    const fileInput = document.getElementById('fileInput');
+    const dataTransfer = new DataTransfer();
+    
+    // Lấy ảnh từ element hiện tại (chắc chắn phải có ảnh được hiển thị trước đó)
+    const newImageFile = event.target.src;
+    fetch(newImageFile)
+        .then(res => res.blob())
+        .then(blob => {
+            const file = new File([blob], 'image.png', { type: blob.type });
+            dataTransfer.items.add(file);
+            fileInput.files = dataTransfer.files;
+            loadFile({ target: { files: [file] } });
+        })
+        .catch(error => console.error('Lỗi khi tải ảnh từ src: ', error));
+}

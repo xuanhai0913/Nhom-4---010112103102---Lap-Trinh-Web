@@ -9,6 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = trim($_POST['password']);
     
     // Kiểm tra nếu các trường không bị bỏ trống
+    
     if(empty($username)) {
         echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập tên người dùng!', 'object' => 'username'));
         exit();

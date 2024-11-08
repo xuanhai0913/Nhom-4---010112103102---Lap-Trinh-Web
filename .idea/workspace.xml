@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="d7d2dd2d-1c9c-4ab4-85b3-5259d5436a8b" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/src/PHP/auth/login.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/PHP/auth/login.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PHP/profile/avatar_edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/PHP/profile/avatar_edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PHP/profile/profile.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/PHP/profile/profile.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PHP/profile/profile_edit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/PHP/profile/profile_edit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/css/avatar_edit.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/css/avatar_edit.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/css/profile_edit.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/css/profile_edit.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/images/avatar/upload/2251120113.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/images/avatar/upload/2251120113.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/js/avatar_edit.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/avatar_edit.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/js/header.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/assets/js/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/assets/js/profile.js" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution />
+  </component>
+  <component name="PhpWorkspaceProjectConfiguration" interpreter_name="D:\xampp\php\php.exe" />
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 2
+}]]></component>
+  <component name="ProjectId" id="2oWqsoPR6EQyguSPCkh7kT5oNtW" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "E:/MyProject/ProjectJava_GroupF_Topic5",
+    "nodejs_package_manager_path": "npm",
+    "vue.rearranger.settings.migration": "true"
+  }
+}]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9823dce3aa75-28b599e66164-intellij.indexing.shared.core-IU-242.23726.103" />
+        <option value="bundled-js-predefined-d6986cc7102b-5c90d61e3bab-JavaScript-IU-242.23726.103" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="d7d2dd2d-1c9c-4ab4-85b3-5259d5436a8b" name="Changes" comment="" />
+      <created>1730995891146</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1730995891146</updated>
+      <workItem from="1730995892980" duration="27000" />
+    </task>
+    <servers />
+  </component>
+</project>

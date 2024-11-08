@@ -33,11 +33,13 @@ $(document).ready(function () {
         var avatar = $(".profilePopup");
         var avatarButton = $(".btn-avatar");
         var containerEditAvatar = $(".container-avatar-edit");
+        var containerEditProfile = $(".container-profile-edit");
 
         // Kiểm tra nếu nhấp bên ngoài cả hai thẻ avatar và avatarButton
         if (!avatar.is(e.target) && avatar.has(e.target).length === 0 &&
             !avatarButton.is(e.target) && avatarButton.has(e.target).length === 0 &&
-            !containerEditAvatar.is(':visible')) {
+            !containerEditAvatar.is(':visible') &&
+            !containerEditProfile.is(':visible')) {
 
             avatar.hide();
             avatarButton.removeClass("active");

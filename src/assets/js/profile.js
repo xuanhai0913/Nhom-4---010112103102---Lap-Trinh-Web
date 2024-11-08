@@ -19,4 +19,23 @@ $(document).ready(function() {
             containerEditAvatar.hide();
         }
     });
+
+    $(".container-profile-edit").hide();
+    $(".action__edit").click(function() {
+        $(".container-profile-edit").toggle().css("opacity", "1");
+    });
+    $(".close-profile-edit").click(function() {
+        $(".container-profile-edit").hide();
+    });
+
+    $(document).mousedown(function(e) {
+        var containerEditProfile = $(".container-profile-edit");
+        var btnEditProfile = $(".action__edit");
+
+        // Kiểm tra nếu nhấp bên ngoài cả hai thẻ avatar và avatarButton
+        if (!containerEditProfile.is(e.target) && containerEditProfile.has(e.target).length === 0 &&
+            !btnEditProfile.is(e.target) && btnEditProfile.has(e.target).length === 0) {   
+                containerEditProfile.hide();
+        }
+    });
 });

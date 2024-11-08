@@ -45,7 +45,7 @@ if (isset($_POST['submit'])) {
                         $stmt->bind_param('ss', $avatar_path, $username);
 
                         if ($stmt->execute()) {
-                            echo "Ảnh đã được tải lên và lưu vào cơ sở dữ liệu thành công.";
+                            echo "Thay đổi ảnh hồ sơ thành công.";
                         } else {
                             echo "Lỗi khi lưu tên ảnh vào cơ sở dữ liệu: " . $stmt->error;
                         }
@@ -97,11 +97,10 @@ if (isset($_POST['submit'])) {
 
                 // Duyệt qua các tệp trong thư mục
                 foreach ($images as $image) {
-                    // Kiểm tra xem tệp có phải là ảnh hay không (dựa trên phần mở rộng)
                     if (in_array(pathinfo($image, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif'])) {
-                        echo "<img src='$directory/$image' alt='$image' class='image-item'>";
+                        echo "<img src='$directory/$image' alt='$image' class='image-item' ondblclick='changeAvatarDefault(event)'>";
                     }
-                }
+                }                
                 ?>
             </div>
         </div>
