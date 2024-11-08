@@ -156,7 +156,7 @@ $('#form-reset').submit(function (e) {
 });
 
 function showError(object, message, form) {
-    document.querySelector(`#input__${object}`).classList.add('input--error');
+    document.querySelector(`#input__${object}-${form}`).classList.add('input--error');
     document.querySelector(`#message__${object}-${form}`).innerHTML = "<i class='fas fa-exclamation-circle'></i> " + message;
     document.querySelector(`#message__${object}-${form}`).style.display = 'block';
 }

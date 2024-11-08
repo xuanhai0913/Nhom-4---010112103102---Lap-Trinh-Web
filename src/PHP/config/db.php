@@ -1,7 +1,7 @@
 <?php
     define('severname', 'localhost');
     define('username', 'root');
-    define('password', '1122');
+    define('password', '');
     define('dbname', 'user_registration');
 
     // Ham ket noi voi dataBase
