@@ -35,6 +35,7 @@ $(document).ready(function () {
 
 $('#form-register').submit(function (e) {
     e.preventDefault();
+    clearErrors(); // Xóa lớp 'input--error' và tất cả thông báo lỗi
     $.ajax({
         type: 'POST',
         url: '../../PHP/auth/register.php',
@@ -43,7 +44,15 @@ $('#form-register').submit(function (e) {
             response = JSON.parse(response);
             console.log(response);
             if (response.status === 'error') {
-                alert(response.message);
+                if(response.object === 'username') {
+                    showError('username',response.message,response.form);
+                }
+                if (response.object === 'email') {
+                    showError('email',response.message,response.form);
+                }
+                if (response.object === 'password') {
+                    showError('password',response.message,response.form);
+                }
             } else {
                 alert(response.message);
                 sessionStorage.setItem('focusLoginInput', 'true'); // Lưu cờ trạng thái
@@ -64,6 +73,7 @@ $(document).ready(function () {
 
 $('#form-login').submit(function (e) {
     e.preventDefault();
+    clearErrors(); // Xóa lớp 'input--error' và tất cả thông báo lỗi
     $.ajax({
         type: 'POST',
         url: '../../PHP/auth/login.php',
@@ -73,10 +83,11 @@ $('#form-login').submit(function (e) {
             console.log(response);
             if (response.status === 'error') {
                 if (response.object === 'password') {
-                    showError('password',response.message);
+                    showError(response.object,response.message,response.form);
                 }
                 if (response.object === 'username') {
-                    showError('username',response.message);
+                    console.log(response.message);
+                    showError(response.object,response.message,response.form);
                 } 
 
             } else {
@@ -88,6 +99,7 @@ $('#form-login').submit(function (e) {
 
 $('#form-forgot').submit(function (e) {
     e.preventDefault();
+    clearErrors();
     $.ajax({
         type: 'POST',
         url: '../../PHP/auth/forgot.php',
@@ -96,7 +108,7 @@ $('#form-forgot').submit(function (e) {
             response = JSON.parse(response);
             console.log(response);
             if (response.status === 'error') {
-                showError('email',response.message);             
+                showError(response.object,response.message,response.form);             
             } else {
                 alert(response.message);
             }
@@ -106,31 +118,56 @@ $('#form-forgot').submit(function (e) {
 
 $('#form-verify-code').submit(function (e) {
     e.preventDefault();
+    clearErrors();
     $.ajax({
         type: 'POST',
         url: '../../PHP/auth/verify_code.php',
         data: $(this).serialize(),
         success: function (response) {
-            try {
-                response = JSON.parse(response);
+            response = JSON.parse(response);
+            console.log(response);
+            if (response.status === 'error') {
+                showError(response.object,response.message,response.form);             
+            } else {
                 alert(response.message);
-            } catch (error) {
-                console.error("Error parsing JSON:", error, response);
-                alert("Có lỗi xảy ra khi xử lý phản hồi.");
             }
-        },
-        error: function (xhr, status, error) {
-            console.error("AJAX Error:", error);
-            alert("Có lỗi xảy ra khi gửi yêu cầu.");
         }
     });
 });
 
 
+$('#form-reset').submit(function (e) {
+    e.preventDefault();
+    clearErrors();
+    $.ajax({
+        type: 'POST',
+        url: '../../PHP/auth/resetPassword.php',
+        data: $(this).serialize(),
+        success: function (response) {
+            response = JSON.parse(response);
+            console.log(response);
+            if (response.status === 'error') {
+                showError(response.object,response.message,response.form);             
+            } else {
+                alert(response.message);
+            }
+        }
+    });
+});
 
-
-function showError(object, message) {
+function showError(object, message, form) {
     document.querySelector(`#input__${object}`).classList.add('input--error');
-    document.querySelector(`#message__${object}`).innerHTML = "<i class='fas fa-exclamation-circle'></i> " + message;
-    document.querySelector(`#message__${object}`).style.display = 'block';
+    document.querySelector(`#message__${object}-${form}`).innerHTML = "<i class='fas fa-exclamation-circle'></i> " + message;
+    document.querySelector(`#message__${object}-${form}`).style.display = 'block';
+}
+
+function clearErrors() {
+    // Xóa lớp 'input--error' và ẩn tất cả thông báo lỗi
+    document.querySelectorAll('.input--error').forEach(element => {
+        element.classList.remove('input--error');
+    });
+    document.querySelectorAll('.message').forEach(element => {
+        element.style.display = 'none';
+        element.innerHTML = '';
+    });
 }

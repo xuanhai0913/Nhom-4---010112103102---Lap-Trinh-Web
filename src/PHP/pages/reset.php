@@ -18,25 +18,18 @@
         <div class="wrapper">
             <div class="form-container" id="form">
                 <div class="section__form section__form--signUp">
-                    <div id="notification"></div>
-                    <div class="form-reset">
-                        <form id="form-forgot" >
-                            <h1>Forgot Password</h1>
-                            <span>Sử email mà bạn đã đăng ký để nhận mã.</span>
-                            <input type="email" name="email" placeholder="Email" />
-                            <button class="btn-send">Gửi mã</button>
-                        </form>
-                        <form id="form-verify-code">
-                            <input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code' />
-                            <button id="btn-captcha" type="submit">Xác nhận</button>
-                        </form>
-                    </div>
                     <form id="form-reset" class="form-reset">
                         <h1>Reset Password</h1>
                         <span>Đặt lại mật khẩu của bạn.</span>
-                        <input class="forgot__input" type='' placeholder="Mật khẩu mới">
-                        <input class="forgot__input" type='' placeholder="Xác nhận mật khẩu">
-                        <button>Xác nhận</button>
+                        <div class="input-form">
+                            <input id="input__reset" class="input" type='text' placeholder="Xác nhận mật khẩu" name="password-first">
+                            <span id="message__password-first" class="message"></span>
+                        </div>
+                        <div class="input-form">
+                            <input id="input__reset" class="input" type='text' placeholder="Xác nhận mật khẩu" name="password-second">
+                            <span id="message__password-second" class="message"></span>
+                        </div>
+                        <button type="submit">Xác nhận</button>
                     </form>
                 </div>
             </div>

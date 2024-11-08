@@ -13,7 +13,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Kiểm tra xem email có hợp lệ không
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo json_encode(array('status' => 'error', 'message' => 'Email không hợp lệ'));
+        echo json_encode(array('status' => 'error', 'message' => 'Email không hợp lệ', 'object' => 'email', 'form' => 'forgot'));
         exit();
     }
 
@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     
     // Nếu không tìm thấy email trong cơ sở dữ liệu, trả về thông báo lỗi
     if ($result->num_rows <= 0) {
-        echo json_encode(array('status' => 'error', 'message' => 'Email chưa có tài khoản, vui lòng tạo tài khoản!'));
+        echo json_encode(array('status' => 'error', 'message' => 'Email chưa có tài khoản, vui lòng tạo tài khoản!', 'object' => 'email', 'form' => 'forgot'));
         exit();
     }
 
@@ -65,11 +65,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             echo json_encode(array('status' => 'success', 'message' => 'Mã xác thực đã được gửi đi!'));
             exit();
         } catch (Exception $e) {
-            echo json_encode(array('status' => 'error', 'message' => "Không thể gửi email. Lỗi: {$mail->ErrorInfo}"));
+            echo json_encode(array('status' => 'error', 'message' => "Không thể gửi email. Lỗi: {$mail->ErrorInfo}", 'object' => 'email', 'form' => 'forgot'));
             exit();
         }
     } else {
-        echo json_encode(array('status' => 'error', 'message' => "Không thể gửi email. Lỗi: " . $stmt->error));
+        echo json_encode(array('status' => 'error', 'message' => "Không thể gửi email. Lỗi: " . $stmt->error, 'object' => 'email', 'form' => 'forgot'));
         exit();
     }
 

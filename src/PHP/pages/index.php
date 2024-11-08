@@ -15,7 +15,6 @@
 		<div class="wrapper">
 			<div class="form-container" id="form">
 				<div class="section__form section__form--signUp">
-					<div id="notification"></div>
 					<form method="post" id="form-register" class="form-log">
 						<h1>Create Account</h1>
 						<div class="social">
@@ -26,15 +25,15 @@
 						<span>or use your email for registration</span>
 						<div class="input-form">
 							<input type="text" placeholder="Name" name="username" class='input__username' pattern="[a-zA-Z0-9._]{5,}" />
-							
+							<span id="message__username-register" class="message"></span>
 						</div>
 						<div class="input-form">
 							<input type="email" placeholder="Email" name="email" />
-							
+							<span id="message__email-register" class="message"></span>
 						</div>
 						<div class="input-form">
 							<input type="password" placeholder="Password" name="password" pattern="[a-z0-9]{5,}" />
-							
+							<span id="message__password-register" class="message"></span>
 						</div>
 						<button>Sign Up</button>
 					</form>
@@ -51,11 +50,11 @@
 						<span>or use your account</span>
 						<div class="input-form">
 							<input type="text" placeholder="User name" name="username" class="input" id="input__username"/>
-							<span id="message__username" class="message"></span>
+							<span id="message__username-login" class="message"></span>
 						</div>
 						<div class="input-form">
 							<input type="password" placeholder="Password" name="password" id="input__password" class="input"/>
-							<span id="message__password" class="message"></span>
+							<span id="message__password-login" class="message"></span>
 						</div>
 						<a id="forgot" onclick="moveForgot();">Forgot your password?</a>
 						<button>Sign In</button>
@@ -70,16 +69,16 @@
 							<span>Sử email mà bạn đã đăng ký để nhận mã.</span>
 							<div class="input-form">
 								<input type="email" name="email" placeholder="Email" class="input" id="input__email" />
-								<span id="message__email" class="message"></span>
+								<span id="message__email-forgot" class="message"></span>
 							</div>
 							<button class="btn-send">Gửi mã</button>
 						</form>
 						<form id="form-verify-code">
 							<div class="input-form">
-								<input id=" captcha" type="text" placeholder="Mã xác nhận" name='verify-code' />
-								
+								<input id="input__captcha" type="text" placeholder="Mã xác nhận" name='verify-code' class="input"/>
+								<span id="message__captcha-verify" class="message"></span>
 							</div>
-							<button id="btn-captcha" type="button">Xác nhận</button>
+							<button id="btn-captcha" type="submit">Xác nhận</button>
 						</form>
 					</div>
 
