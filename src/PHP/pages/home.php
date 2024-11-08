@@ -19,14 +19,14 @@
                 <p>Kết nối, cộng tác và ăn mừng mọi khoảnh khắc – chỉ với một cú chạm, khoảng cách sẽ không còn là rào cản!</p>
 
                 <div class="function">
-                    <button class="function__create-room">
+                    <button class="function__create-room" id="createRoomButton">
                         <i class="fa-solid fa-plus"></i>
                         Cuộc họp mới
                     </button>
                     <div class="function__join-room">
                         <input class="join-room__input" type="text" id="roomCode" placeholder="Nhập mã phòng đã có">
                         <i class="fa-regular fa-paste join-room__paste" onclick="pasteRoomCode()"></i>
-                        <button class="join-room__button"> Tham gia
+                        <button class="join-room__button" id="joinRoomButton"> Tham gia
                             <div class="join-room__button-icon">
                                 <i class="fa-solid fa-arrow-right"></i>
                             </div>

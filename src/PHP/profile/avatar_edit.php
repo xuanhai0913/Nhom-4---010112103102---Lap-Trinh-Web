@@ -3,71 +3,71 @@ require_once('../config/db.php');
 
 $conn = open_dataBase();
 
-// Kiểm tra nếu có form được gửi
-if (isset($_POST['submit'])) {
-    // Kiểm tra nếu có ảnh được tải lên
-    if (isset($_FILES['file']) && $_FILES['file']['error'] == 0) {
-        // Định nghĩa thư mục lưu ảnh
-        $upload_dir = '../../assets/images/avatar/upload/';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['submit_save_avatar'])) {
+        // Kiểm tra nếu có ảnh được tải lên
+        if (isset($_FILES['file']) && $_FILES['file']['error'] === 0) {
+            // Định nghĩa thư mục lưu ảnh
+            $upload_dir = '../../assets/images/avatar/upload/';
+            $username = $_SESSION['username'];
 
-        // Lấy thông tin về ảnh
-        $file_name = $_FILES['file']['name'];
-        $file_tmp = $_FILES['file']['tmp_name'];
-        $file_size = $_FILES['file']['size'];
-        $file_type = $_FILES['file']['type'];
+            // Lấy thông tin về ảnh
+            $file_name = $_FILES['file']['name'];
+            $file_tmp = $_FILES['file']['tmp_name'];
+            $file_size = $_FILES['file']['size'];
+            $file_type = $_FILES['file']['type'];
 
-        // Kiểm tra nếu ảnh hợp lệ (JPG, PNG, GIF)
-        $allowed_types = ['image/jpeg', 'image/png', 'image/gif']; // Các loại ảnh cho phép
-        if (in_array($file_type, $allowed_types)) {
-            // Kiểm tra kích thước ảnh (tối đa 5MB)
-            if ($file_size <= 5 * 1024 * 1024) {
-                // Tạo tên file theo tên người dùng
-                $new_file_name = $username . '.' . 'jpg';
+            // Kiểm tra nếu ảnh hợp lệ (JPG, PNG, GIF)
+            $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+            if (in_array($file_type, $allowed_types)) {
+                // Kiểm tra kích thước ảnh (tối đa 5MB)
+                if ($file_size <= 5 * 1024 * 1024) {
+                    // Tạo tên file theo tên người dùng
+                    $new_file_name = $username . '.jpg';
+                    $existing_file_path = $upload_dir . $new_file_name;
 
-                $existing_file_path = $upload_dir . $new_file_name;
-                if (file_exists($existing_file_path)) {
-                    // Nếu ảnh cũ tồn tại, xóa ảnh cũ
-                    if (!unlink($existing_file_path)) {
+                    // Xóa ảnh cũ nếu tồn tại
+                    if (file_exists($existing_file_path) && !unlink($existing_file_path)) {
                         echo "Lỗi khi xóa ảnh cũ.";
                         exit;
                     }
-                }
 
-                // Di chuyển ảnh vào thư mục upload
-                if (move_uploaded_file($file_tmp, $upload_dir . $new_file_name)) {
-                    $username = $_SESSION['username'];
+                    // Di chuyển ảnh vào thư mục upload
+                    if (move_uploaded_file($file_tmp, $upload_dir . $new_file_name)) {
+                        // Cập nhật avatar vào bảng 'users'
+                        $avatar_path = 'upload/' . $new_file_name;
+                        $sql = "UPDATE users SET avatar = ? WHERE username = ?";
 
-                    // Cập nhật avatar vào bảng 'users'
-                    $avatar_path = 'upload/' . $new_file_name;
-                    $sql = "UPDATE users SET avatar = ? WHERE username = ?";
+                        if ($stmt = $conn->prepare($sql)) {
+                            $stmt->bind_param('ss', $avatar_path, $username);
 
-                    if ($stmt = $conn->prepare($sql)) {
-                        $stmt->bind_param('ss', $avatar_path, $username);
+                            if ($stmt->execute()) {
+                                echo "Thay đổi ảnh hồ sơ thành công.";
+                            } else {
+                                echo "Lỗi khi lưu tên ảnh vào cơ sở dữ liệu: " . $stmt->error;
+                            }
 
-                        if ($stmt->execute()) {
-                            echo "Thay đổi ảnh hồ sơ thành công.";
+                            $stmt->close();
                         } else {
-                            echo "Lỗi khi lưu tên ảnh vào cơ sở dữ liệu: " . $stmt->error;
+                            echo "Lỗi khi chuẩn bị câu lệnh SQL: " . $conn->error;
                         }
                     } else {
-                        echo "Lỗi khi chuẩn bị câu lệnh SQL: " . $conn->error;
+                        echo "Không thể tải ảnh lên.";
                     }
                 } else {
-                    echo "Không thể tải ảnh lên.";
+                    echo "Ảnh quá lớn. Vui lòng chọn ảnh có kích thước nhỏ hơn 5MB.";
                 }
             } else {
-                echo "Ảnh quá lớn. Vui lòng chọn ảnh có kích thước nhỏ hơn 5MB.";
+                echo "Loại file không hợp lệ. Vui lòng chọn ảnh JPG, PNG hoặc GIF.";
             }
         } else {
-            echo "Loại file không hợp lệ. Vui lòng chọn ảnh JPG, PNG hoặc GIF.";
+            echo "Vui lòng chọn một ảnh để tải lên.";
         }
-    } else {
-        echo "Vui lòng chọn một ảnh để tải lên.";
     }
 }
+
+$conn->close();
 ?>
-
-
 
 <head>
     <meta charset="UTF-8">
@@ -100,7 +100,7 @@ if (isset($_POST['submit'])) {
                     if (in_array(pathinfo($image, PATHINFO_EXTENSION), ['jpg', 'jpeg', 'png', 'gif'])) {
                         echo "<img src='$directory/$image' alt='$image' class='image-item' ondblclick='changeAvatarDefault(event)'>";
                     }
-                }                
+                }
                 ?>
             </div>
         </div>
@@ -134,7 +134,7 @@ if (isset($_POST['submit'])) {
                 <img class="preview__content-image" id="previewImage" alt="Preview image" src="../../assets/images/avatar/default/default-avatar.png" />
                 <div class="preview__content-btn">
                     <button type="button" class="btn-cancel" onclick="closePreview();">Huỷ</button>
-                    <button type="submit" name="submit" class="btn-save" id="btn-save">Lưu làm ảnh hồ sơ</button>
+                    <button type="submit" name="submit_save_avatar" class="btn-save" id="btn-save">Lưu làm ảnh hồ sơ</button>
                 </div>
             </div>
         </form>

@@ -67,3 +67,42 @@ function pasteRoomCode() {
         console.error('Không thể dán nội dung: ', err);
     });
 }
+
+
+// Hàm tạo phòng mới
+function createRoom() {
+    // Tạo mã phòng ngẫu nhiên
+    const roomId = Math.random().toString(36).substring(2, 10);
+
+    // Chuyển hướng người dùng đến trang phòng với mã phòng
+    window.location.href = `room/${roomId}`;
+}
+
+// Hàm tham gia phòng có sẵn
+function joinWithId() {
+    const roomId = document.getElementById("roomCode").value;
+
+    // Kiểm tra xem mã phòng có tồn tại không
+    if (!roomId) {
+        alert("Vui lòng nhập mã phòng!");
+        return;
+    }
+
+    // Chuyển hướng người dùng đến trang phòng với mã phòng
+    window.location.href = `room/${roomId}`;
+}
+
+// Hàm dán mã phòng từ clipboard
+function pasteRoomCode() {
+    navigator.clipboard.readText()
+        .then((text) => {
+            document.getElementById("roomCode").value = text;
+        })
+        .catch((err) => {
+            console.error("Không thể dán mã phòng: ", err);
+        });
+}
+
+// Gắn sự kiện cho các nút
+document.getElementById("createRoomButton").addEventListener("click", createRoom);
+document.getElementById("joinRoomButton").addEventListener("click", joinWithId);

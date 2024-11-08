@@ -14,10 +14,20 @@ function closePreview() {
 
 // Tải file
 function loadFile(event) {
+    const file = event.target.files[0];
     const previewImage = document.getElementById('previewImage');
-    previewImage.src = URL.createObjectURL(event.target.files[0]);
-    document.getElementById('preview').style.bottom = '0';
+    const previewContainer = document.getElementById('preview');
+
+    // Kiểm tra nếu file tồn tại và là file ảnh
+    if (file && file.type.startsWith('image/')) {
+        previewImage.src = URL.createObjectURL(file);
+        previewContainer.style.bottom = '0';
+    } else {
+        // Cảnh báo nếu không phải file ảnh
+        alert('Tệp không hợp lệ! Vui lòng chọn một tệp ảnh.');
+    }
 }
+
 
 // Kéo và thả
 document.addEventListener('dragover', function(event) {
