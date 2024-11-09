@@ -36,6 +36,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Mật khẩu chính xác, bắt đầu phiên
             session_start();
             $_SESSION['username'] = $username; // Lưu thông tin người dùng vào phiên
+            echo json_encode(['username' => $_SESSION['username']]);
             echo json_encode(array('status' => 'success', 'message' => 'Đăng nhập thành công!'));
             exit();
         } else {
