@@ -21,9 +21,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Giới hạn độ dài username tối đa 20 ký tự
         if (strlen($new_username) > 20) {
-            echo "Username quá dài! Vui lòng nhập tối đa 20 ký tự.";
+            echo json_encode(array('status' => 'error', 'message' => 'Tên người dùng quá dài! Vui lòng nhập tối đa 20 ký tự.'));
         } else if (strlen($fullname) > 50) {
-            echo "Tên quá dài! Vui lòng nhập tối đa 50 ký tự.";
+            echo json_encode(array('status' => 'error', 'message' => 'Họ và tên quá dài! Vui lòng nhập tối đa 50 ký tự.'));
         } 
         else {
             // Kiểm tra dữ liệu hợp lệ và xử lý cập nhật
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $check_result = $check_stmt->get_result();
 
                 if ($check_result->num_rows > 0) {
-                    echo "Username hoặc email đã được sử dụng!";
+                    echo json_encode(array('status' => 'error', 'message' => 'Tên người dùng hoặc email đã được sử dụng. Vui lòng chọn tên người dùng khác hoặc email khác.'));
                 } else {
                     // Cập nhật thông tin người dùng
                     $update_query = "UPDATE users SET fullname = ?, username = ?, email = ? WHERE username = ?";
@@ -44,8 +44,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $update_stmt->bind_param("ssss", $fullname, $new_username, $email, $username);
 
                     if ($update_stmt->execute()) {
-                        echo "Cập nhật hồ sơ thành công!";
-                        
+                        echo json_encode(array('status' => 'success', 'message' => 'Cập nhật hồ sơ thành công.'));                        
                         // Cập nhật thông tin người dùng trong $user để hiển thị lại
                         $user['fullname'] = $fullname;
                         $user['username'] = $new_username;
@@ -54,11 +53,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         // Cập nhật session với username mới
                         $_SESSION['username'] = $new_username;
                     } else {
-                        echo "Lỗi cập nhật hồ sơ: " . $conn->error;
+                        echo json_encode(array('status' => 'error', 'message' => 'Lỗi cập nhật hồ sơ, vui lòng thử lại sau.'));
                     }
                 }
             } else {
-                echo "Vui lòng điền đầy đủ thông tin!";
+                echo json_encode(array('status' => 'error', 'message' => 'Vui lòng điền đầy đủ thông tin!'));
             }
         }
     }
@@ -78,7 +77,7 @@ $conn->close();
     <script src="../../assets/js/profile_edit.js"></script>
 </head>
 <div class="container-profile-edit">
-    <form class="profile-edit" method="POST" action="">
+    <form id="form-edit-profile" class="profile-edit" method="POST" action="">
         <div class="profile-edit__header">
             <span class="close-profile-edit"><i class="fas fa-times"></i></span>
             <h1>Thay đổi hồ sơ của bạn</h1>

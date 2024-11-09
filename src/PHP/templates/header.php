@@ -12,11 +12,11 @@ if (isset($_SESSION['username'])) {
 
     if ($result->num_rows > 0) {
         $user = $result->fetch_assoc();
-        $avatar = $user['avatar'] ?: 'default-avatar.png'; // Gán giá trị mặc định nếu không có avatar
+        $avatar = $user['avatar'] ?: 'default/default-avatar.png'; // Gán giá trị mặc định nếu không có avatar
         $email = $user['email'];
         $domain = substr($email, strrpos($email, '@') + 1);
     } else {
-        $avatar = 'default-avatar.png'; // Gán giá trị mặc định nếu không tìm thấy người dùng
+        $avatar = 'default/default-avatar.png'; // Gán giá trị mặc định nếu không tìm thấy người dùng
     }
 } else {
     header("Location: ../pages/index.php");

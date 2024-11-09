@@ -10,16 +10,17 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    min-height: 100vh;
   }
   
-  .form-container {
+  .reset-container {
     border-radius: 10px;
     box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
     position: relative;
     /* overflow: hidden; */
-    width: 450px;
+    width: 550px;
     max-width: 100%;
-    min-height: 480px;
+    min-height: 400px;
     transition: transform 2s ease-in;
     h1 {
       margin: 0;
@@ -78,7 +79,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 10px;
+      gap: 20px;
       flex-direction: column;
       box-sizing: border-box;
       padding: 50px;

@@ -105,6 +105,7 @@
         padding: 12px 15px;
         margin: 8px 0;
         width: 100%;
+        box-sizing: border-box;
       }
       .input.input--error {
         border: 2px solid red;
@@ -122,7 +123,6 @@
       box-sizing: border-box;
       text-align: center;
       width: 100%;
-
 
       .input-form {
         width: 100%;
@@ -142,6 +142,7 @@
           padding: 12px 15px;
           margin: 8px 0;
           width: 100%;
+          box-sizing: border-box;
         }
         .input.input--error {
           border: 2px solid red;

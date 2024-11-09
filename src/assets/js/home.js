@@ -106,3 +106,5 @@ function pasteRoomCode() {
 // Gắn sự kiện cho các nút
 document.getElementById("createRoomButton").addEventListener("click", createRoom);
 document.getElementById("joinRoomButton").addEventListener("click", joinWithId);
+
+

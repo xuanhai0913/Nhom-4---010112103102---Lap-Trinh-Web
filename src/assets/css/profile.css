@@ -87,7 +87,7 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 70%;
+    width: 70%; 
   }
   .profilePopup__username {
     text-align: center;
