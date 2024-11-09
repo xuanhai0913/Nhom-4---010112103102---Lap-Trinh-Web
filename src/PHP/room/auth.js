@@ -10,18 +10,17 @@ $(document).ready(function() {
 
 function login() {
     userId = $('#userId').val();
-    if (!userId) {
+    if (userId.length === 0) {
         alert('Please enter your user ID');
         return;
     }
 
     if (!stringeeClient) {
         stringeeClient = new StringeeClient(STRINGEE_SERVER_ADDRS);
-        settingsClientEvents(stringeeClient);
-    }
 
-    // Lấy token và kết nối đến Stringee
-    getAccessTokenAndConnectToStringee(stringeeClient);
+        settingsClientEvents(stringeeClient);
+        getAccessTokenAndConnectToStringee(stringeeClient);
+    }
 }
 
 function settingsClientEvents(client) {

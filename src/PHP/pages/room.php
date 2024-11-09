@@ -55,10 +55,67 @@
         <div class="container">
             <h2><i class="fas fa-video"></i> Video Call Room</h2>
             <div class="input-group">
-                <input id="userId" type="text" name="toUsername" placeholder="Your userID" value="ACBTYKKO5L">
-                <button id="loginBtn" onclick="login()" disabled="">
-                    <i class="fas fa-sign-in-alt"></i> Login
-                </button>
+                <div>
+                    <input id="userId" type="text" name="toUsername" style="width: 200px;" placeholder="Your userID">
+                    <button id="loginBtn" onclick="login()" disabled="">Tạo phòng</button>
+                </div>
+            </div>
+            <script>
+                // Function to generate a random string
+                function generateRandomString(length) {
+                    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+                    var result = '';
+                    var charactersLength = characters.length;
+
+                    for (var i = 0; i < length; i++) {
+                        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+                    }
+                    return result;
+                }
+
+                // Function to update the link with the value of the userId input
+                function updateUserLink() {
+                    var userIdValue = document.getElementById('userId').value;
+                    var userLink = document.getElementById('userLink');
+
+                    // Set the href attribute with the room URL and append the user ID
+                    userLink.href = "?roomID=" + userIdValue;
+                    userLink.innerHTML = '<i class="fas fa-link"></i> Join Room with ID: ' + userIdValue;
+                }
+
+                // Function to get userID from URL
+                function getUserIDFromURL() {
+                    const urlParams = new URLSearchParams(window.location.search);
+                    return urlParams.get('roomID') || ''; // Return an empty string if not found
+                }
+
+                // Function to set the random string to the input on page load
+                function setRandomUserId() {
+                    var userIdInput = document.getElementById('userId');
+                    var urlUserId = getUserIDFromURL();
+
+                    // Set the userID from URL if it exists, otherwise generate a random one
+                    if (urlUserId) {
+                        userIdInput.value = urlUserId;
+                    } else if (userIdInput.value === '' || userIdInput.value === null) {
+                        var randomUserId = generateRandomString(10); // Generate random 10 characters
+                        userIdInput.value = randomUserId;
+                    }
+
+                    // Update the room link with the generated or input value
+                    updateUserLink();
+                }
+                // Initialize the random UserID or allow manual input
+                window.onload = setRandomUserId;
+
+                // Add event listener to update the link when UserID input changes
+                document.getElementById('userId').addEventListener('input', updateUserLink);
+            </script>
+            <div class="footer">
+                <br>
+                <a href="#" id="userLink" class="footer-link">
+                    <i class="fas fa-link"></i> Your User Link
+                </a>
             </div>
             Logged in: <span id="loggedUserId" style="color: red">Not logged</span> |
             SdkVersion: <span id="sdkVersion" style="color: blue"></span>
@@ -115,7 +172,7 @@
             </div>
         </div>
     </div>
-    
+
 
 </body>
 
