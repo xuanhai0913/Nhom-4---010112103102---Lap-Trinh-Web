@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Kiểm tra nếu kết quả trả về có hàng dữ liệu
     if ($result && $result->num_rows > 0) {
         $row = $result->fetch_assoc();
-        $hashed_password = $row['password']; // Lấy mật khẩu đã mã hóa từ kết quả
+        $hashed_password = $row['password']; 
 
         // Kiểm tra mật khẩu
         if (password_verify($password, $hashed_password)) {

@@ -18,12 +18,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $fullname = trim($_POST['fullname']);
         $new_username = trim($_POST['username']);
         $email = trim($_POST['email']);
-
+        echo json_encode(array('fullname' => $fullname, 'username' => $new_username, 'email' => $email));
         // Giới hạn độ dài username tối đa 20 ký tự
         if (strlen($new_username) > 20) {
             echo json_encode(array('status' => 'error', 'message' => 'Tên người dùng quá dài! Vui lòng nhập tối đa 20 ký tự.'));
+            exit();
         } else if (strlen($fullname) > 50) {
             echo json_encode(array('status' => 'error', 'message' => 'Họ và tên quá dài! Vui lòng nhập tối đa 50 ký tự.'));
+            exit();
         } 
         else {
             // Kiểm tra dữ liệu hợp lệ và xử lý cập nhật
@@ -37,31 +39,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                 if ($check_result->num_rows > 0) {
                     echo json_encode(array('status' => 'error', 'message' => 'Tên người dùng hoặc email đã được sử dụng. Vui lòng chọn tên người dùng khác hoặc email khác.'));
+                    exit();
                 } else {
                     // Cập nhật thông tin người dùng
                     $update_query = "UPDATE users SET fullname = ?, username = ?, email = ? WHERE username = ?";
                     $update_stmt = $conn->prepare($update_query);
                     $update_stmt->bind_param("ssss", $fullname, $new_username, $email, $username);
 
-                    if ($update_stmt->execute()) {
-                        echo json_encode(array('status' => 'success', 'message' => 'Cập nhật hồ sơ thành công.'));                        
+                    if ($update_stmt->execute()) {                       
                         // Cập nhật thông tin người dùng trong $user để hiển thị lại
                         $user['fullname'] = $fullname;
                         $user['username'] = $new_username;
                         $user['email'] = $email;
 
                         // Cập nhật session với username mới
+                        session_start();
                         $_SESSION['username'] = $new_username;
+                        echo json_encode(array('status' => 'success', 'message' => 'Cập nhật hồ sơ thành công.')); 
+                        exit();
                     } else {
                         echo json_encode(array('status' => 'error', 'message' => 'Lỗi cập nhật hồ sơ, vui lòng thử lại sau.'));
+                        exit();
                     }
                 }
             } else {
                 echo json_encode(array('status' => 'error', 'message' => 'Vui lòng điền đầy đủ thông tin!'));
+                exit();
             }
         }
     }
+
 }
+// echo json_encode(array('status' => 'error','fullname' => $user['fullname'], 'username' => $user['username'], 'email' => $user['email']));
 
 // Đóng kết nối
 $conn->close();

@@ -19,7 +19,7 @@ if (isset($_SESSION['username'])) {
         $avatar = 'default/default-avatar.png'; // Gán giá trị mặc định nếu không tìm thấy người dùng
     }
 } else {
-    header("Location: ../pages/index.php");
+    header("Location: ../pages/index.html");
     exit();
 }
 

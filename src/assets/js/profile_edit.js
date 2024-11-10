@@ -5,11 +5,12 @@ $(document).ready(function() {
 
         // Gửi AJAX request
         $.ajax({
-            url: '../../PHP/auth/profile_edit.php', // Đặt URL nơi xử lý form, ở đây là trang hiện tại
+            url: '../../PHP/profile/profile_edit.php', // Đặt URL nơi xử lý form, ở đây là trang hiện tại
             type: 'POST',
-            data: $(this).serialize(), // Serialize dữ liệu form
+            data: $(this).serialize() + '&submit_save_profile=1', // Serialize dữ liệu form
             dataType: 'json',
             success: function(response) {
+                response = JSON.parse(response);
                 if (response.status === 'success') {
                     alert(response.message); // Hiển thị thông báo thành công
                 } else {
@@ -17,7 +18,7 @@ $(document).ready(function() {
                 }
             },
             error: function() {
-                alert('Có lỗi xảy ra, vui lòng thử lại sau.');
+                alert('Có lỗi xảy ra.');
             }
         });
     });
