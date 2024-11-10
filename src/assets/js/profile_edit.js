@@ -1,16 +1,15 @@
 $(document).ready(function() {
-    // Xử lý sự kiện gửi form
     $('#form-edit-profile').on('submit', function(e) {
         e.preventDefault(); // Ngừng việc gửi form mặc định
 
         // Gửi AJAX request
         $.ajax({
-            url: '../../PHP/profile/profile_edit.php', // Đặt URL nơi xử lý form, ở đây là trang hiện tại
+            url: '../../PHP/profile/profileAction.php', // Đặt URL nơi xử lý form
             type: 'POST',
-            data: $(this).serialize() + '&submit_save_profile=1', // Serialize dữ liệu form
-            dataType: 'json',
+            data: $(this).serialize() + '&submit_save_profile=true', // Serialize dữ liệu form
+            dataType: 'json', // Đảm bảo server trả về JSON
             success: function(response) {
-                response = JSON.parse(response);
+                console.log(response); // Kiểm tra dữ liệu trả về trong console
                 if (response.status === 'success') {
                     alert(response.message); // Hiển thị thông báo thành công
                 } else {

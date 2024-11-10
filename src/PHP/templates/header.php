@@ -32,20 +32,20 @@ $conn->close();
     <script src="../../assets/js/jquery-3.7.1.min.js"></script>
     <script src="../../assets/js/header.js"></script>
 </head>
-    <div class="header">
-        <div class="header__left">
-            <a href="home.php">
-                <img alt="Logo" height="50" src="../../assets/images/static/logo.png" />
-            </a>
-        </div>
-        <div class="header__right">
-            <p id="datetime"></p>
-            <i class="fas fa-question-circle"></i>
-            <i class="fas fa-cog"></i>
-            <i class="fas fa-th"></i>
-            <div id="btn-avatar" class="btn-avatar">
-                <img alt="User Avatar" height="40" src="../../assets/images/avatar/<?php echo htmlspecialchars($avatar); ?>" />
-            </div>
+<div class="header">
+    <div class="header__left">
+        <a href="home.php">
+            <img alt="Logo" height="50" src="../../assets/images/static/logo.png" />
+        </a>
+    </div>
+    <div class="header__right">
+        <p id="datetime"></p>
+        <i class="fas fa-question-circle"></i>
+        <i class="fas fa-cog"></i>
+        <i class="fas fa-th"></i>
+        <div id="btn-avatar" class="btn-avatar">
+            <img alt="User Avatar" height="40" src="../../assets/images/avatar/<?php echo htmlspecialchars($avatar); ?>" />
         </div>
     </div>
-    <?php include '../profile/profile.php'; ?>
+</div>
+<?php include '../profile/profile.php'; ?>

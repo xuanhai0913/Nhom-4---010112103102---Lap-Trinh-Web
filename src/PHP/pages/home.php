@@ -23,9 +23,6 @@
                     cản!</p>
 
                 <div class="function">
-                    <input type="text" id="roomNameInput" placeholder="Nhập tên phòng">
-                    <input type="text" id="uniqueNameInput" placeholder="Nhập tên riêng">
-
                     <button class="function__create-room" id="createRoomButton">
                         <i class="fa-solid fa-plus"></i>
                         Cuộc họp mới
