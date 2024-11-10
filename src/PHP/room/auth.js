@@ -1,27 +1,12 @@
 // auth.js
 var userId;
 var stringeeClient;
-$(document).ready(function() {
-    $('#userId').on('input', function() {
+$(document).ready(function () {
+    $('#userId').on('input', function () {
         const userIdValue = $(this).val();
         $('#loginBtn').prop('disabled', userIdValue.trim() === '');
     });
 });
-
-function login() {
-    userId = $('#userId').val();
-    if (userId.length === 0) {
-        alert('Please enter your user ID');
-        return;
-    }
-
-    if (!stringeeClient) {
-        stringeeClient = new StringeeClient(STRINGEE_SERVER_ADDRS);
-
-        settingsClientEvents(stringeeClient);
-        getAccessTokenAndConnectToStringee(stringeeClient);
-    }
-}
 
 function settingsClientEvents(client) {
     client.on('authen', function (res) {
@@ -56,7 +41,7 @@ function getAccessTokenAndConnectToStringee(client) {
         }
         client.connect(res.access_token);
         roomToken = res.room_token;
-    }).fail(function() {
+    }).fail(function () {
         alert('Failed to fetch token. Please try again.');
     });
 }

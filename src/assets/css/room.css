@@ -4,8 +4,35 @@ body {
     margin: 0;
     padding: 20px;
 }
+.home-container {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    gap: 50px;
+    min-height: calc(100vh - 70px - 50px);
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding: 20px;
+    gap: 20px;
+    max-width: 50%;
+}
 
-.container {
+.content h1 {
+    font-size: 40px;
+    font-weight: 500;
+    margin: 20px 0 0 0;
+}
+
+.content p {
+    font-size: 18px;
+    color: #5f6368;
+}
+
+.container1 {
     max-width: 800px;
     margin: auto;
     background: white;

@@ -1,4 +1,24 @@
 // roomManagement.js
+function joinRoom(roomID = null) {
+    const roomIdToJoin = roomID || $('#userId').val();
+
+    if (roomIdToJoin) {
+        $('#txtStatus').text('Joining Room ID: ' + roomIdToJoin);
+        const userLink = $('#userLink');
+        userLink.attr('href', '../pages/room.php?roomID=' + roomIdToJoin);
+        userLink.text('Join Room with ID: ' + roomIdToJoin);
+        window.location.href = '../pages/room.php?roomID=' + roomIdToJoin;
+    } else {
+        alert('Please provide a Room ID.');
+    }
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    const joinRoomButton = document.getElementById('loginBtn');
+    joinRoomButton.addEventListener('click', function() {
+        joinRoom();
+    });
+});
 function createRoom() {
     const accessToken = 'eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSy4wLmtLbkliWjBxZGZSbGd4T0pzODBrNEFiWjNkYTh4Rk0tMTczMDcyOTE3MiIsImlzcyI6IlNLLjAua0tuSWJaMHFkZlJsZ3hPSnM4MGs0QWJaM2RhOHhGTSIsImV4cCI6MTczMzMyMTE3MiwicmVzdF9hcGkiOnRydWV9.YPTdcHM0uzC7y3gBNzxS3nzI_pywC4jIrPn78wMwENc';
     const roomName = $('#roomNameInput').val();
@@ -9,15 +29,16 @@ function createRoom() {
         type: 'POST',
         headers: { 'X-STRINGEE-AUTH': accessToken, 'Content-Type': 'application/json' },
         data: JSON.stringify({ name: roomName, uniqueName: uniqueName }),
-        success: function(response) {
+        success: function (response) {
             if (response.r === 0) {
                 $('#roomIdDisplay').text('Room ID: ' + response.roomId);
                 joinRoom(response.data.roomId);
+                // header("Location: ../pages/room.php?'Room ID: ' + response.roomId");
             } else {
                 alert('Error creating room: ' + response.message);
             }
         },
-        error: function(error) { console.error('Error creating room:', error); }
+        error: function (error) { console.error('Error creating room:', error); }
     });
 }
 
@@ -27,10 +48,10 @@ function listRooms() {
         url: 'https://api.stringee.com/v1/room2/list',
         type: 'GET',
         headers: { 'X-STRINGEE-AUTH': accessToken },
-        success: function(response) {
+        success: function (response) {
             console.log('Room list:', response);
         },
-        error: function(error) {
+        error: function (error) {
             console.error('Error listing rooms:', error);
         }
     });
@@ -42,10 +63,10 @@ function deleteRoom() {
 
     $.ajax({
         url: 'https://api.stringee.com/v1/room2/delete',
-type: 'DELETE',
+        type: 'DELETE',
         headers: { 'X-STRINGEE-AUTH': accessToken, 'Content-Type': 'application/json' },
         data: JSON.stringify({ roomId: roomIdToDelete }),
-        success: function(response) { console.log('Room deleted:', response); },
-        error: function(error) { console.error('Error deleting room:', error); }
+        success: function (response) { console.log('Room deleted:', response); },
+        error: function (error) { console.error('Error deleting room:', error); }
     });
 }
