@@ -7,7 +7,7 @@
 	<title>Document</title>
 	<link rel="stylesheet" href="../../assets/css/base.css">
 	<link rel="stylesheet" href="../../assets/css/log.css">
-	<script src="../../assets/js/jquery-3.7.1.min.js"></script>
+	<script src="../../assets/js/includes/jquery-3.7.1.min.js"></script>
 </head>
 
 <body>
@@ -24,7 +24,7 @@
 						</div>
 						<span>or use your email for registration</span>
 						<div class="input-form">
-							<input type="text" placeholder="Name" name="username" id='input__username-register' class="input" pattern="[a-zA-Z0-9._]{5,}" />
+							<input type="text" placeholder="User name" name="username" id='input__username-register' class="input" />
 							<span id="message__username-register" class="message"></span>
 						</div>
 						<div class="input-form">
@@ -32,7 +32,7 @@
 							<span id="message__email-register" class="message"></span>
 						</div>
 						<div class="input-form">
-							<input type="password" placeholder="Password" name="password" pattern="[a-z0-9]{5,}" id="input__password-register" class="input" />
+							<input type="password" placeholder="Password" name="password" id="input__password-register" class="input" />
 							<span id="message__password-register" class="message"></span>
 						</div>
 						<button>Sign Up</button>
@@ -102,7 +102,5 @@
 		</div>
 		<article class="container">
 </body>
-
-<script src="../../assets/js/script.js"></script>
-
+<script src="../../assets/js/auth/log.js"></script>
 </html>

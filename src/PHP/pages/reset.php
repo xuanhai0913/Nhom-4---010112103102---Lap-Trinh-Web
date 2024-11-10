@@ -7,7 +7,8 @@
     <title>Document</title>
     <link rel="stylesheet" href="../../assets/css/base.css">
     <link rel="stylesheet" href="../../assets/css/reset.css">
-    <script src="../../assets/js/jquery-3.7.1.min.js"></script>
+    <script src="../../assets/js/includes/jquery-3.7.1.min.js"></script>
+    <script src="../../assets/js/auth/reset.js"></script>
 </head>
 
 <body>
@@ -31,5 +32,4 @@
         </div>
     </article>
 </body>
-<script src="../../assets/js/reset.js"></script>
 </html>

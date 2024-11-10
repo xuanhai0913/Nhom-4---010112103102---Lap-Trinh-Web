@@ -101,9 +101,10 @@
         input {
           background-color: #eee;
           border: none;
-          padding: 12px 0 12px 3px;
+          padding: 12px 15px;
           margin: 8px 0;
           width: 100%;
+          box-sizing: border-box;
         }
         .input.input--error {
           border: 2px solid red;

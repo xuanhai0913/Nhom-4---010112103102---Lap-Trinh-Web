@@ -4,7 +4,7 @@ $(document).ready(function() {
 
         // Gửi AJAX request
         $.ajax({
-            url: '../../PHP/profile/profileAction.php', // Đặt URL nơi xử lý form
+            url: '../../PHP/profile/profile_edit.php', // Đặt URL nơi xử lý form
             type: 'POST',
             data: $(this).serialize() + '&submit_save_profile=true', // Serialize dữ liệu form
             dataType: 'json', // Đảm bảo server trả về JSON
@@ -12,6 +12,7 @@ $(document).ready(function() {
                 console.log(response); // Kiểm tra dữ liệu trả về trong console
                 if (response.status === 'success') {
                     alert(response.message); // Hiển thị thông báo thành công
+                    location.reload();
                 } else {
                     alert(response.message); // Hiển thị thông báo lỗi
                 }

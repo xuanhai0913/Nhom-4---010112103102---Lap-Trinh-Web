@@ -13,6 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập đầy đủ thông tin!', 'object' => 'username', 'form' => 'register'));
         exit();
     }
+    if (!preg_match('/^[a-zA-Z0-9._]{5,}$/', $username)) {
+        echo json_encode(array('status' => 'error', 'message' => 'Chỉ sử dụng (a-z, A-Z, 0-9, ., _) và ít nhất 5 ký tự', 'object' => 'username', 'form' => 'register'));
+        exit();
+    }
     if (isExists('username', $username)) {
         echo json_encode(array('status' => 'error', 'message' => 'Tên đăng nhập này đã tồn tại.', 'object' => 'username', 'form' => 'register'));
         exit();
@@ -29,6 +33,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập mật khẩu!', 'object' => 'password', 'form' => 'register'));
         exit();
     }
+    if (preg_match('/[^a-zA-Z0-9]/', $_POST['password'])) {
+        echo json_encode(array('status' => 'error', 'message' => 'Mật khẩu không chứa cách hoặc kí tự đặt biệt!', 'object' => 'password', 'form' => 'register'));
+        exit();
+    }
+
     $sql = "INSERT INTO users (username, fullname, password, email) VALUES (?, ?, ?, ?)";
     $stmt = $conn->prepare($sql);
     if ($stmt) {
