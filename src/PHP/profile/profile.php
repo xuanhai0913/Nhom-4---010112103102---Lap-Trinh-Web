@@ -17,7 +17,7 @@
     </div>
 
     <div class="profilePopup__avatar">
-        <img class="avatar-edit" alt="User Avatar" height="40" src="../../assets/images/avatar/<?php echo htmlspecialchars($avatar); ?> " onerror="this.onerror=null; this.src='../../assets/images/avatar/default/default-avatar.png';"/>
+        <img class="avatar-edit" alt="User Avatar" height="40" src="../../assets/images/avatar/<?php echo htmlspecialchars($avatar); ?> " onerror="this.onerror=null; this.src='../../assets/images/avatar/default/default-avatar.png';" />
         <span class="avatar-edit">
             <i class="fas fa-pencil-alt"></i>
         </span>
@@ -32,10 +32,12 @@
             <i class="fa-solid fa-pen-to-square"></i>
             Chỉnh sửa
         </button>
-        <button class="action action__logout">
-            <i class="fas fa-sign-out-alt"></i>
-            Đăng xuất
-        </button>
+        <a href="../auth/logout.php" onclick="return confirm('Bạn có chắc chắn muốn đăng xuất?');">
+            <button class="action action__logout">
+                <i class="fas fa-sign-out-alt"></i>
+                Đăng xuất
+            </button>
+        </a>
     </div>
 </section>
 
