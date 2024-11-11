@@ -12,7 +12,6 @@ $(document).ready(function() {
                 console.log(response); // Kiểm tra dữ liệu trả về trong console
                 if (response.status === 'success') {
                     alert(response.message); // Hiển thị thông báo thành công
-                    location.reload();
                 } else {
                     alert(response.message); // Hiển thị thông báo lỗi
                 }

@@ -112,7 +112,6 @@ function changeAvatarDefault(event) {
         .catch(error => console.error('Lỗi khi tải ảnh từ src: ', error));
 }
 
-
 $(document).ready(function() {
     $("#btn-save-avatar").click(function(e) {
         e.preventDefault(); // Ngừng sự kiện mặc định
@@ -127,14 +126,13 @@ $(document).ready(function() {
             contentType: false, // Không cần thiết lập contentType
             processData: false, // Không xử lý dữ liệu trước khi gửi
             success: function(response) {
-                console.log(response);  // Kiểm tra dữ liệu trả về từ server
                 if (response.status === 'success') {
                     alert(response.message); // Hiển thị thông báo thành công
                     location.reload();
                 } else {
                     alert(response.message); // Hiển thị thông báo lỗi
                 }
-            },            
+            },
             error: function() {
                 $("#message").html("Có lỗi xảy ra khi tải ảnh lên.");
             }
