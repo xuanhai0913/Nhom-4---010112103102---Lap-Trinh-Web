@@ -13,6 +13,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo json_encode(array('status' => 'error', 'message' => 'Vui lòng nhập đầy đủ thông tin!', 'object' => 'username', 'form' => 'register'));
         exit();
     }
+    if (strlen($username) > 20 || strlen($username) < 5) {
+        echo json_encode(array('status' => 'error', 'message' => 'Tên đăng nhập phải có độ dài từ 5 đến 20 ký tự!', 'object' => 'username', 'form' => 'register'));
+        exit();
+    }
     if (!preg_match('/^[a-zA-Z0-9._]{5,}$/', $username)) {
         echo json_encode(array('status' => 'error', 'message' => 'Chỉ sử dụng (a-z, A-Z, 0-9, ., _) và ít nhất 5 ký tự', 'object' => 'username', 'form' => 'register'));
         exit();

@@ -11,7 +11,10 @@ $('#form-reset').submit(function (e) {
             if (response.status === 'error') {
                 showError(response.object, response.message, response.form);
             } else {
-                location = '../../PHP/pages/index.php';
+                setInterval(function () {
+                    location = '../../PHP/auth/logout.php';
+                }, 3000);
+                showAlert(response.message, 'success');
             }
         }
     });

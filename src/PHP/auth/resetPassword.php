@@ -48,7 +48,7 @@ if (isset($_SESSION['email']) && $_SESSION['email'] !== '') {
     $stmt->close();
     $conn->close();
 } else {
-    echo json_encode(['status' => 'error', 'message' => 'Sai email!', 'object' => 'password', 'form' => 'first']);
+    header("Location: ../pages/index.php");
     exit();
 }
 ?>

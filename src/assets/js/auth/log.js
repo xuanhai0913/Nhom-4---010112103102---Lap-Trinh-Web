@@ -54,9 +54,10 @@ $('#form-register').submit(function (e) {
                     showError('password',response.message,response.form);
                 }
             } else {
-                alert(response.message);
-                sessionStorage.setItem('focusLoginInput', 'true'); // Lưu cờ trạng thái
-                location.reload();
+                showAlert(response.message, 'success');
+                sessionStorage.setItem('focusLoginInput', 'true');
+                form.classList.remove("right-panel-active");
+                $('#form-register')[0].reset();
             }
         }
     });
@@ -110,7 +111,7 @@ $('#form-forgot').submit(function (e) {
             if (response.status === 'error') {
                 showError(response.object,response.message,response.form);             
             } else {
-                alert(response.message);
+                showAlert(response.message, 'success');
             }
         }
     });
@@ -153,3 +154,4 @@ function clearErrors() {
         element.innerHTML = '';
     });
 }
+
