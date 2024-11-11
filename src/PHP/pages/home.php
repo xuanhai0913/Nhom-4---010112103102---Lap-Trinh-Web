@@ -3,14 +3,13 @@
 
 <head>
     <title>
-        Video Conference
+        V2meet - Kết nối trái tim, xóa tan khoảng cách
     </title>
     <link href="../../assets/css/base.css" rel="stylesheet" />
     <link href="../../assets/css/home.css" rel="stylesheet" />
-    <script src="../../assets/js/jquery-3.7.1.min.js"></script>
+    <script src="../../assets/js/includes/jquery-3.7.1.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="../room/config.js"></script>
-
+    
 </head>
 
 <body>
@@ -59,7 +58,6 @@
         </div>
     </div>
     <?php include '../templates/footer.php'; ?>
-    <script src="../../assets/js/home.js"></script>
 </body>
-
+<script src="../../assets/js/home/home.js"></script>
 </html>

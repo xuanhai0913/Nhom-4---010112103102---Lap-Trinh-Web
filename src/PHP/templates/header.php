@@ -19,7 +19,7 @@ if (isset($_SESSION['username'])) {
         $avatar = 'default/default-avatar.png'; // Gán giá trị mặc định nếu không tìm thấy người dùng
     }
 } else {
-    header("Location: ../pages/index.html");
+    header("Location: ../pages/index.php");
     exit();
 }
 
@@ -29,8 +29,8 @@ $conn->close();
 <head>
     <link rel="stylesheet" href="../../assets/css/base.css">
     <link rel="stylesheet" href="../../assets/css/header.css">
-    <script src="../../assets/js/jquery-3.7.1.min.js"></script>
-    <script src="../../assets/js/header.js"></script>
+    <script src="../../assets/js/includes/jquery-3.7.1.min.js"></script>
+    <script src="../../assets/js/templates/header.js"></script>
 </head>
 <div class="header">
     <div class="header__left">
@@ -44,7 +44,7 @@ $conn->close();
         <i class="fas fa-cog"></i>
         <i class="fas fa-th"></i>
         <div id="btn-avatar" class="btn-avatar">
-            <img alt="User Avatar" height="40" src="../../assets/images/avatar/<?php echo htmlspecialchars($avatar); ?>" />
+            <img alt="User Avatar" height="40" src="../../assets/images/avatar/<?php echo htmlspecialchars($avatar); ?>" onerror="this.onerror=null; this.src='../../assets/images/avatar/default/default-avatar.png';"/>
         </div>
     </div>
 </div>

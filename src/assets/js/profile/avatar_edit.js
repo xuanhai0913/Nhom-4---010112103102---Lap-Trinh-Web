@@ -2,7 +2,7 @@
 function showTab(tab) {
     document.getElementById('default-avatar').style.display = tab === 'default' ? 'block' : 'none';
     document.getElementById('upload-avatar').style.display = tab === 'upload' ? 'block' : 'none';
-    document.querySelectorAll('.tab').forEach(function(el) {
+    document.querySelectorAll('.tab').forEach(function (el) {
         el.classList.remove('active');
     });
     document.querySelector('.tab[onclick="showTab(\'' + tab + '\')"]').classList.add('active');
@@ -30,7 +30,7 @@ function loadFile(event) {
 
 
 // Kéo và thả
-document.addEventListener('dragover', function(event) {
+document.addEventListener('dragover', function (event) {
     var uploadArea = document.getElementById('dragAndDrop');
     if (uploadArea.contains(event.target)) {
         event.preventDefault();
@@ -38,7 +38,7 @@ document.addEventListener('dragover', function(event) {
     } else document.getElementById('dragAndDrop').style.border = 'none';
 });
 
-document.addEventListener('drop', function(event) {
+document.addEventListener('drop', function (event) {
     document.getElementById('dragAndDrop').style.border = 'none';
     event.preventDefault();
     const files = event.dataTransfer.files;
@@ -98,7 +98,7 @@ function openCameraModal() {
 function changeAvatarDefault(event) {
     const fileInput = document.getElementById('fileInput');
     const dataTransfer = new DataTransfer();
-    
+
     // Lấy ảnh từ element hiện tại (chắc chắn phải có ảnh được hiển thị trước đó)
     const newImageFile = event.target.src;
     fetch(newImageFile)
@@ -111,3 +111,33 @@ function changeAvatarDefault(event) {
         })
         .catch(error => console.error('Lỗi khi tải ảnh từ src: ', error));
 }
+
+
+$(document).ready(function() {
+    $("#btn-save-avatar").click(function(e) {
+        e.preventDefault(); // Ngừng sự kiện mặc định
+
+        var formData = new FormData($('#form-edit-avatar')[0]); // Lấy dữ liệu form, bao gồm ảnh
+
+        $.ajax({
+            url: '../../PHP/profile/avatar_edit.php', // Địa chỉ file PHP xử lý tải ảnh
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            contentType: false, // Không cần thiết lập contentType
+            processData: false, // Không xử lý dữ liệu trước khi gửi
+            success: function(response) {
+                console.log(response);  // Kiểm tra dữ liệu trả về từ server
+                if (response.status === 'success') {
+                    alert(response.message); // Hiển thị thông báo thành công
+                    location.reload();
+                } else {
+                    alert(response.message); // Hiển thị thông báo lỗi
+                }
+            },            
+            error: function() {
+                $("#message").html("Có lỗi xảy ra khi tải ảnh lên.");
+            }
+        });
+    });
+});

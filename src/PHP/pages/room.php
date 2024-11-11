@@ -9,15 +9,15 @@
     <link href="../../assets/css/base.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="../room/config.js"></script>
-    <script src="../room/deviceSettings.js"></script>
-    <script src="../room/Mute.js"></script>
-    <script src="../room/roomManagement.js"></script>
-    <script src="../room/share.js"></script>
-    <script src="../room/utils.js"></script>
-    <script src="../room/Video.js"></script>
-    <script src="../room/videoDimensions.js"></script>
-    <script src="../room/auth.js"></script>
+    <script src="../../assets/js/room/config.js"></script>
+    <script src="../../assets/js/room/deviceSettings.js"></script>
+    <script src="../../assets/js/room/Mute.js"></script>
+    <script src="../../assets/js/room/roomManagement.js"></script>
+    <script src="../../assets/js/room/share.js"></script>
+    <script src="../../assets/js/room/utils.js"></script>
+    <script src="../../assets/js/room/Video.js"></script>
+    <script src="../../assets/js/room/videoDimensions.js"></script>
+    <script src="../../assets/js/room/auth.js"></script>
 
 </head>
 
