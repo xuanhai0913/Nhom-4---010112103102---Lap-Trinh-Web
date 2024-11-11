@@ -1,3 +1,13 @@
+<?php
+  if (isset($_GET['room'])) {
+    $roomId = $_GET['room'];
+    echo "Bạn đã vào phòng: " . htmlspecialchars($roomId);
+  } else {
+    echo "Không có phòng nào được chọn!";
+  }
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,7 +18,10 @@
     <link rel="stylesheet" href="../../assets/css/room.css">
     <link href="../../assets/css/base.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>
+    <script src="https://cdn.stringee.com/sdk/web/2.2.1/stringee-web-sdk.min.js"></script>
     <script src="../../assets/js/room/config.js"></script>
     <script src="../../assets/js/room/deviceSettings.js"></script>
     <script src="../../assets/js/room/Mute.js"></script>
@@ -18,55 +31,34 @@
     <script src="../../assets/js/room/Video.js"></script>
     <script src="../../assets/js/room/videoDimensions.js"></script>
     <script src="../../assets/js/room/auth.js"></script>
-
+    <script src="../../assets/js/room/api.js"></script>
+    <script src="../../assets/js/room/script.js"></script>
 </head>
 
 <body>
-<?php include '../templates/header.php'; ?>
+    <?php include '../templates/header.php'; ?>
 
-    <!-- <div class="container">
-        <div class="room-container">
-            <h3><i class="fas fa-users"></i> V2meet</h3>
-            <input id="roomNameInput" type="text" placeholder="Room Name">
-            <input id="uniqueNameInput" type="text" placeholder="Unique Name">
-            <div class="buttons">
-                <button class="primary" onclick="createRoom()">
-                    <i class="fas fa-plus"></i> Create Room
-                </button>
-                <div id="roomIdDisplay"></div>
-            </div>
-            <div class="buttons">
-                <button onclick="listRooms()">
-                    <i class="fas fa-list"></i> List Rooms
-                </button>
-                <input id="deleteRoomId" type="text" placeholder="Room ID to delete">
-                <button onclick="deleteRoom()">
-                    <i class="fas fa-trash"></i> Delete Room
-                </button>
-            </div>
-            <div id="roomList"></div>
-            <div class="status">
-                Status: <span id="txtStatus">Not started</span>
-            </div>
+    <?php if ($roomId): ?>
+        <div class="info">
+            <p>Bạn đang ở trong phòng <strong><?php echo htmlspecialchars($roomId); ?></strong>.</p>
+            <p>
+                Gửi link này cho bạn bè cùng tham gia phòng:
+                <a href="Room.php?roomId=<?php echo urlencode($roomId); ?>" target="_blank">
+                    Room.php?roomId=<?php echo htmlspecialchars($roomId); ?>
+                </a>.
+            </p>
+            <p>Hoặc bạn cũng có thể copy <code><?php echo htmlspecialchars($roomId); ?></code> để share.</p>
         </div>
--->
+    <?php else: ?>
+        <p>Bạn chưa tham gia phòng nào. Vui lòng quay lại trang <a href="home.php">Home</a> để tạo hoặc tham gia phòng.</p>
+    <?php endif; ?>
+
     <div class="container1">
         <h2><i class="fas fa-video"></i> Video Call Room</h2>
-        <div class="input-group">
-            <div>
-                <input id="userId" type="text" name="toUsername" style="width: 200px;" placeholder="Your roomID">
-                <button id="loginBtn" onclick="joinRoom()" disabled>Join Room</button>
-            </div>
+        <div class="video-container">
+            <video id="localVideo" autoplay muted></video>
         </div>
-        <div class="footer">
-            <br>
-            <a href="#" id="userLink" class="footer-link">
-                <i class="fas fa-link"></i> Your User Link
-            </a>
-        </div>
-        Logged in: <span id="loggedUserId" style="color: red">Not logged</span> |
-        SdkVersion: <span id="sdkVersion" style="color: blue"></span>
-
+        
         <div class="input-group">
             <select id="listCameras">
                 <option value="">Choose camera</option>
@@ -98,11 +90,25 @@
                 <i class="fas fa-microphone-slash"></i> Mute
             </button>
         </div>
-
-        <div id="videos"></div>
-    </div>
     </div>
 
+    <script>
+        // Tự động hiển thị camera khi vào trang
+        function startCamera() {
+            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
+                .then(stream => {
+                    const videoElement = document.getElementById('localVideo');
+                    videoElement.srcObject = stream;
+                })
+                .catch(error => {
+                    console.error('Lỗi khi truy cập camera:', error);
+                });
+        }
+
+        document.addEventListener('DOMContentLoaded', function () {
+            startCamera();
+        });
+    </script>
 </body>
 
 </html>
