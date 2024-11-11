@@ -18,11 +18,11 @@ const vm = new Vue({
     api.setRestToken();
 
     const urlParams = new URLSearchParams(location.search);
-    const roomId = urlParams.get("room");
+    const roomId = urlParams.get("room");  // Get roomId from the URL
     if (roomId) {
       this.roomId = roomId;
 
-      await this.join();
+      await this.join();  // If roomId exists in the URL, try to join that room
     }
   },
   methods: {
@@ -106,8 +106,17 @@ const vm = new Vue({
 
       await this.authen();
       await this.publish();
+
+      // Redirect the user to room.php with the roomId
+      window.location.href = `room.php?roomId=${roomId}`;
     },
     join: async function() {
+      // Ensure we have the roomId from the URL
+      if (!this.roomId) {
+        console.error("Room ID is required to join.");
+        return;
+      }
+
       const roomToken = await api.getRoomToken(this.roomId);
       this.roomToken = roomToken;
 

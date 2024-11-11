@@ -1,7 +1,12 @@
 <?php
-session_start();
-$roomId = isset($_SESSION['roomId']) ? $_SESSION['roomId'] : null;
+  if (isset($_GET['room'])) {
+    $roomId = $_GET['room'];
+    echo "Bạn đã vào phòng: " . htmlspecialchars($roomId);
+  } else {
+    echo "Không có phòng nào được chọn!";
+  }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +19,7 @@ $roomId = isset($_SESSION['roomId']) ? $_SESSION['roomId'] : null;
     <link href="../../assets/css/base.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>
     <script src="https://cdn.stringee.com/sdk/web/2.2.1/stringee-web-sdk.min.js"></script>
     <script src="../../assets/js/room/config.js"></script>
