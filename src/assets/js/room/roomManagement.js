@@ -1,72 +1,52 @@
-// roomManagement.js
-function joinRoom(roomID = null) {
-    const roomIdToJoin = roomID || $('#userId').val();
+document.addEventListener('DOMContentLoaded', function () {
+    // Nút tạo phòng mới
+    document.getElementById('createRoomButton').addEventListener('click', function () {
+        // Tạo mã phòng ngẫu nhiên
+        const roomId = 'room_' + Math.floor(Math.random() * 10000);
 
-    if (roomIdToJoin) {
-        $('#txtStatus').text('Joining Room ID: ' + roomIdToJoin);
-        const userLink = $('#userLink');
-        userLink.attr('href', '../pages/room.php?roomID=' + roomIdToJoin);
-        userLink.text('Join Room with ID: ' + roomIdToJoin);
-        window.location.href = '../pages/room.php?roomID=' + roomIdToJoin;
-    } else {
-        alert('Please provide a Room ID.');
-    }
-}
-
-document.addEventListener("DOMContentLoaded", function() {
-    const joinRoomButton = document.getElementById('loginBtn');
-    joinRoomButton.addEventListener('click', function() {
-        joinRoom();
-    });
-});
-function createRoom() {
-    const accessToken = 'eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSy4wLmtLbkliWjBxZGZSbGd4T0pzODBrNEFiWjNkYTh4Rk0tMTczMDcyOTE3MiIsImlzcyI6IlNLLjAua0tuSWJaMHFkZlJsZ3hPSnM4MGs0QWJaM2RhOHhGTSIsImV4cCI6MTczMzMyMTE3MiwicmVzdF9hcGkiOnRydWV9.YPTdcHM0uzC7y3gBNzxS3nzI_pywC4jIrPn78wMwENc';
-    const roomName = $('#roomNameInput').val();
-    const uniqueName = $('#uniqueNameInput').val();
-
-    $.ajax({
-        url: 'https://api.stringee.com/v1/room2/create',
-        type: 'POST',
-        headers: { 'X-STRINGEE-AUTH': accessToken, 'Content-Type': 'application/json' },
-        data: JSON.stringify({ name: roomName, uniqueName: uniqueName }),
-        success: function (response) {
-            if (response.r === 0) {
-                $('#roomIdDisplay').text('Room ID: ' + response.roomId);
-                joinRoom(response.data.roomId);
-                // header("Location: ../pages/room.php?'Room ID: ' + response.roomId");
-            } else {
-                alert('Error creating room: ' + response.message);
+        // Lưu roomId vào session qua AJAX và chuyển hướng đến Room.php
+        $.ajax({
+            url: 'saveRoom.php',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify({ roomId: roomId }),
+            success: function (response) {
+                if (response.success) {
+                    window.location.href = `Room.php?roomId=${roomId}`;
+                } else {
+                    alert('Có lỗi xảy ra khi tạo phòng.');
+                }
             }
-        },
-        error: function (error) { console.error('Error creating room:', error); }
+        });
     });
-}
 
-function listRooms() {
-    const accessToken = 'eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSy4wLmtLbkliWjBxZGZSbGd4T0pzODBrNEFiWjNkYTh4Rk0tMTczMDcyOTE3MiIsImlzcyI6IlNLLjAua0tuSWJaMHFkZlJsZ3hPSnM4MGs0QWJaM2RhOHhGTSIsImV4cCI6MTczMzMyMTE3MiwicmVzdF9hcGkiOnRydWV9.YPTdcHM0uzC7y3gBNzxS3nzI_pywC4jIrPn78wMwENc';
-    $.ajax({
-        url: 'https://api.stringee.com/v1/room2/list',
-        type: 'GET',
-        headers: { 'X-STRINGEE-AUTH': accessToken },
-        success: function (response) {
-            console.log('Room list:', response);
-        },
-        error: function (error) {
-            console.error('Error listing rooms:', error);
+    // Nút tham gia phòng bằng mã phòng
+    document.getElementById('joinRoomButton').addEventListener('click', function () {
+        const roomId = document.getElementById('roomCode').value.trim();
+
+        if (roomId) {
+            $.ajax({
+                url: 'saveRoom.php',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify({ roomId: roomId }),
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = `Room.php?roomId=${roomId}`;
+                    } else {
+                        alert('Có lỗi xảy ra khi tham gia phòng.');
+                    }
+                }
+            });
+        } else {
+            alert('Vui lòng nhập mã phòng hợp lệ.');
         }
     });
-}
+});
 
-function deleteRoom() {
-    const accessToken = 'eyJjdHkiOiJzdHJpbmdlZS1hcGk7dj0xIiwidHlwIjoiSldUIiwiYWxnIjoiSFMyNTYifQ.eyJqdGkiOiJTSy4wLmtLbkliWjBxZGZSbGd4T0pzODBrNEFiWjNkYTh4Rk0tMTczMDcyOTE3MiIsImlzcyI6IlNLLjAua0tuSWJaMHFkZlJsZ3hPSnM4MGs0QWJaM2RhOHhGTSIsImV4cCI6MTczMzMyMTE3MiwicmVzdF9hcGkiOnRydWV9.YPTdcHM0uzC7y3gBNzxS3nzI_pywC4jIrPn78wMwENc';
-    const roomIdToDelete = $('#deleteRoomId').val();
-
-    $.ajax({
-        url: 'https://api.stringee.com/v1/room2/delete',
-        type: 'DELETE',
-        headers: { 'X-STRINGEE-AUTH': accessToken, 'Content-Type': 'application/json' },
-        data: JSON.stringify({ roomId: roomIdToDelete }),
-        success: function (response) { console.log('Room deleted:', response); },
-        error: function (error) { console.error('Error deleting room:', error); }
-    });
+// Hàm dán mã phòng (nếu cần)
+function pasteRoomCode() {
+    navigator.clipboard.readText().then(
+        text => document.getElementById('roomCode').value = text
+    ).catch(err => console.error('Không thể dán mã phòng:', err));
 }
