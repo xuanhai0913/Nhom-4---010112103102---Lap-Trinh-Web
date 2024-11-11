@@ -1,7 +1,7 @@
 <?php
 // Replace these with your actual Stringee credentials
-$apiKeySid = 'YOUR_API_KEY_SID';
-$apiKeySecret = 'YOUR_API_KEY_SECRET';
+$apiKeySid = 'SK.0.kKnIbZ0qdfRlgxOJs80k4AbZ3da8xFM';
+$apiKeySecret = 'ZWkwc2FDcWF4ZU5UOGJPZDh6dDRPdWhkSU9BcTFDN3U=';
 
 // Prepare payload to create a room
 $data = [
