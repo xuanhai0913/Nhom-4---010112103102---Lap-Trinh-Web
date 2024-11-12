@@ -4,7 +4,7 @@
 </head>
 <footer class="footer">
     <nav class="footer-navbar">
-        <a href="/" class="footer-navbar__biolink">Video Conference</a>
+        <a href="/" class="footer-navbar__biolink">&copy; 2024 V2meet - All Rights Reserved</a>
         <ul class="footer-navbar__social-list">
             <li class="footer-navbar__social-item icon-facebook">
                 <a href="https://facebook.com" class="footer-navbar__social-link">
