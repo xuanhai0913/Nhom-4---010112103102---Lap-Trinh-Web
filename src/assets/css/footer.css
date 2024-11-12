@@ -2,7 +2,7 @@
     height: 50px;
     box-sizing: border-box;
     width: 100%;
-    background-color: rgba(88, 101, 242, 1);
+    background-color: #0e4274;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -13,6 +13,10 @@
     justify-content: space-between;
     align-items: center;
     padding: 0 20px;
+}
+
+.footer-navbar__biolink {
+    color: #fff;
 }
 
 .footer-navbar__social-list {
