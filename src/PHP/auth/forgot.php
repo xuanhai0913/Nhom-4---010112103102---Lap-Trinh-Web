@@ -34,7 +34,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("ss", $verification_code, $email);
     session_start();
-    $_SESSION['verification_code'] = $verification_code;
     $_SESSION['email'] = $email;
 
     if ($stmt->execute()) {

@@ -90,7 +90,6 @@ $('#form-login').submit(function (e) {
                     console.log(response.message);
                     showError(response.object,response.message,response.form);
                 } 
-
             } else {
                 window.location.href = '../../PHP/pages/home.php';
             }

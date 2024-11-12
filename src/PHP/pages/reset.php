@@ -11,6 +11,13 @@
 </head>
 
 <body>
+    <?php
+    session_start();
+    if (!isset($_SESSION['verification_code'])) {
+        header('Location: index.php');
+        exit();
+    }
+    ?>
     <article class="container">
         <div class="wrapper">
             <div class="reset-container" id="reset">
@@ -32,4 +39,5 @@
     </article>
 </body>
 <script src="../../assets/js/auth/reset.js"></script>
+
 </html>
