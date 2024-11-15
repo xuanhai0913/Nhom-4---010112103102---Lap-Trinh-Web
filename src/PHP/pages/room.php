@@ -1,114 +1,107 @@
-<?php
-  if (isset($_GET['room'])) {
-    $roomId = $_GET['room'];
-    echo "Bạn đã vào phòng: " . htmlspecialchars($roomId);
-  } else {
-    echo "Không có phòng nào được chọn!";
-  }
-?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Room Management</title>
-    <link rel="stylesheet" href="../../assets/css/room.css">
-    <link href="../../assets/css/base.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css" />
-    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.14/dist/vue.min.js"></script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Clone Zoom với Stringee hihi</title>
+
+    <!-- import the webpage's stylesheet -->
+    <link rel="stylesheet" href="../../assets/css/room.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios@0.20.0/dist/axios.min.js"></script>
     <script src="https://cdn.stringee.com/sdk/web/2.2.1/stringee-web-sdk.min.js"></script>
-    <script src="../../assets/js/room/config.js"></script>
-    <script src="../../assets/js/room/deviceSettings.js"></script>
-    <script src="../../assets/js/room/Mute.js"></script>
-    <script src="../../assets/js/room/roomManagement.js"></script>
-    <script src="../../assets/js/room/share.js"></script>
-    <script src="../../assets/js/room/utils.js"></script>
-    <script src="../../assets/js/room/Video.js"></script>
-    <script src="../../assets/js/room/videoDimensions.js"></script>
-    <script src="../../assets/js/room/auth.js"></script>
-    <script src="../../assets/js/room/api.js"></script>
-    <script src="../../assets/js/room/script.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 
 <body>
-    <?php include '../templates/header.php'; ?>
+    <div class="container">
+        <div class="container__content has-text-centered" v-cloak id="app">
+            <div class="header">
+                <div class="logo" v-if="room">
+                    <img alt="Logo" height="50" src="../../assets/images/static/logo.png" />
+                </div>
+                <div class="function">
+                    <button class="function__create-room is-primary" v-if="!room" @click="createRoom">
+                        <i class="fa-solid fa-plus"></i>
+                        Tạo Meeting
+                    </button>
 
-    <?php if ($roomId): ?>
-        <div class="info">
-            <p>Bạn đang ở trong phòng <strong><?php echo htmlspecialchars($roomId); ?></strong>.</p>
-            <p>
-                Gửi link này cho bạn bè cùng tham gia phòng:
-                <a href="Room.php?roomId=<?php echo urlencode($roomId); ?>" target="_blank">
-                    Room.php?roomId=<?php echo htmlspecialchars($roomId); ?>
-                </a>.
-            </p>
-            <p>Hoặc bạn cũng có thể copy <code><?php echo htmlspecialchars($roomId); ?></code> để share.</p>
-        </div>
-    <?php else: ?>
-        <p>Bạn chưa tham gia phòng nào. Vui lòng quay lại trang <a href="home.php">Home</a> để tạo hoặc tham gia phòng.</p>
-    <?php endif; ?>
+                    <button class="join-room__button is-info" v-if="!room" @click="joinWithId">
+                        Join Meeting
+                        <div class="join-room__button-icon">
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </div>
+                    </button>
 
-    <div class="container1">
-        <h2><i class="fas fa-video"></i> Video Call Room</h2>
-        <div class="video-container">
-            <video id="localVideo" autoplay muted></video>
-        </div>
-        
-        <div class="input-group">
-            <select id="listCameras">
-                <option value="">Choose camera</option>
-            </select>
-            <select id="videoDimensions">
-                <option value="max">Max resolution</option>
-                <option value="720p">720p (1280x720)</option>
-                <option value="480p">480p (854x480)</option>
-                <option value="360p">360p (640x360)</option>
-                <option value="240p">240p (426x240)</option>
-                <option value="default">default</option>
-            </select>
-            <select id="listMicrophones">
-                <option value="">Choose Microphone</option>
-            </select>
-            <select id="listSpeakers">
-                <option value="">Choose Speaker</option>
-            </select>
+                    <button class="function__button is-info" v-if="room" @click="publish(true)">
+                        Share Desktop
+                    </button>
+
+                    <!-- New control buttons -->
+                    <button class="function__button" v-if="room" @click="toggleCamera">
+                        <i :class="isCameraOn ? 'fa-solid fa-video' : 'fa-solid fa-video-slash'"></i>
+                    </button>
+                    <button class="function__button" v-if="room" @click="toggleMicrophone">
+                        <i :class="isMicrophoneOn ? 'fa-solid fa-microphone' : 'fa-solid fa-microphone-slash'"></i>
+                    </button>
+                    <button class="function__button" v-if="room" @click="openSettings">
+                        <i class="fa-solid fa-cog"></i>
+                    </button>
+                    <!-- Menu cài đặt -->
+                    <div id="settingsMenu" v-if="showSettings" class="settings-menu">
+                        <!-- Chọn Camera -->
+                        <label for="videoSelect">Chọn Camera:</label>
+                        <select id="videoSelect" v-model="selectedVideoDevice" @change="updateVideoDevice">
+                            <option v-for="device in videoDevices" :key="device.deviceId" :value="device.deviceId">
+                                {{ device.label || 'Camera ' + (videoDevices.indexOf(device) + 1) }}
+                            </option>
+                        </select>
+
+                        <!-- Chọn Microphone -->
+                        <label for="audioSelect">Chọn Microphone:</label>
+                        <select id="audioSelect" v-model="selectedAudioDevice" @change="updateAudioDevice">
+                            <option v-for="device in audioDevices" :key="device.deviceId" :value="device.deviceId">
+                                {{ device.label || 'Micro ' + (audioDevices.indexOf(device) + 1) }}
+                            </option>
+                        </select>
+
+                        <!-- Chọn Loa -->
+                        <label for="audioOutputSelect">Chọn Loa:</label>
+                        <select id="audioOutputSelect" v-model="selectedAudioOutput" @change="updateAudioOutput">
+                            <option v-for="device in audioOutputs" :key="device.deviceId" :value="device.deviceId">
+                                {{ device.label || 'Loa ' + (audioOutputs.indexOf(device) + 1) }}
+                            </option>
+                        </select>
+                    </div>
+                </div>
+                <button class="btn-info" v-if="room" @click="toggleRoomInfo">
+                <i class="fa-solid fa-info"></i>
+                </button>
+
+                <div v-if="showRoomInfo && roomId" class="info-room" id="info-room">
+                    <h3>Chi tiết về phòng họp</h3>
+                    <p>
+                        <strong>Thông tin về cách tham gia phòng</strong></br>
+                        Gửi link này cho bạn bè cùng join room nhé
+                        <a v-bind:href="roomUrl" target="_blank">{{roomUrl}}</a>, hoặc bạn cũng có thể copy <strong>{{roomId}}</strong> để share.
+                    </p>
+                </div>
+            </div>
+
         </div>
 
-        <div class="video-controls">
-            <button id="checkDeviceBtn" onclick="checkDevice()" disabled="">
-                <i class="fas fa-check"></i> Check Device
-            </button>
-            <button id="shareScreenBtn" onclick="testShare()" disabled="">
-                <i class="fas fa-desktop"></i> Share Screen
-            </button>
-            <button id="muteBtn" onclick="testMute()">
-                <i class="fas fa-microphone-slash"></i> Mute
-            </button>
+        <div class="container__video">
+            <div id="videos" class="videos">
+            </div>
         </div>
     </div>
-
-    <script>
-        // Tự động hiển thị camera khi vào trang
-        function startCamera() {
-            navigator.mediaDevices.getUserMedia({ video: true, audio: true })
-                .then(stream => {
-                    const videoElement = document.getElementById('localVideo');
-                    videoElement.srcObject = stream;
-                })
-                .catch(error => {
-                    console.error('Lỗi khi truy cập camera:', error);
-                });
-        }
-
-        document.addEventListener('DOMContentLoaded', function () {
-            startCamera();
-        });
-    </script>
 </body>
+<script src="../../assets/js/test/api.js"></script>
+<script src="../../assets/js/test/room.js"></script>
 
 </html>

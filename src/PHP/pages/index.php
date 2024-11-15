@@ -28,7 +28,7 @@
 							<span id="message__username-register" class="message"></span>
 						</div>
 						<div class="input-form">
-							<input type="email" placeholder="Email" name="email" id="input__email-register" class="input"/>
+							<input type="email" placeholder="Email" name="email" id="input__email-register" class="input" />
 							<span id="message__email-register" class="message"></span>
 						</div>
 						<div class="input-form">
@@ -49,11 +49,11 @@
 						</div>
 						<span>or use your account</span>
 						<div class="input-form">
-							<input type="text" placeholder="User name" name="username" class="input" id="input__username-login"/>
+							<input type="text" placeholder="User name" name="username" class="input" id="input__username-login" />
 							<span id="message__username-login" class="message"></span>
 						</div>
 						<div class="input-form">
-							<input type="password" placeholder="Password" name="password" id="input__password-login" class="input"/>
+							<input type="password" placeholder="Password" name="password" id="input__password-login" class="input" />
 							<span id="message__password-login" class="message"></span>
 						</div>
 						<a id="forgot" onclick="moveForgot();">Forgot your password?</a>
@@ -75,7 +75,7 @@
 						</form>
 						<form id="form-verify-code">
 							<div class="input-form">
-								<input id="input__captcha-verify" type="text" placeholder="Mã xác nhận" name='verify-code' class="input"/>
+								<input id="input__captcha-verify" type="text" placeholder="Mã xác nhận" name='verify-code' class="input" />
 								<span id="message__captcha-verify" class="message"></span>
 							</div>
 							<button id="btn-captcha" type="submit">Xác nhận</button>

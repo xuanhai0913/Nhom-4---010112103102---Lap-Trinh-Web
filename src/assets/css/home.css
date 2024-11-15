@@ -30,7 +30,9 @@
 .function {
     display: flex;
     gap: 2.5%;
-    height: 35px;
+    height: 100%;
+    width: 100%;
+    background-color: aqua;
 }
 
 .function__create-room {
