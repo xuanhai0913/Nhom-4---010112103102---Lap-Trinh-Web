@@ -38,14 +38,17 @@ $conn->close();
             <img alt="Logo" height="50" src="../../assets/images/static/logo.png" />
         </a>
     </div>
+
     <div class="header__right">
         <p id="datetime"></p>
-        <i class="fas fa-question-circle"></i>
-        <i class="fas fa-cog"></i>
-        <i class="fas fa-th"></i>
+        <div id="btn-feedback" class="btn-feedback">
+            <i class="fa-solid fa-comment-dots"></i>
+            <span class="btn-feedback-text">Feedback</span>
+        </div>
         <div id="btn-avatar" class="btn-avatar">
-            <img alt="User Avatar" height="40" src="../../assets/images/avatar/<?php echo htmlspecialchars($avatar); ?>" onerror="this.onerror=null; this.src='../../assets/images/avatar/default/default-avatar.png';"/>
+            <img alt="User Avatar" height="40" src="../../assets/images/avatar/<?php echo htmlspecialchars($avatar); ?>" onerror="this.onerror=null; this.src='../../assets/images/avatar/default/default-avatar.png';" />
         </div>
     </div>
 </div>
 <?php include '../profile/profile.php'; ?>
+<?php include '../feedback/feedback.php'; ?>

@@ -9,7 +9,7 @@
     <title>Clone Zoom với Stringee hihi</title>
 
     <!-- import the webpage's stylesheet -->
-    <link rel="stylesheet" href="../../assets/css/room.css" />
+    <link rel="stylesheet" href="/room.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
 
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.min.js"></script>
@@ -23,7 +23,7 @@
         <div class="container__content has-text-centered" v-cloak id="app">
             <div class="header">
                 <div class="logo" v-if="room">
-                    <img alt="Logo" height="50" src="../../assets/images/static/logo.png" />
+                    <img alt="Logo" height="50" src="logo.png" />
                 </div>
                 <div class="function">
                     <button class="function__create-room is-primary" v-if="!room" @click="createRoom">
@@ -41,7 +41,6 @@
                     <button class="function__button is-info" v-if="room" @click="publish(true)">
                         Share Desktop
                     </button>
-
                     <!-- New control buttons -->
                     <button class="function__button" v-if="room" @click="toggleCamera">
                         <i :class="isCameraOn ? 'fa-solid fa-video' : 'fa-solid fa-video-slash'"></i>
@@ -80,10 +79,10 @@
                     </div>
                 </div>
                 <button class="btn-info" v-if="room" @click="toggleRoomInfo">
-                <i class="fa-solid fa-info"></i>
+                    <i class="fa-solid fa-info"></i>
                 </button>
 
-                <div v-if="showRoomInfo && roomId" class="info-room" id="info-room">
+                <div v-if="roomId && showRoomInfo" class="info-room" id="info-room">
                     <h3>Chi tiết về phòng họp</h3>
                     <p>
                         <strong>Thông tin về cách tham gia phòng</strong></br>
@@ -92,7 +91,6 @@
                     </p>
                 </div>
             </div>
-
         </div>
 
         <div class="container__video">
@@ -101,7 +99,7 @@
         </div>
     </div>
 </body>
-<script src="../../assets/js/test/api.js"></script>
-<script src="../../assets/js/test/room.js"></script>
+<script src="/api.js"></script>
+<script src="/room.js"></script>
 
 </html>

@@ -66,5 +66,4 @@
 <script src="../../assets/js/home/home.js"></script>
 <script src="../../assets/js/room/api.js"></script>
 <script src="../../assets/js/room/script.js"></script>
-
 </html>

@@ -21,8 +21,8 @@ const vm = new Vue({
     selectedAudioOutput: ""
   },
   computed: {
-    roomUrl: function() {
-      return `https://${location.hostname}?room=${this.roomId}`
+    roomUrl: function () {
+      return `https://${location.hostname}?room=${this.roomId}`;
     }
   },
   async mounted() {
@@ -32,11 +32,12 @@ const vm = new Vue({
     const roomId = urlParams.get("room");
     if (roomId) {
       this.roomId = roomId;
+
       await this.join();
     }
   },
   methods: {
-    authen: function() {
+    authen: function () {
       return new Promise(async resolve => {
         const userId = `${(Math.random() * 100000).toFixed(6)}`;
         const userToken = await api.getUserToken(userId);
@@ -44,7 +45,8 @@ const vm = new Vue({
 
         if (!this.callClient) {
           const client = new StringeeClient();
-          client.on("authen", function(res) {
+
+          client.on("authen", function (res) {
             console.log("on authen: ", res);
             resolve(res);
           });
@@ -53,20 +55,18 @@ const vm = new Vue({
         this.callClient.connect(userToken);
       });
     },
-    publish: async function(screenSharing = false) {
-      this.localTrack = await StringeeVideo.createLocalVideoTrack(
+    publish: async function (screenSharing = false) {
+      const localTrack = await StringeeVideo.createLocalVideoTrack(
         this.callClient,
         {
-          audio: this.isMicrophoneOn,
-          video: this.isCameraOn,
+          audio: true,
+          video: true,
           screen: screenSharing,
-          videoDimensions: { width: 640, height: 360 },
-          audioConstraints: { deviceId: this.selectedAudioDevice },
-          videoConstraints: { deviceId: this.selectedVideoDevice }
+          videoDimensions: { width: 640, height: 360 }
         }
       );
 
-      const videoElement = this.localTrack.attach();
+      const videoElement = localTrack.attach();
       this.addVideo(videoElement);
 
       const roomData = await StringeeVideo.joinRoom(
@@ -81,21 +81,32 @@ const vm = new Vue({
         room.clearAllOnMethos();
         room.on("addtrack", e => {
           const track = e.info.track;
-          if (track.serverId === this.localTrack.serverId) return;
+
+          console.log("addtrack", track);
+          if (track.serverId === localTrack.serverId) {
+            console.log("local");
+            return;
+          }
           this.subscribe(track);
         });
         room.on("removetrack", e => {
           const track = e.track;
-          if (track) track.detach().forEach(el => el.remove());
+          if (!track) {
+            return;
+          }
+
+          const mediaElements = track.detach();
+          mediaElements.forEach(element => element.remove());
         });
 
+        // Join existing tracks
         roomData.listTracksInfo.forEach(info => this.subscribe(info));
       }
 
-      await room.publish(this.localTrack);
+      await room.publish(localTrack);
       console.log("room publish successful");
     },
-    createRoom: async function() {
+    createRoom: async function () {
       const room = await api.createRoom();
       const { roomId } = room;
       const roomToken = await api.getRoomToken(roomId);
@@ -107,21 +118,33 @@ const vm = new Vue({
       await this.authen();
       await this.publish();
     },
-    join: async function() {
+    join: async function () {
       const roomToken = await api.getRoomToken(this.roomId);
       this.roomToken = roomToken;
 
       await this.authen();
       await this.publish();
     },
-    joinWithId: async function() {
+    joinWithId: async function () {
       const roomId = prompt("Dán Room ID vào đây nhé!");
       if (roomId) {
         this.roomId = roomId;
         await this.join();
       }
     },
-    toggleCamera: async function() {
+    subscribe: async function (trackInfo) {
+      const track = await this.room.subscribe(trackInfo.serverId);
+      track.on("ready", () => {
+        const videoElement = track.attach();
+        this.addVideo(videoElement);
+      });
+    },
+    addVideo: function (video) {
+      video.setAttribute("controls", "true");
+      video.setAttribute("playsinline", "true");
+      videoContainer.appendChild(video);
+    },
+    toggleCamera: async function () {
       this.isCameraOn = !this.isCameraOn;
       if (this.localTrack) {
         this.localTrack.video = this.isCameraOn;
@@ -130,8 +153,8 @@ const vm = new Vue({
         }
       }
     },
-    
-    toggleMicrophone: async function() {
+
+    toggleMicrophone: async function () {
       this.isMicrophoneOn = !this.isMicrophoneOn;
       if (this.localTrack) {
         this.localTrack.audio = this.isMicrophoneOn;
@@ -140,7 +163,7 @@ const vm = new Vue({
         }
       }
     },
-        openSettings: async function() {
+    openSettings: async function () {
       this.showSettings = !this.showSettings;
       const devices = await navigator.mediaDevices.enumerateDevices();
       this.audioDevices = devices.filter(device => device.kind === "audioinput");
@@ -151,20 +174,20 @@ const vm = new Vue({
       this.selectedVideoDevice = this.videoDevices[0]?.deviceId || "";
       this.selectedAudioOutput = this.audioOutputs[0]?.deviceId || "";
     },
-    closeSettings: function() {
+    closeSettings: function () {
       this.showSettings = false;
     },
-    updateVideoDevice: async function() {
+    updateVideoDevice: async function () {
       if (this.localTrack) {
         await this.localTrack.switchCamera(this.selectedVideoDevice);
       }
     },
-    updateAudioDevice: async function() {
+    updateAudioDevice: async function () {
       if (this.localTrack) {
         await this.localTrack.switchMicrophone(this.selectedAudioDevice);
       }
     },
-    updateAudioOutput: function() {
+    updateAudioOutput: function () {
       const audioOutput = this.audioOutputs.find(
         device => device.deviceId === this.selectedAudioOutput
       );
@@ -173,15 +196,7 @@ const vm = new Vue({
         audioElement.setSinkId(audioOutput.deviceId);
       }
     },
-    addVideo: function(videoElement) {
-      videoContainer.appendChild(videoElement);
-    },
-    subscribe: function(track) {
-      const videoElement = track.attach();
-      this.addVideo(videoElement);
-    },
-
-    toggleRoomInfo: function() {
+    toggleRoomInfo: function () {
       this.showRoomInfo = !this.showRoomInfo;
     }
   }
