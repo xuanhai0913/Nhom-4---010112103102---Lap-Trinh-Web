@@ -47,24 +47,3 @@ $(document).ready(function () {
     });
 });
 
-$(document).ready(function () {
-    $(".feedback").hide();
-    $(".btn-feedback").click(function () {
-        $(".feedback").toggle().css("opacity", "1");
-    });
-    $(".feedback__closeIcon").click(function () {
-        $(".feedback").hide();
-    });
-    $(document).mousedown(function (e) {
-        var feedback = $(".feedback");
-        var feedbackButton = $(".btn-feedback");
-
-
-        // Kiểm tra nếu nhấp bên ngoài cả hai thẻ avatar và avatarButton
-        if (!feedback.is(e.target) && feedback.has(e.target).length === 0 &&
-            !feedbackButton.is(e.target) && feedbackButton.has(e.target).length === 0) {
-                feedback.hide();
-            feedbackButton.removeClass("active");
-        }
-    });
-});

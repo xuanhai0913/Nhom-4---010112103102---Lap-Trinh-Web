@@ -14,15 +14,62 @@ function checkForm() {
 document.getElementById('issue').addEventListener('input', checkForm);
 document.getElementById('description').addEventListener('input', checkForm);
 
+$(document).ready(function () {
+    $(".feedback").hide();
+    $(".btn-feedback").click(function () {
+        $(".feedback").toggle().css("opacity", "1");
+    });
+    $(".feedback__closeIcon").click(function () {
+        $(".feedback").hide();
+    });
+    $(document).mousedown(function (e) {
+        var feedback = $(".feedback");
+        var feedbackButton = $(".btn-feedback");
 
-// $(document).ready(function () {
-//     // Đóng feedback khi click nút close-feedBack
-//     $(document).on('click', '#close-feedBack', function () {
-//         $('.feedBack').hide();
-//     });
+        if (!feedback.is(e.target) && feedback.has(e.target).length === 0 &&
+            !feedbackButton.is(e.target) && feedbackButton.has(e.target).length === 0) {
+                feedback.hide();
+            feedbackButton.removeClass("active");
+        }
+    });
+});
 
-//     // Đóng success message khi click nút close-success
-//     $(document).on('click', '#close-success', function () {
-//         $('.feedBack').hide();
-//     });
-// });
+$(document).ready(function() {
+    // Xử lý sự kiện submit của form
+    $("#feedback-form").submit(function(event) {
+        event.preventDefault();
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: '../../PHP/feedBack/feedback_action.php', // Kiểm tra đường dẫn
+            type: 'POST',
+            data: formData,
+            dataType: 'json',
+            contentType: false,
+            processData: false,
+            success: function(response) {
+                console.log(response); 
+                if (response.status === 'success') {
+                    // Hiển thị thông báo thành công
+                    $('#feedback-message').html('<div class="feedback-success-message"><h2>' + response.message + '</h2></div>');
+                    // Ẩn form
+                    $('#feedback-form').hide();
+                } else {
+                    // Hiển thị thông báo lỗi
+                    $('#feedback-message').html('<div class="feedback-error-message"><h2>' + response.message + '</h2></div>');
+                }
+            },
+            error: function() {
+                $('#feedback-message').html('<div class="feedback-error-message"><h2>Đã có lỗi xảy ra, vui lòng thử lại sau!</h2></div>');
+            }
+        });
+    });
+
+    $(".feedback__closeIcon").click(function () {
+        $('#feedback-form').hide();
+        $('#feedback-message').html(''); // Xóa thông báo
+        document.getElementById('feedback-form').reset(); // Reset form
+        $('#feedback-form').show();
+    });
+});
